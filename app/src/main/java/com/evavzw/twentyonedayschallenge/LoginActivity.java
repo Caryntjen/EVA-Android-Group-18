@@ -22,9 +22,8 @@ public class LoginActivity extends AppCompatActivity {
     private UserRegisterTask mAuthRegisterTask = null;
 
     // UI references.
-    private EditText mEmailView;
-    private EditText mPasswordView;
-    private View mLoginFormView;
+    private EditText etEmail;
+    private EditText etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // Set up the login form.
-        mEmailView = (EditText) findViewById(R.id.email);
-        mPasswordView = (EditText) findViewById(R.id.password);
+        etEmail = (EditText) findViewById(R.id.email);
+        etPassword = (EditText) findViewById(R.id.password);
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -50,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
                 attemptLoginOrRegister(mAuthRegisterTask, "register");
             }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
     }
 
     /**
@@ -65,35 +62,35 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
+        etEmail.setError(null);
+        etPassword.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String email = etEmail.getText().toString();
+        String password = etPassword.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
         if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
+            etPassword.setError(getString(R.string.error_field_required));
+            focusView = etPassword;
             cancel = true;
         } else if (!isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+            etPassword.setError(getString(R.string.error_invalid_password));
+            focusView = etPassword;
             cancel = true;
         }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            etEmail.setError(getString(R.string.error_field_required));
+            focusView = etEmail;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            etEmail.setError(getString(R.string.error_invalid_email));
+            focusView = etEmail;
             cancel = true;
         }
 
@@ -104,12 +101,10 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // Kick off a background task to perform the user login attempt.
             Intent i = null;
-            if(stask.equalsIgnoreCase("register"))
-            {
+            if (stask.equalsIgnoreCase("register")) {
                 task = new UserRegisterTask(email, password);
                 i = new Intent(this, RegisterActivity.class);
-            }
-            else {
+            } else {
                 task = new UserLoginTask(email, password);
                 i = new Intent(this, ChallengesActivity.class);
             }
