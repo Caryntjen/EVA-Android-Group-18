@@ -31,4 +31,12 @@
     <string name="registration.english">English</string>
     <string name="registration.student">Student</string>
     <string name="Next">Next</string>
+    <string name="registration.complete">Complete</string>
+    <string name="prompt_children">Number Of Children</string>
+    <string name="registration.omnivorism">Omnivorism (Meat eater)</string>
+    <string name="registration.pescetarianism">Pescetarianism (No meat but fish)</string>
+    <string name="registration.vegetarianism">Vegetarianism (No meat, fish or poultry)</string>
+    <string name="registration.parttimevegetarianism">Part-Time Vegetarianism (3 days Vegetarianism or less)</string>
+    <string name="registration.veganism">Veganism (No animal products)</string>
+    <string name="registration.newsletter">EVA newsletter</string>
 </resources>

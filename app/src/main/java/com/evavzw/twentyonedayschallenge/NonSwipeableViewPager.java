@@ -3,6 +3,7 @@ package com.evavzw.twentyonedayschallenge;
 /**
  * Created by Matthias on 27/10/2015.
  */
+
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -27,4 +28,6 @@ public class NonSwipeableViewPager extends ViewPager {
     public boolean onTouchEvent(MotionEvent event) {
         return false;
     }
+
+
 }

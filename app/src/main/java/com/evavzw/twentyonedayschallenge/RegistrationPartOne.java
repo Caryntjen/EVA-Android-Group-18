@@ -1,7 +1,9 @@
 package com.evavzw.twentyonedayschallenge;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Fragment;
+import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +15,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import java.util.Calendar;
-
 
 public class RegistrationPartOne extends Fragment implements View.OnClickListener {
 
     // UI references.
     private static EditText etBirthday;
+    private static EditText etChildren;
     private static RadioGroup rgSex;
     private static RadioButton rbMale;
     private static RadioButton rbFemale;
@@ -31,12 +32,12 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
 
     private String sex;
     private String language;
-    private String brithday;
+    private String birthday;
+    private int children;
 
     private boolean isStudent = false;
 
     public RegistrationPartOne() {
-        // Required empty public constructor
     }
 
     @Override
@@ -48,9 +49,11 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_registration_part_one, container, false);
 
-        etBirthday = (EditText) view.findViewById(R.id.birthday);
-        etBirthday.setEnabled(false);
+        etBirthday = (EditText) view.findViewById(R.id.etBirthday);
+        //etBirthday.setEnabled(false);
         etBirthday.setOnClickListener(this);
+
+        etChildren = (EditText) view.findViewById(R.id.etNumberOfChildren);
 
         rgSex = (RadioGroup) view.findViewById(R.id.rgSex);
         rgSex.setOnClickListener(this);
@@ -71,7 +74,13 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         cbStudent.setOnClickListener(this);
 
         btnNext = (Button) view.findViewById(R.id.btnNext);
-        btnNext.setOnClickListener(this);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                if (callback != null) {
+                    callback.onButtonClick(view);
+                }
+            }
+        });
         return view;
     }
 
@@ -86,10 +95,10 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
 
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            brithday = String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear + 1)
+            birthday = String.valueOf(dayOfMonth) + "-" + String.valueOf(monthOfYear + 1)
                     + "-" + String.valueOf(year);
 
-            etBirthday.setText(brithday);
+            etBirthday.setText(birthday);
         }
     };
 
@@ -97,42 +106,65 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.birthday:
+            case R.id.etBirthday:
                 showBirthDatePicker();
-
+                break;
 
             case R.id.rbEnglish:
-                if (rbEnglish.isChecked())
-                    language = "EN";
+                //if (rbEnglish.isChecked())
+                language = "EN";
                 break;
             case R.id.rbFrench:
-                if (rbFrench.isChecked())
-                    language = "FR";
+                //if (rbFrench.isChecked())
+                language = "FR";
                 break;
 
 
             case R.id.rbMale:
-                if (rbMale.isChecked())
-                    sex = "M";
+                //if (rbMale.isChecked())
+                sex = "M";
                 break;
             case R.id.rbFemale:
-                if (rbFemale.isChecked())
-                    sex = "F";
+                //if (rbFemale.isChecked())
+                sex = "F";
                 break;
 
             case R.id.cbStudent:
-                if (cbStudent.isChecked()) {
-                    isStudent = true;
-                } else isStudent = false;
+                //cbStudent.setChecked(!cbStudent.isChecked());
+                isStudent = cbStudent.isChecked();
                 break;
 
-            case R.id.btnNext:
-                //TODO: Need some validation
-                break;
+            //case R.id.btnNext:
+            //TODO: Need some validation
+            //break;
 
             default:
                 break;
         }
 
+    }
+
+    public interface Callback {
+        public void onButtonClick(View button);
+    }
+
+    private Callback callback;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        Activity a;
+
+        if (context instanceof Activity) {
+            callback = (Callback) context;
+        }
+
+    }
+
+    @Override
+    public void onDetach() {
+        callback = null;
+        super.onDetach();
     }
 }
