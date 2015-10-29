@@ -1,4 +1,4 @@
-package com.evavzw.twentyonedayschallenge;
+package com.evavzw.twentyonedayschallenge.registration;
 
 /**
  * Created by Matthias on 27/10/2015.

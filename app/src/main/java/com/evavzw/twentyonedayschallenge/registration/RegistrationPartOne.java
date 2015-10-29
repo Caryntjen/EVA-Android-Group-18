@@ -1,4 +1,4 @@
-package com.evavzw.twentyonedayschallenge;
+package com.evavzw.twentyonedayschallenge.registration;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -14,6 +14,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import com.evavzw.twentyonedayschallenge.R;
 
 
 public class RegistrationPartOne extends Fragment implements View.OnClickListener {

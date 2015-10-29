@@ -1,4 +1,4 @@
-package com.evavzw.twentyonedayschallenge;
+package com.evavzw.twentyonedayschallenge.registration;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

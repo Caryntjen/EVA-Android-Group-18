@@ -1,4 +1,4 @@
-package com.evavzw.twentyonedayschallenge;
+package com.evavzw.twentyonedayschallenge.login;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.evavzw.twentyonedayschallenge.R;
+import com.evavzw.twentyonedayschallenge.main.MainActivity;
+import com.evavzw.twentyonedayschallenge.registration.RegisterActivity;
 
 /**
  * A login screen that offers login or register via email/password.
@@ -106,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                 i = new Intent(this, RegisterActivity.class);
             } else {
                 task = new UserLoginTask(email, password);
-                i = new Intent(this, ChallengesActivity.class);
+                i = new Intent(this, MainActivity.class);
             }
 
             task.execute((Void) null);

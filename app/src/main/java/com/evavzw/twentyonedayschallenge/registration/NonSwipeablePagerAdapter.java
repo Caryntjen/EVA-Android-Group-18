@@ -1,4 +1,4 @@
-package com.evavzw.twentyonedayschallenge;
+package com.evavzw.twentyonedayschallenge.registration;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

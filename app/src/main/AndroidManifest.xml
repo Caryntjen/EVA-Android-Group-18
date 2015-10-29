@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".LoginActivity"
+            android:name=".login.LoginActivity"
             android:label="@string/activity_SignIn" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,12 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ChallengesActivity"
-            android:label="@string/activity_Challenges" >
-        </activity>
-        <activity
-            android:name=".RegisterActivity"
+            android:name=".registration.RegisterActivity"
             android:label="@string/activity_Register" >
+        </activity>
+        <activity android:name=".main.MainActivity"
+            android:label="@string/title_activity_main" >
         </activity>
     </application>
 

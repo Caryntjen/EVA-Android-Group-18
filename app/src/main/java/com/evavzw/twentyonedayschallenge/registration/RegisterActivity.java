@@ -1,9 +1,11 @@
-package com.evavzw.twentyonedayschallenge;
+package com.evavzw.twentyonedayschallenge.registration;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+
+import com.evavzw.twentyonedayschallenge.R;
 
 public class RegisterActivity extends FragmentActivity implements RegistrationPartOne.Callback {
 

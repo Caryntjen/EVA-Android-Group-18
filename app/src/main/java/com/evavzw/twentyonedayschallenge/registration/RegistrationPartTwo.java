@@ -1,4 +1,4 @@
-package com.evavzw.twentyonedayschallenge;
+package com.evavzw.twentyonedayschallenge.registration;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import com.evavzw.twentyonedayschallenge.R;
 
 
 public class RegistrationPartTwo extends Fragment implements View.OnClickListener {
