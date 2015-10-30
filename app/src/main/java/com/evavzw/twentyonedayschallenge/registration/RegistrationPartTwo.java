@@ -1,5 +1,6 @@
 package com.evavzw.twentyonedayschallenge.registration;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.evavzw.twentyonedayschallenge.R;
+import com.evavzw.twentyonedayschallenge.login.LoginActivity;
 
 
 public class RegistrationPartTwo extends Fragment implements View.OnClickListener {
@@ -96,6 +98,8 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
 
             case R.id.btnComplete:
                 //TODO: Need some validation
+                Intent loginActivity = new Intent(getActivity(), LoginActivity.class);
+                startActivity(loginActivity);
                 break;
 
             default:

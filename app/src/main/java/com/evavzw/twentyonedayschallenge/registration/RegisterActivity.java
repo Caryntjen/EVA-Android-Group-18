@@ -20,8 +20,6 @@ public class RegisterActivity extends FragmentActivity implements RegistrationPa
         paRegistration = new NonSwipeablePagerAdapter(getSupportFragmentManager());
         vpRegister = (ViewPager) findViewById(R.id.vpRegistration);
         vpRegister.setAdapter(paRegistration);
-
-
     }
 
     @Override
