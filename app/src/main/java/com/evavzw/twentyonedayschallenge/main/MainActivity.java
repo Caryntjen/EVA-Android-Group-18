@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager vpMain;
     private MainViewPagerAdapter mvAdapter;
     private SlidingTabLayout slidingTabs;
-    private String currentday ="5";
+    private String currentday =" 5";
 
 
     @Override
