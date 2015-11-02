@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="tabsScrollColor">#8a140e</color>
+    <color name="colorPrimary">#191919</color>
+    <color name="colorPrimaryDark">#101010</color>
+    <color name="colorAccent">@color/evaDarkOrange</color>
+    <color name="tabsScrollColor">@color/evaDarkOrange</color>
+
+    <!-- Primary Colors -->
+    <color name="evaDarkGreen">#004833</color>
+    <color name="evaLightGreen">#a5b11e</color>
+    <color name="evaDarkOrange">#f15d22</color>
+
+    <!-- Secundary Colors -->
+    <color name="evaBlue">#006990</color>
+    <color name="evaGrey">#b4a59f</color>
+    <color name="evaYellow">#f4dc00</color>
+    <color name="evaBlueGreen">#009ea0</color>
 </resources>

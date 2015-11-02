@@ -64,4 +64,6 @@
     <string name="challenge.socialmedia.title">Social Media</string>
     <string name="challenge.socialmedia.image">Social Media Image</string>
     <string name="activity.socialmedia.title">Social Media Challenge</string>
+    <string name="registration.language">Language:</string>
+    <string name="registration.sex">Sex:</string>
 </resources>

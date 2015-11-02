@@ -63,7 +63,7 @@
                 android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="15dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
@@ -73,7 +73,6 @@
                 android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
                 android:text="@string/action_register"
                 android:textStyle="bold" />
 

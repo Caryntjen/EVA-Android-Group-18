@@ -7,12 +7,32 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="logo">@drawable/evalogo</item>
-    </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/evaDarkGreen</item>
+        <item name="colorControlHighlight">@color/evaLightGreen</item>
+    <!--<item name="android:navigationBarColor">@color/colorAccent</item>-->
+</style>
+<style name="AppTheme.NoActionBar">
+   <item name="windowActionBar">false</item>
+   <item name="windowNoTitle">true</item>
+</style>
+<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+<style name="TextAppearence.TextInputLayout" parent="@android:style/TextAppearance">
+   <item name="android:textColor">@color/colorAccent</item>
+   <item name="android:textSize">14sp</item>
+</style>
+<!--
+       <style name="EvaTheme" parent="@android:style/Theme.Holo.Light">
+           <item name="android:actionBarStyle">@style/EvaActionBarTheme</item>
+       </style>
+
+       <style name="EvaActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
+           <item name="android:background">#000000</item>
+           <item name="android:textColor">#FFFFFF</item>
+           <item name="titleTextStyle">@color/actionBarTitle</item>
+       </style>
+       -->
 
 </resources>

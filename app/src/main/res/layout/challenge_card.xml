@@ -22,6 +22,8 @@
             android:id="@+id/ivChallengeThumbmail"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             android:layout_marginRight="15dp"
             android:src="@drawable/socialmedia"
             android:layout_alignParentTop="true"

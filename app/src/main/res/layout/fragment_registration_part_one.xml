@@ -52,12 +52,18 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/registration.sex"
+                android:textSize="20sp" />
+
             <RadioGroup
                 android:id="@+id/rgSex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
                 <RadioButton
@@ -78,12 +84,19 @@
 
             </RadioGroup>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/registration.language"
+                android:textSize="20sp" />
+
             <RadioGroup
                 android:id="@+id/rgLanguage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
                 <RadioButton
