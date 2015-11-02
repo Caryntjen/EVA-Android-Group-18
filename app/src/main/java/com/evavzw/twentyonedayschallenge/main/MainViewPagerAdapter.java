@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    static CharSequence TABS[] = {"Challenges", "Account", "Settings"};
+    private static CharSequence TABS[] = {"Challenges", "Overview", "Account"};
 
     public MainViewPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -20,9 +20,9 @@ public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new ChallengesActivity();
             case 1:
-                return new AccountActivity();
+                return new OverviewActivity();
             case 2:
-                return new SettingsActivity();
+                return new AccountAcitivy();
             default:
                 return null;
         }
@@ -35,6 +35,6 @@ public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return TABS.length;
     }
 }

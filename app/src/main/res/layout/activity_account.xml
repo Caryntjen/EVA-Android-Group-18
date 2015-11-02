@@ -1,6 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</RelativeLayout>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tlSettings"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:visibility="visible">
+
+    <TableRow
+        android:id="@+id/trEmail"
+        android:background="#e5e6e6"
+        android:gravity="center_vertical"
+        android:minHeight="45dp"
+        android:weightSum="1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="@string/account.email"></TextView>
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.60"
+            android:gravity="right"
+            android:paddingRight="15dp"></TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trBirthday"
+        android:background="#e5e6e6"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:minHeight="45dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="@string/account.birthday"></TextView>
+
+        <TextView
+            android:id="@+id/tvBirthday"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.60"
+            android:gravity="right"
+            android:paddingRight="15dp"></TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trChildren"
+        android:background="#e5e6e6"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:minHeight="45dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="@string/account.children"></TextView>
+
+        <TextView
+            android:id="@+id/tvChildren"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.60"
+            android:gravity="right"
+            android:paddingRight="15dp"></TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trSex"
+        android:background="#e5e6e6"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:minHeight="45dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="@string/account.sex"></TextView>
+
+        <TextView
+            android:id="@+id/tvSex"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.60"
+            android:gravity="right"
+            android:paddingRight="15dp"></TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trLanguage"
+        android:background="#e5e6e6"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:minHeight="45dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="@string/account.language"></TextView>
+
+        <TextView
+            android:id="@+id/tvLanguage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.60"
+            android:gravity="right"
+            android:paddingRight="15dp"></TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trStudent"
+        android:background="#e5e6e6"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:minHeight="45dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="@string/account.student"></TextView>
+
+        <TextView
+            android:id="@+id/tvStudent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.60"
+            android:gravity="right"
+            android:paddingRight="15dp"></TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trDiet"
+        android:background="#e5e6e6"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:minHeight="45dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="@string/account.diet"></TextView>
+
+        <TextView
+            android:id="@+id/tvDiet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.60"
+            android:gravity="right"
+            android:paddingRight="15dp"></TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trNewsletter"
+        android:background="#e5e6e6"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:minHeight="45dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="left"
+            android:paddingLeft="15dp"
+            android:text="@string/account.newsletter"></TextView>
+
+        <TextView
+            android:id="@+id/tvNewsletter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.60"
+            android:gravity="right"
+            android:paddingRight="15dp"></TextView>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/trInvite"
+        android:gravity="center"
+        android:weightSum="1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <Button
+            android:id="@+id/btnInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/account.invite" />
+    </TableRow>
+
+
+</TableLayout>
+</ScrollView>

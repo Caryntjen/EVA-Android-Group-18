@@ -3,6 +3,7 @@ package com.evavzw.twentyonedayschallenge.main;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -10,14 +11,23 @@ import com.evavzw.twentyonedayschallenge.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    ViewPager vpMain;
-    MainViewPagerAdapter mvAdapter;
-    SlidingTabLayout slidingTabs;
+    private ViewPager vpMain;
+    private MainViewPagerAdapter mvAdapter;
+    private SlidingTabLayout slidingTabs;
+    private String currentday ="5";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+        actionBar.setLogo(R.drawable.evalogo);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(getSupportActionBar().getTitle() +currentday);
 
         mvAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
 
@@ -39,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
+
 }

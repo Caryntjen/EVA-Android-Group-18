@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -52,8 +53,14 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         View view = inflater.inflate(R.layout.fragment_registration_part_one, container, false);
 
         etBirthday = (EditText) view.findViewById(R.id.etBirthday);
-        //etBirthday.setEnabled(false);
-        etBirthday.setOnClickListener(this);
+        etBirthday.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    showBirthDatePicker();
+                }
+            }
+        });
 
         etChildren = (EditText) view.findViewById(R.id.etNumberOfChildren);
 
@@ -88,7 +95,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
 
     private void showBirthDatePicker() {
         BirthDatePickerFragment date = new BirthDatePickerFragment();
-
+        date.setCancelable(true);
         date.setCallBack(ondate);
         date.show(getFragmentManager(), "Birthday");
     }
@@ -108,10 +115,6 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.etBirthday:
-                showBirthDatePicker();
-                break;
-
             case R.id.rbEnglish:
                 //if (rbEnglish.isChecked())
                 language = "EN";

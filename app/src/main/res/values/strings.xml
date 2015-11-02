@@ -2,7 +2,7 @@
     <string name="app_name">TwentyOne Days Challenge</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="title_activity_main">EVA 21 Day Challenge</string>
+    <string name="title_activity_main">21 Day Challenge: Day </string>
     <string name="title_activity_account">Account</string>
     <string name="title_activity_challenges">Challenges</string>
     <string name="title_activity_settings">Settings</string>
@@ -36,4 +36,32 @@
     <string name="registration.parttimevegetarianism">Part-Time Vegetarianism (3 days Vegetarianism or less)</string>
     <string name="registration.veganism">Veganism (No animal products)</string>
     <string name="registration.newsletter">EVA newsletter</string>
+    <string name="account.email">E-mail</string>
+    <string name="account.birthday">Birthday</string>
+    <string name="account.sex">Sex</string>
+    <string name="account.newsletter">Subcribed to Newsletter</string>
+    <string name="account.student">Student</string>
+    <string name="account.children">Number of children</string>
+    <string name="account.diet">Kind of diet</string>
+    <string name="account.language">Language</string>
+    <string name="account.invite">Invite a friend</string>
+    <string name="registration.kindofdiet">Kind of diet:</string>
+    <string name="challenges.currentday">Day </string>
+    <string name="challenge.product.title">Product</string>
+
+    <string name="text.defaulttext">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="challenge.verify">Verify challenge</string>
+    <string name="challenge.product.image">Product Image</string>
+    <string name="image.star">Star</string>
+    <string name="points.value">p</string>
+    <string name="activity.product.title">Product Challenge</string>
+
+
+    <string name="challenge.recipe.title">Recipe</string>
+    <string name="challenge.recipe.image">Recipe Image</string>
+    <string name="activity.recipe.title">Recipe Challenge</string>
+
+    <string name="challenge.socialmedia.title">Social Media</string>
+    <string name="challenge.socialmedia.image">Social Media Image</string>
+    <string name="activity.socialmedia.title">Social Media Challenge</string>
 </resources>

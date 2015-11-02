@@ -1,20 +1,35 @@
 package com.evavzw.twentyonedayschallenge.challenges;
 
 public class ChallengeCardItem {
-    private String title;
-    private String tagline;
+    private ChallengeType type;
+    private int stars;
 
-    public ChallengeCardItem(String title, String tagline) {
-        this.title = title;
-        this.tagline = tagline;
+    public ChallengeCardItem(ChallengeType type, int stars) {
+        this.stars = stars;
+        this.type = type;
+    }
+
+    public ChallengeCardItem(ChallengeCardItem ccItem) {
+        this(ccItem.getType(), ccItem.getStars());
+    }
+
+    public int getImage() {
+        return type.getResourceId();
     }
 
     public String getTitle() {
-        return title;
+        return type.getTitle();
     }
 
     public String getTagline() {
-        return tagline;
+        return type.getTagline();
+    }
+
+    public int getStars() {
+        return stars;
+    }
+    public ChallengeType getType() {
+        return type;
     }
 
 }

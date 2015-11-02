@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivSocialMediaImage"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center"
+            android:src="@drawable/share"
+            android:contentDescription="@string/challenge.socialmedia.image" />
+
+        <TextView
+            android:id="@+id/tvSocialMediaTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivSocialMediaImage"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="@string/challenge.socialmedia.title"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/ivStarOne"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@+id/tvSocialMediaTitle"
+            android:layout_gravity="right|bottom"
+            android:layout_toLeftOf="@+id/tvPoints"
+            android:layout_toStartOf="@+id/tvPoints"
+            android:src="@drawable/star"
+            android:visibility="invisible"
+            android:contentDescription="@string/image.star" />
+
+        <ImageView
+            android:id="@+id/ivStarTwo"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@+id/ivStarOne"
+            android:layout_gravity="right|bottom"
+            android:layout_toLeftOf="@+id/ivStarOne"
+            android:layout_toStartOf="@+id/ivStarOne"
+            android:src="@drawable/star"
+            android:visibility="invisible"
+            android:contentDescription="@string/image.star" />
+
+        <TextView
+            android:id="@+id/tvPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/ivSocialMediaImage"
+            android:layout_alignTop="@+id/ivStarOne"
+            android:layout_marginLeft="10dp"
+            android:text="@string/points.value"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvSocialMediaChallengeExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text.defaulttext"
+            android:textSize="15sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignLeft="@+id/tvSocialMediaTitle"
+            android:layout_alignStart="@+id/tvSocialMediaTitle"
+            android:layout_alignRight="@+id/ivSocialMediaImage"
+            android:layout_alignEnd="@+id/ivSocialMediaImage"
+            android:layout_below="@+id/ivStarOne" />
+
+        <Button
+            android:id="@+id/btnVerify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/challenge.verify"
+            android:layout_gravity="center"
+            android:layout_below="@+id/tvSocialMediaChallengeExplanation"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+
+</ScrollView>

@@ -4,12 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-/**
- * Created by Matthias on 29/10/2015.
- */
-public class NonSwipeablePagerAdapter extends FragmentPagerAdapter {
+public class RegistrationNonSwipeablePagerAdapter extends FragmentPagerAdapter {
 
-    public NonSwipeablePagerAdapter(FragmentManager fragmentManager) {
+    public RegistrationNonSwipeablePagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
     }
 

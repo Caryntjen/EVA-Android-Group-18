@@ -1,9 +1,5 @@
 package com.evavzw.twentyonedayschallenge.registration;
 
-/**
- * Created by Matthias on 27/10/2015.
- */
-
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;

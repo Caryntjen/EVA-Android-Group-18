@@ -9,15 +9,15 @@ import com.evavzw.twentyonedayschallenge.R;
 
 public class RegisterActivity extends FragmentActivity implements RegistrationPartOne.Callback {
 
-    NonSwipeablePagerAdapter paRegistration;
-    ViewPager vpRegister;
+    private RegistrationNonSwipeablePagerAdapter paRegistration;
+    private ViewPager vpRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        paRegistration = new NonSwipeablePagerAdapter(getSupportFragmentManager());
+        paRegistration = new RegistrationNonSwipeablePagerAdapter(getSupportFragmentManager());
         vpRegister = (ViewPager) findViewById(R.id.vpRegistration);
         vpRegister.setAdapter(paRegistration);
     }

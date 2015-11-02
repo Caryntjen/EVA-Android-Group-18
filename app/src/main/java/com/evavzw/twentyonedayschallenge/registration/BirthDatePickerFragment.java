@@ -8,12 +8,9 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
-/**
- * Created by Matthias on 27/10/2015.
- */
 public class BirthDatePickerFragment extends DialogFragment {
 
-    DatePickerDialog.OnDateSetListener ondateSet;
+    private DatePickerDialog.OnDateSetListener ondateSet;
 
     public BirthDatePickerFragment() {
 
