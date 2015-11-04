@@ -3,7 +3,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/evaGrey">
 
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tlSettings"
@@ -13,8 +14,9 @@
     android:visibility="visible">
 
     <TableRow
+        android:layout_marginTop="5dp"
+        android:background="@android:color/white"
         android:id="@+id/trEmail"
-        android:background="#e5e6e6"
         android:gravity="center_vertical"
         android:minHeight="45dp"
         android:weightSum="1"
@@ -22,25 +24,27 @@
         android:layout_marginRight="15dp">
 
         <TextView
+            android:textColor="@color/evaDarkGreen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.40"
+            android:layout_weight="0.30"
             android:gravity="left"
             android:paddingLeft="15dp"
             android:text="@string/account.email"></TextView>
 
         <TextView
+            android:textColor="@color/evaLightGreen"
             android:id="@+id/tvEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.60"
+            android:layout_weight="0.70"
             android:gravity="right"
             android:paddingRight="15dp"></TextView>
     </TableRow>
 
     <TableRow
         android:id="@+id/trBirthday"
-        android:background="#e5e6e6"
+        android:background="@android:color/white"
         android:gravity="center_vertical"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
@@ -49,25 +53,27 @@
         android:weightSum="1">
 
         <TextView
+            android:textColor="@color/evaDarkGreen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.40"
+            android:layout_weight="0.70"
             android:gravity="left"
             android:paddingLeft="15dp"
             android:text="@string/account.birthday"></TextView>
 
         <TextView
+            android:textColor="@color/evaLightGreen"
             android:id="@+id/tvBirthday"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.60"
+            android:layout_weight="0.30"
             android:gravity="right"
             android:paddingRight="15dp"></TextView>
     </TableRow>
 
     <TableRow
         android:id="@+id/trChildren"
-        android:background="#e5e6e6"
+        android:background="@android:color/white"
         android:gravity="center_vertical"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
@@ -76,25 +82,27 @@
         android:weightSum="1">
 
         <TextView
+            android:textColor="@color/evaDarkGreen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.40"
+            android:layout_weight="0.80"
             android:gravity="left"
             android:paddingLeft="15dp"
             android:text="@string/account.children"></TextView>
 
         <TextView
+            android:textColor="@color/evaLightGreen"
             android:id="@+id/tvChildren"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.60"
+            android:layout_weight="0.20"
             android:gravity="right"
             android:paddingRight="15dp"></TextView>
     </TableRow>
 
     <TableRow
         android:id="@+id/trSex"
-        android:background="#e5e6e6"
+        android:background="@android:color/white"
         android:gravity="center_vertical"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
@@ -103,6 +111,7 @@
         android:weightSum="1">
 
         <TextView
+            android:textColor="@color/evaDarkGreen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.40"
@@ -111,6 +120,7 @@
             android:text="@string/account.sex"></TextView>
 
         <TextView
+            android:textColor="@color/evaLightGreen"
             android:id="@+id/tvSex"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -120,8 +130,8 @@
     </TableRow>
 
     <TableRow
+        android:background="@android:color/white"
         android:id="@+id/trLanguage"
-        android:background="#e5e6e6"
         android:gravity="center_vertical"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
@@ -130,6 +140,7 @@
         android:weightSum="1">
 
         <TextView
+            android:textColor="@color/evaDarkGreen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.40"
@@ -138,6 +149,7 @@
             android:text="@string/account.language"></TextView>
 
         <TextView
+            android:textColor="@color/evaLightGreen"
             android:id="@+id/tvLanguage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -148,7 +160,7 @@
 
     <TableRow
         android:id="@+id/trStudent"
-        android:background="#e5e6e6"
+        android:background="@android:color/white"
         android:gravity="center_vertical"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
@@ -157,6 +169,7 @@
         android:weightSum="1">
 
         <TextView
+            android:textColor="@color/evaDarkGreen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.40"
@@ -165,6 +178,7 @@
             android:text="@string/account.student"></TextView>
 
         <TextView
+            android:textColor="@color/evaLightGreen"
             android:id="@+id/tvStudent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -175,7 +189,7 @@
 
     <TableRow
         android:id="@+id/trDiet"
-        android:background="#e5e6e6"
+        android:background="@android:color/white"
         android:gravity="center_vertical"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
@@ -184,6 +198,7 @@
         android:weightSum="1">
 
         <TextView
+            android:textColor="@color/evaDarkGreen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.40"
@@ -192,6 +207,7 @@
             android:text="@string/account.diet"></TextView>
 
         <TextView
+            android:textColor="@color/evaLightGreen"
             android:id="@+id/tvDiet"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -202,7 +218,7 @@
 
     <TableRow
         android:id="@+id/trNewsletter"
-        android:background="#e5e6e6"
+        android:background="@android:color/white"
         android:gravity="center_vertical"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
@@ -211,18 +227,20 @@
         android:weightSum="1">
 
         <TextView
+            android:textColor="@color/evaDarkGreen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.40"
+            android:layout_weight="0.80"
             android:gravity="left"
             android:paddingLeft="15dp"
             android:text="@string/account.newsletter"></TextView>
 
         <TextView
+            android:textColor="@color/evaLightGreen"
             android:id="@+id/tvNewsletter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.60"
+            android:layout_weight="0.20"
             android:gravity="right"
             android:paddingRight="15dp"></TextView>
     </TableRow>
@@ -231,12 +249,15 @@
         android:id="@+id/trInvite"
         android:gravity="center"
         android:weightSum="1"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp">
 
         <Button
             android:id="@+id/btnInvite"
-            android:layout_width="wrap_content"
+            style="?android:textAppearanceSmall"
+            android:textColor="@color/evaDarkGreen"
+            android:layout_width="146dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/account.invite" />

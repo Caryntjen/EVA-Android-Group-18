@@ -10,6 +10,7 @@
         <item name="colorControlNormal">@color/colorPrimary</item>
         <item name="colorControlActivated">@color/evaDarkGreen</item>
         <item name="colorControlHighlight">@color/evaLightGreen</item>
+        <item name="colorButtonNormal">@color/android:white</item>
     <!--<item name="android:navigationBarColor">@color/colorAccent</item>-->
 </style>
 <style name="AppTheme.NoActionBar">

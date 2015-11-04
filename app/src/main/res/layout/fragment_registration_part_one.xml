@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@color/evaGrey">
 
 
     <ScrollView
@@ -53,11 +54,12 @@
             </android.support.design.widget.TextInputLayout>
 
             <TextView
+                android:textColor="@color/evaDarkGreen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/registration.sex"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <RadioGroup
                 android:id="@+id/rgSex"
@@ -86,11 +88,12 @@
 
 
             <TextView
+                android:textColor="@color/evaDarkGreen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="@string/registration.language"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <RadioGroup
                 android:id="@+id/rgLanguage"
@@ -117,20 +120,35 @@
 
             </RadioGroup>
 
+            <TextView
+                android:textColor="@color/evaDarkGreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Are you a student?"
+                android:textSize="18sp" />
             <CheckBox
                 android:id="@+id/cbStudent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginTop="15dp"
                 android:text="@string/registration.student" />
 
             <Button
                 android:id="@+id/btnNext"
-                android:layout_width="wrap_content"
+                android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:textColor="@color/evaDarkGreen"
+                style="?android:textAppearanceSmall"
                 android:text="@string/Next" />
+
+            <Button
+                android:id="@+id/fill_button"
+                android:background="@android:color/transparent"
+                android:layout_width="146dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
     </ScrollView>

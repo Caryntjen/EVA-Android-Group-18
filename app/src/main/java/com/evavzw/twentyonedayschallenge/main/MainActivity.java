@@ -8,13 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.evavzw.twentyonedayschallenge.R;
+import com.evavzw.twentyonedayschallenge.dummy.User;
 
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager vpMain;
     private MainViewPagerAdapter mvAdapter;
     private SlidingTabLayout slidingTabs;
-    private String currentday =" 5";
+    private String currentday = User.DAY.toString();
 
 
     @Override

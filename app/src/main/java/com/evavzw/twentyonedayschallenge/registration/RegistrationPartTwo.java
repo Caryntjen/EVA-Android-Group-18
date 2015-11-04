@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.evavzw.twentyonedayschallenge.R;
+import com.evavzw.twentyonedayschallenge.dummy.User;
 import com.evavzw.twentyonedayschallenge.login.LoginActivity;
 
 
@@ -62,6 +63,18 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
 
         btnComplete = (Button) view.findViewById(R.id.btnComplete);
         btnComplete.setOnClickListener(this);
+
+        Button mFillButton = (Button) view.findViewById(R.id.fill_button);
+        mFillButton.setFocusable(true);
+        mFillButton.setFocusableInTouchMode(true);
+        mFillButton.requestFocus();
+        mFillButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rbVeganism.setChecked(User.SEX.toBool());
+                cbNewsletter.setChecked(User.LANGUAGE.toBool());
+            }
+        });
         return view;
     }
 

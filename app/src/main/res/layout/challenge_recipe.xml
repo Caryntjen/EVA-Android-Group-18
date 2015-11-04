@@ -1,95 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:background="@color/evaGrey"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="1">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="@color/evaGrey">
 
-        <ImageView
-            android:id="@+id/ivRecipeImage"
-            android:layout_width="fill_parent"
-            android:layout_height="150dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_gravity="center"
-            android:src="@drawable/vegan"
-            android:contentDescription="@string/challenge.recipe.image" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvRecipeTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivRecipeImage"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:text="@string/challenge.recipe.title"
-            android:textSize="20sp" />
+            <LinearLayout
+                android:id="@+id/llRecipeImage"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="5dp"
+                android:background="@color/android:white">
 
-        <ImageView
-            android:id="@+id/ivStarOne"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignTop="@+id/tvRecipeTitle"
-            android:layout_gravity="right|bottom"
-            android:layout_toLeftOf="@+id/tvPoints"
-            android:layout_toStartOf="@+id/tvPoints"
-            android:src="@drawable/star"
-            android:visibility="invisible"
-            android:contentDescription="@string/image.star" />
+            <ImageView
+                android:id="@+id/ivRecipeImage"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/challenge.recipe.image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/vegan" />
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/ivStarTwo"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignTop="@+id/ivStarOne"
-            android:layout_gravity="right|bottom"
-            android:layout_toLeftOf="@+id/ivStarOne"
-            android:layout_toStartOf="@+id/ivStarOne"
-            android:src="@drawable/star"
-            android:visibility="invisible"
-            android:contentDescription="@string/image.star" />
+            <TextView
+                android:id="@+id/tvRecipeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llRecipeImage"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/challenge.recipe.title"
+                android:textColor="@color/evaDarkGreen"
+                android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tvPoints"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/ivRecipeImage"
-            android:layout_alignTop="@+id/ivStarOne"
-            android:layout_marginLeft="10dp"
-            android:text="@string/points.value"
-            android:textSize="20sp" />
+            <ImageView
+                android:id="@+id/ivStarOne"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignTop="@+id/tvRecipeTitle"
+                android:layout_gravity="right|bottom"
+                android:layout_toLeftOf="@+id/tvPoints"
+                android:layout_toStartOf="@+id/tvPoints"
+                android:contentDescription="@string/image.star"
+                android:src="@drawable/star"
+                android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/tvRecipeChallengeExplanation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text.defaulttext"
-            android:textSize="15sp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_alignLeft="@+id/tvRecipeTitle"
-            android:layout_alignStart="@+id/tvRecipeTitle"
-            android:layout_alignRight="@+id/ivRecipeImage"
-            android:layout_alignEnd="@+id/ivRecipeImage"
-            android:layout_below="@+id/ivStarOne" />
+            <ImageView
+                android:id="@+id/ivStarTwo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignTop="@+id/ivStarOne"
+                android:layout_gravity="right|bottom"
+                android:layout_toLeftOf="@+id/ivStarOne"
+                android:layout_toStartOf="@+id/ivStarOne"
+                android:contentDescription="@string/image.star"
+                android:src="@drawable/star"
+                android:visibility="invisible" />
 
-        <Button
-            android:id="@+id/btnVerify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/challenge.verify"
-            android:layout_gravity="center"
-            android:layout_below="@+id/tvRecipeChallengeExplanation"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tvPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/llRecipeImage"
+                android:layout_alignTop="@+id/ivStarOne"
+                android:layout_marginLeft="10dp"
+                android:text="@string/points.value"
+                android:textColor="@color/evaDarkOrange"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvRecipeChallengeExplanation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/llRecipeImage"
+                android:layout_alignLeft="@+id/tvRecipeTitle"
+                android:layout_alignRight="@+id/llRecipeImage"
+                android:layout_alignStart="@+id/tvRecipeTitle"
+                android:layout_below="@+id/ivStarOne"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/text.defaulttext"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/btnVerify"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvRecipeChallengeExplanation"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/challenge.verify"
+                android:textColor="@color/evaDarkGreen" />
+        </RelativeLayout>
 
 
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

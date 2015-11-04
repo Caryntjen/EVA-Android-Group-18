@@ -39,7 +39,7 @@
     <string name="account.email">E-mail</string>
     <string name="account.birthday">Birthday</string>
     <string name="account.sex">Sex</string>
-    <string name="account.newsletter">Subcribed to Newsletter</string>
+    <string name="account.newsletter">Subscribed to Newsletter</string>
     <string name="account.student">Student</string>
     <string name="account.children">Number of children</string>
     <string name="account.diet">Kind of diet</string>
@@ -53,7 +53,7 @@
     <string name="challenge.verify">Verify challenge</string>
     <string name="challenge.product.image">Product Image</string>
     <string name="image.star">Star</string>
-    <string name="points.value">p</string>
+    <string name="points.value">25p</string>
     <string name="activity.product.title">Product Challenge</string>
 
 
@@ -66,4 +66,6 @@
     <string name="activity.socialmedia.title">Social Media Challenge</string>
     <string name="registration.language">Language:</string>
     <string name="registration.sex">Sex:</string>
+    <string name="registration.astudent">Are you a student?:</string>
+    <string name="registration.subscribe">Subscribe to:</string>
 </resources>

@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.evavzw.twentyonedayschallenge.R;
+import com.evavzw.twentyonedayschallenge.dummy.User;
 
 
 public class RegistrationPartOne extends Fragment implements View.OnClickListener {
@@ -53,6 +55,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         View view = inflater.inflate(R.layout.fragment_registration_part_one, container, false);
 
         etBirthday = (EditText) view.findViewById(R.id.etBirthday);
+        etBirthday.clearFocus();
         etBirthday.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -61,6 +64,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
                 }
             }
         });
+        etBirthday.setInputType(InputType.TYPE_NULL);
 
         etChildren = (EditText) view.findViewById(R.id.etNumberOfChildren);
 
@@ -88,6 +92,21 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
                 if (callback != null) {
                     callback.onButtonClick(view);
                 }
+            }
+        });
+
+        Button mFillButton = (Button) view.findViewById(R.id.fill_button);
+        mFillButton.setFocusable(true);
+        mFillButton.setFocusableInTouchMode(true);
+        mFillButton.requestFocus();
+        mFillButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etBirthday.setText(User.BIRTHDAY.toString());
+                etChildren.setText(User.CHILDREN.toString());
+                rbFemale.setChecked(User.SEX.toBool());
+                rbEnglish.setChecked(User.LANGUAGE.toBool());
+                cbStudent.setChecked(User.STUDENT.toBool());
             }
         });
         return view;

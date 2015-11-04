@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.evavzw.twentyonedayschallenge.R;
+import com.evavzw.twentyonedayschallenge.dummy.User;
 import com.evavzw.twentyonedayschallenge.main.MainActivity;
 import com.evavzw.twentyonedayschallenge.registration.RegisterActivity;
 
@@ -57,6 +58,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 attemptLoginOrRegister(mAuthRegisterTask, "register");
+            }
+        });
+
+        Button mFillButton = (Button) findViewById(R.id.fill_button);
+        mFillButton.setFocusable(true);
+        mFillButton.setFocusableInTouchMode(true);
+        mFillButton.requestFocus();
+        mFillButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etEmail.setText(User.EMAIL.toString());
+                etPassword.setText(User.PASSWORD.toString());
             }
         });
     }

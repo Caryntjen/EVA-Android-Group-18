@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/evaGrey"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -27,7 +28,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/registration.kindofdiet"
-                android:textSize="20sp" />
+                android:textColor="@color/evaDarkGreen"
+                android:textSize="18sp" />
 
             <RadioGroup
                 android:id="@+id/rgKindOfVegitarian"
@@ -72,20 +74,37 @@
 
             </RadioGroup>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Subscribe to:"
+                android:textColor="@color/evaDarkGreen"
+                android:textSize="18sp" />
+
             <CheckBox
                 android:id="@+id/cbNewsletter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginTop="15dp"
                 android:text="@string/registration.newsletter" />
 
             <Button
                 android:id="@+id/btnComplete"
-                android:layout_width="wrap_content"
+                android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/registration.complete" />
+                android:text="@string/registration.complete"
+                style="?android:textAppearanceSmall"
+                android:textColor="@color/evaDarkGreen" />
+
+            <Button
+                android:id="@+id/fill_button"
+                android:layout_width="146dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

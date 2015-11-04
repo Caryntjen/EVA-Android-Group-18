@@ -1,5 +1,6 @@
 package com.evavzw.twentyonedayschallenge.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.evavzw.twentyonedayschallenge.R;
+import com.evavzw.twentyonedayschallenge.dummy.User;
 
 public class AccountAcitivy extends Fragment {
 
@@ -42,34 +44,42 @@ public class AccountAcitivy extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         tvEmail = (TextView) activity.findViewById(R.id.tvEmail);
-        tvEmail.setText("firstname.lastname.number@student.hogent.be");
+        tvEmail.setText(User.EMAIL.toString());
 
         tvBirthday = (TextView) activity.findViewById(R.id.tvBirthday);
-        tvBirthday.setText("20-01-1968");
+        tvBirthday.setText(User.BIRTHDAY.toString());
 
         tvSex = (TextView) activity.findViewById(R.id.tvSex);
-        tvSex.setText("Female");
+        tvSex.setText(User.SEX.toString());
 
         tvLanguage = (TextView) activity.findViewById(R.id.tvLanguage);
-        tvLanguage.setText("English");
+        tvLanguage.setText(User.LANGUAGE.toString());
 
         tvStudent = (TextView) activity.findViewById(R.id.tvStudent);
-        tvStudent.setText("No");
+        tvStudent.setText(User.STUDENT.toString());
 
         tvChildren = (TextView) activity.findViewById(R.id.tvChildren);
-        tvChildren.setText("2");
+        tvChildren.setText(User.CHILDREN.toString());
 
         tvNewsletter = (TextView) activity.findViewById(R.id.tvNewsletter);
-        tvNewsletter.setText("Yes");
+        tvNewsletter.setText(User.NEWSLETTER.toString());
 
         tvDiet = (TextView) activity.findViewById(R.id.tvDiet);
-        tvDiet.setText("Veganism");
+        tvDiet.setText(User.DIET.toString());
 
         btnInvite = (Button) activity.findViewById(R.id.btnInvite);
         btnInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                /*
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("plain/text");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"hogent@evavzw.be"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Come join the challenge");
+                intent.putExtra(Intent.EXTRA_TEXT, "Go check this new app out!");
+                startActivity(Intent.createChooser(intent, ""));
+    */
             }
         });
     }
