@@ -26,6 +26,7 @@
     <string name="registration.male">Male</string>
     <string name="registration.french">French</string>
     <string name="registration.english">English</string>
+    <string name="registration.dutch">Dutch</string>
     <string name="registration.student">Student</string>
     <string name="Next">Next</string>
     <string name="registration.complete">Complete</string>
@@ -38,18 +39,24 @@
     <string name="registration.newsletter">EVA newsletter</string>
     <string name="account.email">E-mail</string>
     <string name="account.birthday">Birthday</string>
-    <string name="account.sex">Sex</string>
+    <string name="account.sex">Gender</string>
     <string name="account.newsletter">Subscribed to Newsletter</string>
     <string name="account.student">Student</string>
     <string name="account.children">Number of children</string>
-    <string name="account.diet">Kind of diet</string>
+    <string name="account.diet">Diet</string>
     <string name="account.language">Language</string>
     <string name="account.invite">Invite a friend</string>
     <string name="registration.kindofdiet">Kind of diet:</string>
     <string name="challenges.currentday">Day </string>
-    <string name="challenge.product.title">Product</string>
+    <string name="challenge.product.title">Biozuivel</string>
 
     <string name="text.defaulttext">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+
+    <string name="text.producttext">Gebruik vandaag eens biozuivel. \nHieronder volgen twee voordelen van biozuivel: \nDiervriendelijk: \n\rNet zoals bij de eerder besproken activiteiten in de voedselindustrie waarbij dieren betrokken zijn (zie ook eieren en vlees), moet de biologische zuivelsector meer rekening houden met enkele diervriendelijke maatregelen. Zo moet het aantal koeien per hectare grond beperkt gehouden worden, mogen er geen preventieve geneesmiddelen worden gebruikt en moet hun voeder strikt biologisch geteeld zijn.
+    \n \nGezond: \nTerwijl we bij eieren of vlees geen sluitende gezondheidsvoordelen konden vaststellen, zijn er voor melk wél al verschillende studies uitgevoerd die erop wijzen dat het biologische product daadwerkelijk gezonder is dan de reguliere variant.</string>
+    <string name="text.recipetext">bereidingstijd: 15 min\naantal personen: 8\nIngredienten:\n 75 g sojaboter \n 75 g tarwebloem \n 250 ml groentebouillon \n 500 ml ongezoete sojamelk \n 3 el gistvlokken(optioneel) \n nootmuskaat \n peper \n zout\n\n
+                Bereidingswijze: \nSmelt de sojaboter op een zacht vuurtje. Meng er vervolgens de tarwebloem door. Laat op een laag vuurtje gedurende 2 minuten koken, blijf voortdurend roeren (deze stap zorgt ervoor dat de saus niet naar bloem smaakt). Voeg heel geleidelijk sojamelk en groentebouillon toe, roer stevig om geen klonters te krijgen.Breng op smaak met peper, zout en nootmuskaat.Voeg, indien gewenst, de gistvlokken toe.
+                \n\nTips: \n-Dit is een basissaus. Aan deze saus kan vb. 1 el mosterd toegevoegd worden, citroensap, miso, ...</string>
     <string name="challenge.verify">Verify challenge</string>
     <string name="challenge.product.image">Product Image</string>
     <string name="image.star">Star</string>
@@ -57,7 +64,7 @@
     <string name="activity.product.title">Product Challenge</string>
 
 
-    <string name="challenge.recipe.title">Recipe</string>
+    <string name="challenge.recipe.title">Plantaardige Béchamelsaus</string>
     <string name="challenge.recipe.image">Recipe Image</string>
     <string name="activity.recipe.title">Recipe Challenge</string>
 
@@ -65,7 +72,7 @@
     <string name="challenge.socialmedia.image">Social Media Image</string>
     <string name="activity.socialmedia.title">Social Media Challenge</string>
     <string name="registration.language">Language:</string>
-    <string name="registration.sex">Sex:</string>
+    <string name="registration.sex">Gender:</string>
     <string name="registration.astudent">Are you a student?:</string>
     <string name="registration.subscribe">Subscribe to:</string>
 </resources>

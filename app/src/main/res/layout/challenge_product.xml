@@ -41,7 +41,7 @@
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/challenge.product.image"
                 android:scaleType="centerCrop"
-                android:src="@drawable/vegetables" />
+                android:src="@drawable/zuivel" />
             </LinearLayout>
 
             <TextView
@@ -103,7 +103,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="15dp"
-                android:text="@string/text.defaulttext"
+                android:text="@string/text.producttext"
                 android:textSize="15sp" />
 
             <Button
