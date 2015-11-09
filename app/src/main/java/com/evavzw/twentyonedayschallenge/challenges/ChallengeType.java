@@ -4,8 +4,8 @@ import com.evavzw.twentyonedayschallenge.R;
 
 public enum ChallengeType {
     SOCIALMEDIA(R.drawable.socialmedia, "Social Media", "Share the love"),
-    RECIPE(R.drawable.recipe, "Recipe", "Follow these easy steps"),
-    PRODUCT(R.drawable.product,"Product","Use this in your day");
+    RECIPE(R.drawable.recipe, "Recipe", "Cook your own bio meal"),
+    PRODUCT(R.drawable.product,"Product", "Use a bio product");
 
     private int resourceId;
     private String title;
