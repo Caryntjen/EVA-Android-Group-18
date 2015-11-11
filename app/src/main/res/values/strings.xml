@@ -2,7 +2,7 @@
     <string name="app_name">TwentyOne Days Challenge</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="title_activity_main">21 Day Challenge: Day </string>
+    <string name="title_activity_main">21 Day Challenge</string>
     <string name="title_activity_account">Account</string>
     <string name="title_activity_challenges">Challenges</string>
     <string name="title_activity_settings">Settings</string>
@@ -75,4 +75,15 @@
     <string name="registration.sex">Gender:</string>
     <string name="registration.astudent">Are you a student?:</string>
     <string name="registration.subscribe">Subscribe to:</string>
+    <string name="registration.subscribeto">Subscribe to:</string>
+    <string name="registration.studentornot">Are you a student?</string>
+    <string name="overview.stats">Stats</string>
+    <string name="overview.points">Points</string>
+    <string name="overview.completechallenge">Complete challenges</string>
+    <string name="overview.currentday">Current Day</string>
+    <string name="overview.achievements">Achievements</string>
+    <string name="overview.level">Level</string>
+    <string name="overview.share">Share</string>
+    <string name="card.icon">Icon</string>
+    <string name="card.star">Star</string>
 </resources>

@@ -3,340 +3,343 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/evaGrey">
+    android:background="@drawable/blackboard_background">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/tvStatsTitle"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
-        android:text="Stats"
-        android:textColor="@color/evaDarkGreen"
-        android:textSize="20sp" />
+        android:orientation="vertical">
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/tlSettings"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:visibility="visible"
-        android:layout_below="@+id/tvStatsTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TableRow
-            android:layout_marginTop="5dp"
-            android:background="@android:color/white"
-            android:id="@+id/trEmail"
-            android:gravity="center_vertical"
-            android:minHeight="45dp"
-            android:weightSum="1"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
-
-            <TextView
-                android:textColor="@color/evaDarkGreen"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.30"
-                android:gravity="left"
-                android:paddingLeft="15dp"
-                android:text="Points"></TextView>
-
-            <TextView
-                android:textColor="@color/evaLightGreen"
-                android:id="@+id/tvPoints"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.70"
-                android:gravity="right"
-                android:text="125"
-                android:paddingRight="15dp"></TextView>
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/trBirthday"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:layout_marginTop="5dp"
+        <TextView
+            android:id="@+id/tvStatsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:minHeight="45dp"
-            android:weightSum="1">
+            android:layout_marginTop="10dp"
+            android:text="@string/overview.stats"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
-            <TextView
-                android:textColor="@color/evaDarkGreen"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.70"
-                android:gravity="left"
-                android:paddingLeft="15dp"
-                android:text="Complete challenges"></TextView>
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/tlSettings"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvStatsTitle"
+            android:layout_gravity="top"
+            android:visibility="visible">
 
-            <TextView
-                android:textColor="@color/evaLightGreen"
-                android:id="@+id/tvCompletedChallenges"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.30"
-                android:gravity="right"
-                android:text="28"
-                android:paddingRight="15dp"></TextView>
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/trChildren"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:minHeight="45dp"
-            android:weightSum="1">
-
-            <TextView
-                android:textColor="@color/evaDarkGreen"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.80"
-                android:gravity="left"
-                android:paddingLeft="15dp"
-                android:text="Current Day"></TextView>
-
-            <TextView
-                android:textColor="@color/evaLightGreen"
-                android:id="@+id/tvCurrentDay"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.20"
-                android:gravity="right"
-                android:text="7"
-                android:paddingRight="15dp"></TextView>
-        </TableRow>
-
-
-    </TableLayout>
-
-
-    <!--
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/rlBadges1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="45dp">
-
-            <ImageView
-                android:id="@+id/ivBadge1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right|bottom"
-                android:contentDescription="@string/image.star"
-                android:src="@drawable/badge1"
-                android:visibility="visible"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <ImageView
-                android:id="@+id/ivBadge2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right|bottom"
-                android:contentDescription="@string/image.star"
-                android:src="@drawable/badge2"
-                android:layout_marginLeft="10dp"
-                android:visibility="visible"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/ivBadge1"
-                android:layout_toEndOf="@+id/ivBadge1" />
-
-            <ImageView
-                android:id="@+id/ivBadge3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right|bottom"
-                android:contentDescription="@string/image.star"
-                android:src="@drawable/badge3"
-                android:layout_marginLeft="10dp"
-                android:visibility="visible"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/ivBadge2"
-                android:layout_toEndOf="@+id/ivBadge2" />
-
-            <ImageView
-                android:id="@+id/ivBadge4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right|bottom"
-                android:contentDescription="@string/image.star"
-                android:src="@drawable/badge4"
-                android:layout_marginLeft="10dp"
-                android:visibility="visible"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/ivBadge3"
-                android:layout_toEndOf="@+id/ivBadge3" />
-
-            <ImageView
-                android:id="@+id/ivBadge0"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right|bottom"
-                android:contentDescription="@string/image.star"
-                android:src="@drawable/badge0"
-                android:layout_marginLeft="10dp"
-                android:visibility="visible"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/ivBadge4"
-                android:layout_toEndOf="@+id/ivBadge4" />
-
-
-
-
-
-
-        </RelativeLayout>
-
-
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/rlBadges2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="45dp"
-            android:layout_below="@+id/rlBadges1">
-            <ImageView
-                android:id="@+id/ivBadge5"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right|bottom"
-                android:contentDescription="@string/image.star"
-                android:src="@drawable/badge5"
-                android:visibility="visible"
+            <TableRow
+                android:id="@+id/trEmail"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/ivBadge1"
-                android:layout_toLeftOf="@+id/ivBadge2"
-                android:layout_toStartOf="@+id/ivBadge2" />
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:weightSum="1">
 
-            <ImageView
-                android:id="@+id/ivBadge6"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right|bottom"
-                android:contentDescription="@string/image.star"
-                android:src="@drawable/badge6"
-                android:visibility="visible"
-                android:layout_alignTop="@+id/ivBadge5"
-                android:layout_alignLeft="@+id/ivBadge2"
-                android:layout_alignStart="@+id/ivBadge2" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.30"
+                    android:gravity="left"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="0dp"
+                    android:text="@string/overview.points"
+                    android:textColor="@color/evaDarkGreen" />
 
-            <ImageView
-                android:id="@+id/ivBadge7"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right|bottom"
-                android:contentDescription="@string/image.star"
-                android:src="@drawable/badge7"
-                android:visibility="visible"
-                android:layout_alignTop="@+id/ivBadge6"
-                android:layout_toLeftOf="@+id/ivBadge4"
-                android:layout_toStartOf="@+id/ivBadge4" />
+                <TextView
+                    android:id="@+id/tvPoints"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.70"
+                    android:gravity="right"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/evaLightGreen" />
+            </TableRow>
 
-            <ImageView
-                android:id="@+id/ivBadge8"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right|bottom"
-                android:contentDescription="@string/image.star"
-                android:src="@drawable/badge8"
-                android:visibility="visible"
-                android:layout_alignTop="@+id/ivBadge7"
-                android:layout_toLeftOf="@+id/ivBadge0"
-                android:layout_toStartOf="@+id/ivBadge0" />
+            <TableRow
+                android:id="@+id/trBirthday"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:weightSum="1">
 
-            <ImageView
-                android:id="@+id/ivBadge9"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="right|bottom"
-                android:contentDescription="@string/image.star"
-                android:src="@drawable/badge9"
-                android:visibility="visible"
-                android:layout_alignTop="@+id/ivBadge8"
-                android:layout_alignLeft="@+id/ivBadge0"
-                android:layout_alignStart="@+id/ivBadge0" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.70"
+                    android:gravity="left"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="0dp"
+                    android:text="@string/overview.completechallenge"
+                    android:textColor="@color/evaDarkGreen" />
 
-    -->
+                <TextView
+                    android:id="@+id/tvCompletedChallenges"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.30"
+                    android:gravity="right"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/evaLightGreen" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/trChildren"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:minHeight="45dp"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.80"
+                    android:gravity="left"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="0dp"
+                    android:text="@string/overview.currentday"
+                    android:textColor="@color/evaDarkGreen" />
+
+                <TextView
+                    android:id="@+id/tvCurrentDay"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.20"
+                    android:gravity="right"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/evaLightGreen" />
+            </TableRow>
+
+
+        </TableLayout>
+
+
+        <!--
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rlBadges1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="45dp">
+
+                <ImageView
+                    android:id="@+id/ivBadge1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:contentDescription="@string/image.star"
+                    android:src="@drawable/badge1"
+                    android:visibility="visible"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <ImageView
+                    android:id="@+id/ivBadge2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:contentDescription="@string/image.star"
+                    android:src="@drawable/badge2"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="visible"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ivBadge1"
+                    android:layout_toEndOf="@+id/ivBadge1" />
+
+                <ImageView
+                    android:id="@+id/ivBadge3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:contentDescription="@string/image.star"
+                    android:src="@drawable/badge3"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="visible"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ivBadge2"
+                    android:layout_toEndOf="@+id/ivBadge2" />
+
+                <ImageView
+                    android:id="@+id/ivBadge4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:contentDescription="@string/image.star"
+                    android:src="@drawable/badge4"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="visible"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ivBadge3"
+                    android:layout_toEndOf="@+id/ivBadge3" />
+
+                <ImageView
+                    android:id="@+id/ivBadge0"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:contentDescription="@string/image.star"
+                    android:src="@drawable/badge0"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="visible"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ivBadge4"
+                    android:layout_toEndOf="@+id/ivBadge4" />
+
+
+
+
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rlBadges2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="45dp"
+                android:layout_below="@+id/rlBadges1">
+                <ImageView
+                    android:id="@+id/ivBadge5"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:contentDescription="@string/image.star"
+                    android:src="@drawable/badge5"
+                    android:visibility="visible"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/ivBadge1"
+                    android:layout_toLeftOf="@+id/ivBadge2"
+                    android:layout_toStartOf="@+id/ivBadge2" />
+
+                <ImageView
+                    android:id="@+id/ivBadge6"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:contentDescription="@string/image.star"
+                    android:src="@drawable/badge6"
+                    android:visibility="visible"
+                    android:layout_alignTop="@+id/ivBadge5"
+                    android:layout_alignLeft="@+id/ivBadge2"
+                    android:layout_alignStart="@+id/ivBadge2" />
+
+                <ImageView
+                    android:id="@+id/ivBadge7"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:contentDescription="@string/image.star"
+                    android:src="@drawable/badge7"
+                    android:visibility="visible"
+                    android:layout_alignTop="@+id/ivBadge6"
+                    android:layout_toLeftOf="@+id/ivBadge4"
+                    android:layout_toStartOf="@+id/ivBadge4" />
+
+                <ImageView
+                    android:id="@+id/ivBadge8"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:contentDescription="@string/image.star"
+                    android:src="@drawable/badge8"
+                    android:visibility="visible"
+                    android:layout_alignTop="@+id/ivBadge7"
+                    android:layout_toLeftOf="@+id/ivBadge0"
+                    android:layout_toStartOf="@+id/ivBadge0" />
+
+                <ImageView
+                    android:id="@+id/ivBadge9"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right|bottom"
+                    android:contentDescription="@string/image.star"
+                    android:src="@drawable/badge9"
+                    android:visibility="visible"
+                    android:layout_alignTop="@+id/ivBadge8"
+                    android:layout_alignLeft="@+id/ivBadge0"
+                    android:layout_alignStart="@+id/ivBadge0" />
+
+        -->
 
         <TextView
             android:id="@+id/tvAchievements"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Achievements"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/evaDarkGreen"
-            android:textSize="20sp"
-            android:layout_below="@+id/tlSettings"
             android:layout_alignLeft="@+id/tvStatsTitle"
-            android:layout_alignStart="@+id/tvStatsTitle" />
+            android:layout_alignStart="@+id/tvStatsTitle"
+            android:layout_below="@+id/tlSettings"
+            android:layout_marginTop="15dp"
+            android:text="@string/overview.achievements"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
         <ImageView
 
             android:id="@+id/ivBadges"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
+            android:layout_below="@+id/tvAchievements"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
             android:contentDescription="@string/challenge.product.image"
             android:scaleType="centerCrop"
-            android:src="@drawable/badges"
-            android:layout_gravity="center_vertical"
-            android:layout_below="@+id/tvAchievements"
-            android:layout_centerHorizontal="true" />
+            android:src="@drawable/badges" />
 
         <TextView
             android:id="@+id/tvLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Level"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/evaDarkGreen"
-            android:textSize="20sp"
-            android:layout_below="@+id/ivBadges"
             android:layout_alignLeft="@+id/tvStatsTitle"
-            android:layout_alignStart="@+id/tvStatsTitle" />
+            android:layout_alignStart="@+id/tvStatsTitle"
+            android:layout_below="@+id/ivBadges"
+            android:layout_marginTop="15dp"
+            android:text="@string/overview.level"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
         <ImageView
 
             android:id="@+id/ivLevel"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tvLevel"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
             android:contentDescription="@string/challenge.product.image"
             android:scaleType="centerCrop"
-            android:src="@drawable/level"
-            android:layout_gravity="center_vertical"
-            android:layout_below="@+id/tvLevel"
-            android:layout_centerHorizontal="true" />
+            android:src="@drawable/level" />
 
         <Button
             android:id="@+id/btnShare"
             style="?android:textAppearanceSmall"
-            android:textColor="@color/evaDarkGreen"
             android:layout_width="146dp"
-            android:layout_marginTop="15dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_below="@+id/ivLevel"
-            android:text="Share"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_below="@+id/ivLevel"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="15dp"
+            android:text="@string/overview.share"
+            android:textColor="@color/evaDarkGreen" />
 
     </RelativeLayout>
 </ScrollView>

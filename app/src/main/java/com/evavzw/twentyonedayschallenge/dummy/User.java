@@ -9,7 +9,7 @@ public enum User {
     LANGUAGE("English"),
     STUDENT("Yes"),
     DIET("Veganism"),
-    DAY(" 07"),
+    DAY("7"),
     NEWSLETTER("Yes");
 
     private final String text;

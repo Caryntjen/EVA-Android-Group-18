@@ -95,6 +95,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
             }
         });
 
+/*
         Button mFillButton = (Button) view.findViewById(R.id.fill_button);
         mFillButton.setFocusable(true);
         mFillButton.setFocusableInTouchMode(true);
@@ -109,6 +110,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
                 cbStudent.setChecked(User.STUDENT.toBool());
             }
         });
+*/
         return view;
     }
 

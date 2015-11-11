@@ -22,7 +22,7 @@ public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new OverviewActivity();
             case 2:
-                return new AccountAcitivy();
+                return new AccountActivity();
             default:
                 return null;
         }

@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="beforeDescendants"
     android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:descendantFocusability="beforeDescendants">
+    android:paddingRight="15dp">
 
     <RelativeLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:paddingRight="15dp"
         android:background="@drawable/selector_challenge_background"
-        android:descendantFocusability="afterDescendants">
+        android:descendantFocusability="afterDescendants"
+        android:orientation="vertical"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp">
 
         <ImageView
             android:id="@+id/ivChallengeThumbmail"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/socialmedia"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="15dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/card.icon"
+            android:scaleType="centerCrop"
+            android:src="@drawable/socialmedia" />
 
         <TextView
             android:id="@+id/tvChallengeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Challenge Title"
-            android:textSize="20dp"
             android:layout_alignTop="@+id/ivChallengeThumbmail"
+            android:layout_toEndOf="@+id/ivChallengeThumbmail"
             android:layout_toRightOf="@+id/ivChallengeThumbmail"
-            android:layout_toEndOf="@+id/ivChallengeThumbmail" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tvChallengeTagline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Challenge Tagline"
-            android:layout_below="@+id/tvChallengeTitle"
             android:layout_alignLeft="@+id/tvChallengeTitle"
-            android:layout_alignStart="@+id/tvChallengeTitle" />
+            android:layout_alignStart="@+id/tvChallengeTitle"
+            android:layout_below="@+id/tvChallengeTitle" />
 
         <ImageView
             android:id="@+id/ivStarOne"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/star"
-            android:visibility="invisible"
-            android:layout_gravity="right|bottom"
             android:layout_alignBottom="@+id/tvChallengeTagline"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_gravity="right|bottom"
+            android:contentDescription="@string/card.star"
+            android:src="@drawable/star"
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/ivStarTwo"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/star"
-            android:visibility="invisible"
-            android:layout_gravity="right|bottom"
             android:layout_alignTop="@+id/ivStarOne"
+            android:layout_gravity="right|bottom"
             android:layout_toLeftOf="@+id/ivStarOne"
-            android:layout_toStartOf="@+id/ivStarOne" />
+            android:layout_toStartOf="@+id/ivStarOne"
+            android:contentDescription="@string/card.star"
+            android:src="@drawable/star"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 

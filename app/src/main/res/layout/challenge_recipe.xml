@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/evaGrey"
+    android:background="@drawable/blackboard_background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -14,12 +14,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/evaGrey">
+        android:layout_height="wrap_content">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -28,20 +27,18 @@
                 android:layout_height="150dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:padding="5dp"
-                android:background="@color/android:white">
+                android:background="@color/android:white"
+                android:padding="5dp">
 
-            <ImageView
-                android:id="@+id/ivRecipeImage"
-                android:layout_width="fill_parent"
-                android:layout_height="150dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/challenge.recipe.image"
-                android:scaleType="centerCrop"
-                android:src="@drawable/recipe3" />
+                <ImageView
+                    android:id="@+id/ivRecipeImage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/challenge.recipe.image"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/recipe3" />
             </LinearLayout>
 
             <TextView
@@ -53,7 +50,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/challenge.recipe.title"
-                android:textColor="@color/evaDarkGreen"
+                android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
             <ImageView
@@ -103,6 +100,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="15dp"
+                android:padding="10dp"
+                android:background="@drawable/cloth_background"
                 android:text="@string/text.recipetext"
                 android:textSize="15sp" />
 

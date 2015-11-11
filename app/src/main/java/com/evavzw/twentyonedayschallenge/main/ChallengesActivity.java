@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.challenges.BaseInflaterAdapter;
@@ -18,11 +20,15 @@ import com.evavzw.twentyonedayschallenge.challenges.ChallengeType;
 import com.evavzw.twentyonedayschallenge.challenges.ProductChallengeActivity;
 import com.evavzw.twentyonedayschallenge.challenges.RecipeChallengeActivity;
 import com.evavzw.twentyonedayschallenge.challenges.SocialMediaChallengeActivity;
+import com.evavzw.twentyonedayschallenge.dummy.User;
 
-public class ChallengesActivity extends Fragment{
+public class ChallengesActivity extends Fragment {
 
-        private FragmentActivity activity;
+    private FragmentActivity activity;
     private BaseInflaterAdapter<ChallengeCardItem> adapter;
+
+    private String currentday = User.DAY.toString();
+    private final int MAXDAYS = 21;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,19 @@ public class ChallengesActivity extends Fragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
+
+        ProgressBar pbLoading = (ProgressBar) activity.findViewById(R.id.pbLoading);
+
+        ProgressBar pbDays = (ProgressBar) activity.findViewById(R.id.pbDays);
+        pbDays.setMax(MAXDAYS);
+        pbDays.setProgress(Integer.parseInt(currentday));
+
+        TextView tvDays = (TextView) activity.findViewById(R.id.tvDays);
+        tvDays.setText(currentday + "/21 days");
+
+
         final ListView challengeItems = (ListView) activity.findViewById(R.id.lvChallenges);
 
         challengeItems.addHeaderView(new View(activity));
@@ -57,19 +76,15 @@ public class ChallengesActivity extends Fragment{
         challengeItems.setAdapter(adapter);
 
 
-
-
-
         challengeItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
 
-                ChallengeCardItem ccItem = new ChallengeCardItem(adapter.getTItem(position-1));
+                ChallengeCardItem ccItem = new ChallengeCardItem(adapter.getTItem(position - 1));
                 Intent typeChallenge = null;
-                switch (ccItem.getType())
-                {
+                switch (ccItem.getType()) {
                     case PRODUCT:
                         typeChallenge = new Intent(activity, ProductChallengeActivity.class);
                         break;
@@ -80,11 +95,14 @@ public class ChallengesActivity extends Fragment{
                         typeChallenge = new Intent(activity, RecipeChallengeActivity.class);
                         break;
                 }
-                if(!typeChallenge.equals(null)){
+                if (!typeChallenge.equals(null)) {
                     startActivity(typeChallenge);
                 }
 
             }
         });
+
+
+        pbLoading.setVisibility(View.GONE);
     }
 }

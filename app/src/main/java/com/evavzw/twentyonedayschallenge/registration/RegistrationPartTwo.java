@@ -14,6 +14,8 @@ import android.widget.RadioGroup;
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 import com.evavzw.twentyonedayschallenge.login.LoginActivity;
+import com.evavzw.twentyonedayschallenge.main.ChallengesActivity;
+import com.evavzw.twentyonedayschallenge.main.MainActivity;
 
 
 public class RegistrationPartTwo extends Fragment implements View.OnClickListener {
@@ -64,6 +66,7 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
         btnComplete = (Button) view.findViewById(R.id.btnComplete);
         btnComplete.setOnClickListener(this);
 
+/*
         Button mFillButton = (Button) view.findViewById(R.id.fill_button);
         mFillButton.setFocusable(true);
         mFillButton.setFocusableInTouchMode(true);
@@ -75,6 +78,7 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
                 cbNewsletter.setChecked(User.LANGUAGE.toBool());
             }
         });
+        */
         return view;
     }
 
@@ -111,8 +115,8 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
 
             case R.id.btnComplete:
                 //TODO: Need some validation
-                Intent loginActivity = new Intent(getActivity(), LoginActivity.class);
-                startActivity(loginActivity);
+                Intent mainActivity = new Intent(getActivity(), MainActivity.class);
+                startActivity(mainActivity);
                 break;
 
             default:

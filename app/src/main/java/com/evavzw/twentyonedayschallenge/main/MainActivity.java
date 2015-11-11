@@ -15,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager vpMain;
     private MainViewPagerAdapter mvAdapter;
     private SlidingTabLayout slidingTabs;
-    private String currentday = User.DAY.toString();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setLogo(R.drawable.evalogo);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(getSupportActionBar().getTitle() +currentday);
 
         mvAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
 

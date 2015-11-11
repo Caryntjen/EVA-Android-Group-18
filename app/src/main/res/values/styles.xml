@@ -24,6 +24,18 @@
    <item name="android:textColor">@color/colorAccent</item>
    <item name="android:textSize">14sp</item>
 </style>
+
+    <style name="LevelProgressBar" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progressbar_level</item>
+        <item name="android:minHeight">10dp</item>
+        <item name="android:maxHeight">20dp</item>
+    </style>
+
+    <style name="LoadingProgressBar" parent="android:Widget.ProgressBar.Large">
+        <item name="android:indeterminateOnly">true</item>
+        <item name="android:progressDrawable">@drawable/progressbar_loading</item>
+    </style>
 <!--
        <style name="EvaTheme" parent="@android:style/Theme.Holo.Light">
            <item name="android:actionBarStyle">@style/EvaActionBarTheme</item>

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 
-public class AccountAcitivy extends Fragment {
+public class AccountActivity extends Fragment {
 
     private FragmentActivity activity;
 

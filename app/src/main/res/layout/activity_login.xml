@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/cloth_background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -10,7 +11,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:weightSum="1"
-    android:background="@color/evaGrey"
     tools:context="com.evavzw.twentyonedayschallenge.login.LoginActivity">
 
     <ScrollView
@@ -59,32 +59,33 @@
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                android:textColor="@color/evaDarkGreen"
                 style="?android:textAppearanceSmall"
                 android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:text="@string/action_sign_in"
+                android:textColor="@color/evaDarkGreen"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/register_button"
-                android:textColor="@color/evaDarkGreen"
                 style="?android:textAppearanceSmall"
                 android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/action_register"
+                android:textColor="@color/evaDarkGreen"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/fill_button"
-                android:background="@android:color/transparent"
-                android:layout_width="146dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center_horizontal"/>
-
+            <!--
+                        <Button
+                            android:id="@+id/fill_button"
+                            android:background="@android:color/transparent"
+                            android:layout_width="146dp"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center_horizontal"/>
+            -->
         </LinearLayout>
     </ScrollView>
 
