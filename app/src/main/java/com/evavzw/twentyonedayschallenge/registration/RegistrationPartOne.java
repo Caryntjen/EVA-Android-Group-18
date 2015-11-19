@@ -32,6 +32,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
     private static RadioGroup rgLanguage;
     private static RadioButton rbFrench;
     private static RadioButton rbEnglish;
+    private static RadioButton rbDutch;
     private static CheckBox cbStudent;
     private static Button btnNext;
 
@@ -82,6 +83,8 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         rbFrench.setOnClickListener(this);
         rbEnglish = (RadioButton) view.findViewById(R.id.rbEnglish);
         rbEnglish.setOnClickListener(this);
+        rbDutch = (RadioButton) view.findViewById(R.id.rbDutch);
+        rbDutch.setOnClickListener(this);
 
         cbStudent = (CheckBox) view.findViewById(R.id.cbStudent);
         cbStudent.setOnClickListener(this);
@@ -141,6 +144,11 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
                 language = "EN";
                 break;
             case R.id.rbFrench:
+                //if (rbFrench.isChecked())
+                language = "FR";
+                break;
+
+            case R.id.rbDutch:
                 //if (rbFrench.isChecked())
                 language = "FR";
                 break;

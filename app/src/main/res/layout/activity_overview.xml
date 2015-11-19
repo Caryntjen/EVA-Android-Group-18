@@ -127,6 +127,14 @@
 
         </TableLayout>
 
+        <include layout="@layout/overview_achievements"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/tlSettings"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/include" />
+
 
         <!--
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -276,7 +284,6 @@
                     android:layout_alignLeft="@+id/ivBadge0"
                     android:layout_alignStart="@+id/ivBadge0" />
 
-        -->
 
         <TextView
             android:id="@+id/tvAchievements"
@@ -299,26 +306,26 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/challenge.product.image"
+            android:contentDescription="@string/overview.image.badges"
             android:scaleType="centerCrop"
             android:src="@drawable/badges" />
+        -->
 
         <TextView
             android:id="@+id/tvLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvStatsTitle"
-            android:layout_alignStart="@+id/tvStatsTitle"
-            android:layout_below="@+id/ivBadges"
-            android:layout_marginTop="15dp"
             android:text="@string/overview.level"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_below="@+id/include"
+            android:layout_alignLeft="@+id/tvStatsTitle"
+            android:layout_alignStart="@+id/tvStatsTitle" />
 
         <ImageView
 
             android:id="@+id/ivLevel"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvLevel"
             android:layout_centerHorizontal="true"
@@ -326,7 +333,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/challenge.product.image"
             android:scaleType="centerCrop"
-            android:src="@drawable/level" />
+            android:src="@drawable/heart7" />
 
         <Button
             android:id="@+id/btnShare"

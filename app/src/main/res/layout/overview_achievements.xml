@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvAchievements"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvStatsTitle"
+        android:layout_alignStart="@+id/tvStatsTitle"
+        android:layout_below="@+id/tlSettings"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/overview.achievements"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <ImageView
+
+        android:id="@+id/ivBadge0"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/overview.image.badges"
+        android:scaleType="centerCrop"
+        android:src="@drawable/badge0"
+        android:layout_below="@+id/tvAchievements"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+
+        android:id="@+id/ivBadge1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/overview.image.badges"
+        android:scaleType="centerCrop"
+        android:src="@drawable/badge1"
+        android:layout_below="@+id/ivBadge8"
+        android:layout_toRightOf="@+id/ivBadge2"
+        android:layout_toEndOf="@+id/ivBadge2" />
+
+    <ImageView
+
+        android:id="@+id/ivBadge2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/overview.image.badges"
+        android:scaleType="centerCrop"
+        android:src="@drawable/badge2"
+        android:layout_below="@+id/ivBadge0"
+        android:layout_toRightOf="@+id/ivBadge0"
+        android:layout_toEndOf="@+id/ivBadge0" />
+
+    <ImageView
+
+        android:id="@+id/ivBadge3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/overview.image.badges"
+        android:scaleType="centerCrop"
+        android:src="@drawable/badge3"
+        android:layout_below="@+id/ivBadge0"
+        android:layout_toRightOf="@+id/ivBadge4"
+        android:layout_toEndOf="@+id/ivBadge4" />
+
+    <ImageView
+
+        android:id="@+id/ivBadge4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/overview.image.badges"
+        android:scaleType="centerCrop"
+        android:src="@drawable/badge4"
+        android:layout_below="@+id/ivBadge0"
+        android:layout_toRightOf="@+id/ivBadge5"
+        android:layout_toEndOf="@+id/ivBadge5" />
+
+    <ImageView
+
+        android:id="@+id/ivBadge5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/overview.image.badges"
+        android:scaleType="centerCrop"
+        android:src="@drawable/badge5"
+        android:layout_below="@+id/ivBadge6"
+        android:layout_alignLeft="@+id/ivBadge6"
+        android:layout_alignStart="@+id/ivBadge6" />
+
+    <ImageView
+
+        android:id="@+id/ivBadge6"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/overview.image.badges"
+        android:scaleType="centerCrop"
+        android:src="@drawable/badge6"
+        android:layout_alignTop="@+id/ivBadge7"
+        android:layout_toLeftOf="@+id/ivBadge7"
+        android:layout_toStartOf="@+id/ivBadge7" />
+
+    <ImageView
+
+        android:id="@+id/ivBadge7"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/overview.image.badges"
+        android:scaleType="centerCrop"
+        android:src="@drawable/badge7"
+        android:layout_alignTop="@+id/ivBadge0"
+        android:layout_toLeftOf="@+id/ivBadge0"
+        android:layout_toStartOf="@+id/ivBadge0" />
+
+    <ImageView
+
+        android:id="@+id/ivBadge8"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/overview.image.badges"
+        android:scaleType="centerCrop"
+        android:src="@drawable/badge8"
+        android:layout_alignTop="@+id/ivBadge9"
+        android:layout_toRightOf="@+id/ivBadge9"
+        android:layout_toEndOf="@+id/ivBadge9" />
+
+    <ImageView
+
+        android:id="@+id/ivBadge9"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/overview.image.badges"
+        android:scaleType="centerCrop"
+        android:src="@drawable/badge9"
+        android:layout_alignTop="@+id/ivBadge0"
+        android:layout_toRightOf="@+id/ivBadge0"
+        android:layout_toEndOf="@+id/ivBadge0" />
+
+    <TextView
+        android:id="@+id/tvAchievementTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TITLE"
+        android:paddingTop="15dp"
+        android:gravity="center_vertical"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:layout_below="@+id/ivBadge3"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp"
+        android:layout_below="@+id/tvAchievementTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ProgressBar
+            android:id="@+id/pbAchievements"
+            style="@style/LevelProgressBar"
+            android:layout_width="0dp"
+            android:layout_height="15dip"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.8" />
+
+        <TextView
+            android:id="@+id/tvAchievementExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:text="TEST"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

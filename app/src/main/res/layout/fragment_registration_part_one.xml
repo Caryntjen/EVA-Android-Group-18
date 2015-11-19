@@ -72,7 +72,7 @@
                     android:id="@+id/rbFemale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginRight="15dp"
                     android:checked="false"
                     android:text="@string/registration.female" />
 
@@ -106,7 +106,7 @@
                     android:id="@+id/rbEnglish"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginRight="15dp"
                     android:checked="false"
                     android:text="@string/registration.english" />
 
@@ -114,9 +114,16 @@
                     android:id="@+id/rbFrench"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="15dp"
                     android:checked="false"
                     android:text="@string/registration.french" />
+
+                <RadioButton
+                    android:id="@+id/rbDutch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/registration.dutch" />
 
             </RadioGroup>
 
