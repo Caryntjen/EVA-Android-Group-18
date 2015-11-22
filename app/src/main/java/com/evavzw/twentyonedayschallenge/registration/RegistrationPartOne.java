@@ -19,6 +19,7 @@ import android.widget.RadioGroup;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
+import com.evavzw.twentyonedayschallenge.models.Registration;
 
 
 public class RegistrationPartOne extends Fragment implements View.OnClickListener {
@@ -42,7 +43,10 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
 
     private boolean isStudent = false;
 
+    private RegisterActivity _activity;
+
     public RegistrationPartOne() {
+
     }
 
     @Override
@@ -88,10 +92,10 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
 
         btnNext = (Button) view.findViewById(R.id.btnNext);
         btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                if (callback != null) {
-                    callback.onButtonClick(view);
-                }
+                updateRegistrationDataObject();
+                callback.onButtonClick(view);
             }
         });
 
@@ -110,6 +114,14 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
             }
         });
         return view;
+    }
+
+    private void updateRegistrationDataObject(){
+        _activity.registration.BirthDate = etBirthday.toString();
+        _activity.registration.NmbrOfChildren = children;
+        _activity.registration.Gender = sex;
+        _activity.registration.Language = language;
+        _activity.registration.IsStudent = cbStudent.isChecked();
     }
 
     private void showBirthDatePicker() {
@@ -143,7 +155,6 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
                 language = "FR";
                 break;
 
-
             case R.id.rbMale:
                 //if (rbMale.isChecked())
                 sex = "M";
@@ -159,13 +170,12 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
                 break;
 
             //case R.id.btnNext:
-            //TODO: Need some validation
+
             //break;
 
             default:
                 break;
         }
-
     }
 
     public interface Callback {
@@ -179,9 +189,9 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         super.onAttach(context);
 
         Activity a;
-
         if (context instanceof Activity) {
             callback = (Callback) context;
+            _activity = (RegisterActivity) context;
         }
 
     }

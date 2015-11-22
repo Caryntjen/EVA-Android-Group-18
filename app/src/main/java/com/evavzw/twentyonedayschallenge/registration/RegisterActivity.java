@@ -6,11 +6,13 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.evavzw.twentyonedayschallenge.R;
+import com.evavzw.twentyonedayschallenge.models.Registration;
 
 public class RegisterActivity extends FragmentActivity implements RegistrationPartOne.Callback {
 
     private RegistrationNonSwipeablePagerAdapter paRegistration;
     private ViewPager vpRegister;
+    public Registration registration = new Registration();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

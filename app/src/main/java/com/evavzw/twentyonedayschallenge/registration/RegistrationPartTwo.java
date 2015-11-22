@@ -1,5 +1,7 @@
 package com.evavzw.twentyonedayschallenge.registration;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -27,12 +29,18 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
     private static RadioButton rbVeganism;
     private static CheckBox cbNewsletter;
     private static Button btnComplete;
+    private RegisterActivity _activity;
 
-    private String diet;
+    private int diet;
 
     private boolean wantsNewsletter = true;
 
     public RegistrationPartTwo() {
+    }
+
+    private void updateRegistrationDataObject(){
+        _activity.registration.sendNewsLetter = wantsNewsletter;
+        _activity.registration.Difficulty = diet;
     }
 
     @Override
@@ -62,7 +70,14 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
         cbNewsletter.setOnClickListener(this);
 
         btnComplete = (Button) view.findViewById(R.id.btnComplete);
-        btnComplete.setOnClickListener(this);
+        btnComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateRegistrationDataObject();
+                Intent loginActivity = new Intent(getActivity(), LoginActivity.class);
+                startActivity(loginActivity);
+            }
+        });
 
         Button mFillButton = (Button) view.findViewById(R.id.fill_button);
         mFillButton.setFocusable(true);
@@ -85,38 +100,41 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
         switch (view.getId()) {
             case R.id.rbOmnivorism:
                 //if (rbOmnivorism.isChecked())
-                diet = "Omnivorism";
+                diet = 1;
                 break;
             case R.id.rbPescetarianism:
                 //if (rbPescetarianism.isChecked())
-                diet = "Pescetarianism";
+                diet = 2;
                 break;
             case R.id.rbVegetarianism:
                 //if (rbVegetarianism.isChecked())
-                diet = "Vegetarianism";
+                diet = 3;
                 break;
             case R.id.rbParttimeVegetarianism:
                 //if (rbParttimeVegetarianism.isChecked())
-                diet = "Part-Time Vegetarianism";
+                diet = 4;
                 break;
             case R.id.rbVeganism:
                 //if (rbVeganism.isChecked())
-                diet = "Veganism";
+                diet = 5;
                 break;
 
             case R.id.cbNewsletter:
                 //cbNewsletter.setChecked(!cbNewsletter.isChecked());
                 wantsNewsletter = cbNewsletter.isChecked();
                 break;
-
-            case R.id.btnComplete:
-                //TODO: Need some validation
-                Intent loginActivity = new Intent(getActivity(), LoginActivity.class);
-                startActivity(loginActivity);
-                break;
-
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        Activity a;
+        if (context instanceof Activity) {
+            _activity = (RegisterActivity) context;
         }
 
     }
