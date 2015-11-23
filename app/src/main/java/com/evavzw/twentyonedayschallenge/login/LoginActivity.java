@@ -127,6 +127,8 @@ public class LoginActivity extends AppCompatActivity {
             if (stask.equalsIgnoreCase("register")) {
                 task = new UserRegisterTask(email, password);
                 i = new Intent(this, RegisterActivity.class);
+                i.putExtra("email", email);
+                i.putExtra("password", password);
             } else {
                 task = new UserLoginTask(email, password);
                 i = new Intent(this, MainActivity.class);
@@ -135,7 +137,6 @@ public class LoginActivity extends AppCompatActivity {
             task.execute((Void) null);
             startActivity(i);
         }
-
     }
 
     private boolean isEmailValid(String email) {

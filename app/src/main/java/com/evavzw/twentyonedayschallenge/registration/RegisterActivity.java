@@ -18,6 +18,9 @@ public class RegisterActivity extends FragmentActivity implements RegistrationPa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        registration.Email = getIntent().getExtras().getString("email");
+        registration.UserName = registration.Email;
+        registration.password = getIntent().getExtras().getString("password");
 
         paRegistration = new RegistrationNonSwipeablePagerAdapter(getSupportFragmentManager());
         vpRegister = (ViewPager) findViewById(R.id.vpRegistration);
