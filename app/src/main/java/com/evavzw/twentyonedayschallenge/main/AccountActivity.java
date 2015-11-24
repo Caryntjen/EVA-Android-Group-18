@@ -9,10 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 
+/*
+    The AccountActivity class will display the information of the account of the user.
+    There's also the possibility to invite a friend through e-mail.
+*/
 public class AccountActivity extends Fragment {
 
     private FragmentActivity activity;
@@ -43,43 +48,56 @@ public class AccountActivity extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        //TODO: Load information into TextViews
+
+        //Email Information
         tvEmail = (TextView) activity.findViewById(R.id.tvEmail);
         tvEmail.setText(User.EMAIL.toString());
 
+        //Birthday Information
         tvBirthday = (TextView) activity.findViewById(R.id.tvBirthday);
         tvBirthday.setText(User.BIRTHDAY.toString());
 
+        //Gender Information
         tvSex = (TextView) activity.findViewById(R.id.tvSex);
         tvSex.setText(User.SEX.toString());
 
+        //Language Information
         tvLanguage = (TextView) activity.findViewById(R.id.tvLanguage);
         tvLanguage.setText(User.LANGUAGE.toString());
 
+        //Student Information
         tvStudent = (TextView) activity.findViewById(R.id.tvStudent);
         tvStudent.setText(User.STUDENT.toString());
 
+        //Number of Children Information
         tvChildren = (TextView) activity.findViewById(R.id.tvChildren);
         tvChildren.setText(User.CHILDREN.toString());
 
+        //Subscribed to newsletter Information
         tvNewsletter = (TextView) activity.findViewById(R.id.tvNewsletter);
         tvNewsletter.setText(User.NEWSLETTER.toString());
 
+        //Kind of Diet Information
         tvDiet = (TextView) activity.findViewById(R.id.tvDiet);
         tvDiet.setText(User.DIET.toString());
 
+        //Button to invite others through email if the intent can not be started a short Toast is made that no email client is found.
         btnInvite = (Button) activity.findViewById(R.id.btnInvite);
         btnInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                /*
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("plain/text");
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"hogent@evavzw.be"});
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Come join the challenge");
-                intent.putExtra(Intent.EXTRA_TEXT, "Go check this new app out!");
-                startActivity(Intent.createChooser(intent, ""));
-    */
+                //TODO: Add Strings to resources bundles
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setType("message/rfc822");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{tvEmail.getText().toString()});
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "21 Days Eva Challenge");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Come and join this healthy lifestyle and download our app.\nVisit our website at http://www.evavazw.be for more information!");
+                try {
+                    startActivity(Intent.createChooser(emailIntent, "Choose your email client:"));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(activity, "We've found no email clients", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
