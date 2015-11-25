@@ -97,4 +97,10 @@
     <string name="activity_first_run">First Run</string>
     <string name="activity.firt.run.two">First Run 2</string>
     <string name="registration.partone.dutch">Dutch</string>
+
+
+    <string name="overview_invite_email_title">21 Days Eva Challenge</string>
+    <string name="overview_invite_email_body">Come and join this healthy lifestyle and download our app.\nVisit our website at http://www.evavazw.be for more information!</string>
+    <string name="overview_invite_email_chooser">Choose your email client:</string>
+    <string name="overview_invite_email_notfound">We\'ve found no email clients</string>
 </resources>

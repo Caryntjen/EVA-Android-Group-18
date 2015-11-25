@@ -32,6 +32,8 @@ public class AccountActivity extends Fragment {
     private static TextView tvNewsletter;
     private static Button btnInvite;
 
+    private static final String EMAILTYPE = "message/rfc822";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,16 +89,15 @@ public class AccountActivity extends Fragment {
         btnInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Add Strings to resources bundles
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                emailIntent.setType("message/rfc822");
+                emailIntent.setType(EMAILTYPE);
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{tvEmail.getText().toString()});
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "21 Days Eva Challenge");
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "Come and join this healthy lifestyle and download our app.\nVisit our website at http://www.evavazw.be for more information!");
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.overview_invite_email_title));
+                emailIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.overview_invite_email_body));
                 try {
-                    startActivity(Intent.createChooser(emailIntent, "Choose your email client:"));
+                    startActivity(Intent.createChooser(emailIntent, getString(R.string.overview_invite_email_chooser)));
                 } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(activity, "We've found no email clients", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, getString(R.string.overview_invite_email_notfound), Toast.LENGTH_SHORT).show();
                 }
             }
         });
