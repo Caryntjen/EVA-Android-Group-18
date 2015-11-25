@@ -7,6 +7,10 @@ import android.view.View;
 
 import com.evavzw.twentyonedayschallenge.R;
 
+/**
+ * A FragmentActivity to start the Registration process.
+ */
+
 public class RegisterActivity extends FragmentActivity implements RegistrationPartOne.Callback {
 
     private RegistrationNonSwipeablePagerAdapter paRegistration;

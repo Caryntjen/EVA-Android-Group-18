@@ -8,18 +8,19 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
+/**
+ * A DialogFragment to pick the BirthDate.
+ */
+
 public class BirthDatePickerFragment extends DialogFragment {
 
     private DatePickerDialog.OnDateSetListener ondateSet;
 
-    public BirthDatePickerFragment() {
-
-    }
+    public BirthDatePickerFragment() {}
 
     public void setCallBack(DatePickerDialog.OnDateSetListener ondate) {
         ondateSet = ondate;
     }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

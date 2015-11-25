@@ -17,6 +17,12 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+
+    <string name="error_empty_children">Fill in the number of children</string>
+    <string name="error_invalid_children">This is not a valid number</string>
+    <string name="error_negative_children">Fill in zero or a positive number of children</string>
+    <string name="error_male_children">As a male you\'re having more children than Genghis Khan. Please correct.</string>
+    <string name="error_female_children">As a female you\'re having more children than Mrs. Vassilyev. Please correct.</string>
     <string name="action_register">Register</string>
     <string name="activity_SignIn">Sign In</string>
     <string name="activity_Challenges">Challenges</string>
