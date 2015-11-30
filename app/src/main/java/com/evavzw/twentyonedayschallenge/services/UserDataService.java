@@ -3,6 +3,8 @@ package com.evavzw.twentyonedayschallenge.services;
 import com.evavzw.twentyonedayschallenge.models.Registration;
 
 import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -12,5 +14,5 @@ import retrofit.http.POST;
  */
 public interface UserDataService {
     @POST("api/account/register")
-    Call register(@Body Registration registration);
+    void register(@Body Registration registration, Callback cb);
 }

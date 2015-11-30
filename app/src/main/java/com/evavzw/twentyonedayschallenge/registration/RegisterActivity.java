@@ -76,17 +76,16 @@ public class RegisterActivity extends FragmentActivity implements RegistrationPa
     }
 
     public void Register(){
-        Call<Registration> call = service.register(registration);
-            call.enqueue(new Callback() {
-                @Override
-                public void onResponse(Response response, Retrofit retrofit) {
-                    Log.d("Retrofit", "succeeded for android studio");
-                }
+        service.register(registration, new Callback() {
+            @Override
+            public void onResponse(Response result, Retrofit retrofit) {
+                Log.d("SUCCES", result.body().toString());
+            }
 
-                @Override
-                public void onFailure(Throwable t) {
-                    Log.d("Retrofit", t.getMessage());
-                }
-            });
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("FAILURE", t.getMessage());
+            }
+        });
     }
 }
