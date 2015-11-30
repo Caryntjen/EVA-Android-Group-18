@@ -74,6 +74,7 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
             @Override
             public void onClick(View view) {
                 updateRegistrationDataObject();
+                _activity.Register();
                 Intent loginActivity = new Intent(getActivity(), LoginActivity.class);
                 startActivity(loginActivity);
             }
