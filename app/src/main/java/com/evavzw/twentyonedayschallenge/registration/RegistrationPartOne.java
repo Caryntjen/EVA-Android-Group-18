@@ -21,6 +21,10 @@ import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 import com.evavzw.twentyonedayschallenge.models.Registration;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class RegistrationPartOne extends Fragment implements View.OnClickListener {
 
@@ -108,8 +112,11 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
             public void onClick(View view) {
                 etBirthday.setText(User.BIRTHDAY.toString());
                 etChildren.setText(User.CHILDREN.toString());
+
                 rbFemale.setChecked(User.SEX.toBool());
+                sex = "F";
                 rbEnglish.setChecked(User.LANGUAGE.toBool());
+                language = "EN";
                 cbStudent.setChecked(User.STUDENT.toBool());
             }
         });
@@ -117,11 +124,23 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
     }
 
     private void updateRegistrationDataObject(){
-        _activity.registration.BirthDate = etBirthday.toString();
-        _activity.registration.NmbrOfChildren = children;
+        _activity.registration.BirthDate = convertDate(etBirthday.getText().toString());
+        _activity.registration.NmbrOfChildren = Integer.parseInt(etChildren.getText().toString());
         _activity.registration.Gender = sex;
         _activity.registration.Language = language;
         _activity.registration.IsStudent = cbStudent.isChecked();
+    }
+
+    private Date convertDate(String dateString){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date convertedDate = new Date();
+        try {
+            convertedDate = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return convertedDate;
     }
 
     private void showBirthDatePicker() {

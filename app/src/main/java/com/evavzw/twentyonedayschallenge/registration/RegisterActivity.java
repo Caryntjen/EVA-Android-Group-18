@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.models.Registration;
+import com.evavzw.twentyonedayschallenge.models.RestError;
 import com.evavzw.twentyonedayschallenge.services.UserDataService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,10 +17,10 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 
 import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
-import retrofit.Call;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.TypedByteArray;
 
 public class RegisterActivity extends FragmentActivity implements RegistrationPartOne.Callback {
 
@@ -39,24 +40,16 @@ public class RegisterActivity extends FragmentActivity implements RegistrationPa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        int SDK_INT = android.os.Build.VERSION.SDK_INT;
-        if (SDK_INT > 8)
-        {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                    .permitAll().build();
-            StrictMode.setThreadPolicy(policy);
 
-            Gson gson = new GsonBuilder()
-                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                    .create();
+        RestAdapter retrofit = new RestAdapter.Builder().setEndpoint("http://10.0.2.2:54967").build();
 
-            Retrofit retrofit = new Retrofit.Builder().baseUrl("http://laptop-nico:54967/").addConverterFactory(GsonConverterFactory.create(gson)).build();
             service = retrofit.create(UserDataService.class);
-        }
+
 
         registration.Email = getIntent().getExtras().getString("email");
         registration.UserName = registration.Email;
         registration.password = getIntent().getExtras().getString("password");
+        registration.confirmPassword = getIntent().getExtras().getString("password");
 
         paRegistration = new RegistrationNonSwipeablePagerAdapter(getSupportFragmentManager());
         vpRegister = (ViewPager) findViewById(R.id.vpRegistration);
@@ -75,16 +68,21 @@ public class RegisterActivity extends FragmentActivity implements RegistrationPa
         vpRegister.setCurrentItem(1);
     }
 
-    public void Register(){
-        service.register(registration, new Callback() {
+    public void Register() {
+        service.register(registration, new Callback<Response>() {
             @Override
-            public void onResponse(Response result, Retrofit retrofit) {
-                Log.d("SUCCES", result.body().toString());
+            public void success(Response response, Response response2) {
+                Log.d("SUCCES", response.getBody().toString());
             }
 
             @Override
-            public void onFailure(Throwable t) {
-                Log.d("FAILURE", t.getMessage());
+            public void failure(RetrofitError error) {
+
+                if (error.getResponse() != null) {
+                    String errorString =  new String(((TypedByteArray)error.getResponse().getBody()).getBytes());
+                    //Error handling here
+                    Log.e("FAILURE", errorString.toString());
+                }
             }
         });
     }

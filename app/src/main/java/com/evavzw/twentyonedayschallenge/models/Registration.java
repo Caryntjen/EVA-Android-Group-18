@@ -14,7 +14,7 @@ public class Registration {
     public String Language;
     public String Gender;
     public int Difficulty;
-    public String BirthDate;
+    public Date BirthDate;
     public Boolean sendNewsLetter;
     public int NmbrOfChildren;
     public Boolean IsStudent;

@@ -87,8 +87,11 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
         mFillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rbVeganism.setChecked(User.SEX.toBool());
-                cbNewsletter.setChecked(User.LANGUAGE.toBool());
+                rbVeganism.setChecked(true);
+                diet = 5;
+                cbNewsletter.setChecked(true);
+                wantsNewsletter = true;
+
             }
         });
         return view;
