@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 /**
  * A login screen that offers login or register via email & password.
  * Email address needs to present in database for signing in and the password must match.
- * Password needs to be at least 7 characters for registering.
+ * Password needs to be at least 6 characters for registering.
  */
 
 public class LoginActivity extends AppCompatActivity {
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //Validation Statics
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-    private static final int MIN_PASSWORD_SIZE = 7;
+    private static final int MIN_PASSWORD_SIZE = 6;
 
     //Asynctask String names
     private static final String SIGN_IN = "signin";
@@ -186,7 +186,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * The password needs to be at least 7 characters long
+     * The password needs to be at least 6 characters long
      */
     private boolean isPasswordValid(String password) {
         return password.length() >= MIN_PASSWORD_SIZE;
@@ -197,7 +197,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private boolean isEmailInFoundDatabase(String email) {
         //TODO: Need to compare this with the database entry.
-        return true;
+        return false;
     }
 
     /**
