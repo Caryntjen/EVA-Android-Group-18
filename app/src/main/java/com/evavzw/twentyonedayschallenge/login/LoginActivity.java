@@ -12,12 +12,19 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.evavzw.twentyonedayschallenge.R;
+import com.evavzw.twentyonedayschallenge.dummy.User;
 import com.evavzw.twentyonedayschallenge.main.MainActivity;
 import com.evavzw.twentyonedayschallenge.registration.RegisterActivity;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
- * A login screen that offers login or register via email/password.
+ * A login screen that offers login or register via email & password.
+ * Email address needs to present in database for signing in and the password must match.
+ * Password needs to be at least 6 characters for registering.
  */
+
 public class LoginActivity extends AppCompatActivity {
 
     /**
@@ -30,11 +37,20 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
 
+    //Validation Statics
+    private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    private static final int MIN_PASSWORD_SIZE = 6;
+
+    //Asynctask String names
+    private static final String SIGN_IN = "signin";
+    private static final String REGISTER = "register";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //Shows action bar and logos
         ActionBar actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.evalogo);
         actionBar.setDisplayUseLogoEnabled(true);
@@ -44,22 +60,26 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = (EditText) findViewById(R.id.email);
         etPassword = (EditText) findViewById(R.id.password);
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        //Email button
+        Button btnEmail = (Button) findViewById(R.id.email_sign_in_button);
+        btnEmail.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLoginOrRegister(mAuthLoginTaks, "signin");
+                attemptLoginOrRegister(mAuthLoginTaks, SIGN_IN);
             }
         });
 
-        Button mRegisterButton = (Button) findViewById(R.id.register_button);
-        mRegisterButton.setOnClickListener(new OnClickListener() {
+        //Register button
+        Button btnRegister = (Button) findViewById(R.id.register_button);
+        btnRegister.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLoginOrRegister(mAuthRegisterTask, "register");
+                attemptLoginOrRegister(mAuthRegisterTask, REGISTER);
             }
         });
-/*
+
+        //TODO: Hide in full release
+        //Hidden fill button for testing
         Button mFillButton = (Button) findViewById(R.id.fill_button);
         mFillButton.setFocusable(true);
         mFillButton.setFocusableInTouchMode(true);
@@ -71,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                 etPassword.setText(User.PASSWORD.toString());
             }
         });
-        */
     }
 
     /**
@@ -117,35 +136,76 @@ public class LoginActivity extends AppCompatActivity {
             cancel = true;
         }
 
+        //Checks if the email address is in the database and matches the password when Signing In
+        if (!cancel && stask.equalsIgnoreCase(SIGN_IN)) {
+            if (!isEmailInFoundDatabase(email)) {
+                etEmail.setError(getString(R.string.error_notfound_email));
+                focusView = etEmail;
+                cancel = true;
+            } else if (!doesPasswordMatchDatabase(email, password)) {
+                etPassword.setError(getString(R.string.error_nomatch_password));
+                focusView = etPassword;
+                cancel = true;
+            }
+        }
+
+        //Checks if email address is not the database when Registering
+        if (!cancel && stask.equalsIgnoreCase(REGISTER) && isEmailInFoundDatabase(email)) {
+                etEmail.setError(getString(R.string.error_found_email));
+                focusView = etEmail;
+                cancel = true;
+        }
+
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
+            // There was an error; don't attempt login or login and focus the first
             // form field with an error.
             focusView.requestFocus();
         } else {
-            // Kick off a background task to perform the user login attempt.
+            // Kick off a background task to perform the user login or register attempt.
             Intent i = null;
-            if (stask.equalsIgnoreCase("register")) {
+            if (stask.equalsIgnoreCase(REGISTER)) {
                 task = new UserRegisterTask(email, password);
                 i = new Intent(this, RegisterActivity.class);
             } else {
                 task = new UserLoginTask(email, password);
                 i = new Intent(this, MainActivity.class);
             }
-
-            task.execute((Void) null);
+            task.execute((Void) null); //task.execute()
             startActivity(i);
         }
 
     }
 
+    /**
+     * Validates through a Regular Expression if the email is valid.
+     */
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+        Pattern emailPattern = Pattern.compile(EMAIL_PATTERN);
+        Matcher emailMatcher = emailPattern.matcher(email);
+        return emailMatcher.matches();
     }
 
+    /**
+     * The password needs to be at least 6 characters long
+     */
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >= MIN_PASSWORD_SIZE;
+    }
+
+    /**
+     * Checks if the email matches the one found in the database.
+     */
+    private boolean isEmailInFoundDatabase(String email) {
+        //TODO: Need to compare this with the database entry.
+        return true;
+    }
+
+    /**
+     * Checks if the passwords matches the one found in the database.
+     */
+    private boolean doesPasswordMatchDatabase(String email, String password) {
+        //TODO: Need to compare this with the database entry.
+        return true;
     }
 
     /**

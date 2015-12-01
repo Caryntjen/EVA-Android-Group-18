@@ -380,7 +380,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
      *
      * @param view the view that needs the keyboard being hidden
      */
-    public void hideKeyboard(View view) {
+    private void hideKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
@@ -390,7 +390,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
      *
      * @param view the view that needs the keyboard being hidden
      */
-    public void showKeyboard(View view) {
+    private void showKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
     }

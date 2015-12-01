@@ -2,7 +2,7 @@ package com.evavzw.twentyonedayschallenge.dummy;
 
 public enum User {
     EMAIL("hogent@evavzw.be"),
-    PASSWORD("EvaVZW"),
+    PASSWORD("EvaVZW123"),
     BIRTHDAY("05-11-1985"),
     CHILDREN("2"),
     SEX("Female"),
