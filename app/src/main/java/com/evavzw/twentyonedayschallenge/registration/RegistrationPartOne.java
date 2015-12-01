@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -20,10 +21,16 @@ import android.widget.RadioGroup;
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * The first part of the registration where the user needs to provide:
- * - The number of children they're having. (Maximum for males: 2000; for females: 69 - Source: https://en.wikipedia.org/wiki/List_of_people_with_the_most_children
- * - Pick their birthday (Maximum in year for males: 116; for females: 122 - Source: https://en.wikipedia.org/wiki/Oldest_people
+ * - The number of children they're having. (Maximum for males: 2000; for females: 69 - Source: https://en.wikipedia.org/wiki/List_of_people_with_the_most_children )
+ * - Pick their birthday (Maximum in year for males: 116; for females: 122 - Source: https://en.wikipedia.org/wiki/Oldest_people, Minimum age is set tot 13 with Based on http://www.adweek.com/socialtimes/social-media-minimum-age/501920)
  * - Choose the Gender, with default Gender being female
  * - Language, with Default Language being English
  * - Check if they're a student, default is not checked.
@@ -73,7 +80,10 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
     private static final int MAX_YEAR_FEMALE = 122; //Jeanne Calment
     private static final int MAX_YEAR_MALE = 116; //Jiroemon Kimura
 
+    //Minimum age to use the service is 13. Based on http://www.adweek.com/socialtimes/social-media-minimum-age/501920
+    private static final int MIN_AGE = 13; //Jiroemon Kimura
 
+    //Default constructor
     public RegistrationPartOne() {
     }
 
@@ -88,6 +98,17 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
 
         //Number of Children
         etChildren = (EditText) view.findViewById(R.id.etNumberOfChildren);
+        etChildren.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+                else{
+                    showKeyboard(v);
+                }
+            }
+        });
 
         //Birthday Picker
         etBirthday = (EditText) view.findViewById(R.id.etBirthday);
@@ -97,6 +118,8 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     showBirthDatePicker();
+                } else {
+                    hideKeyboard(v);
                 }
             }
         });
@@ -109,7 +132,6 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         rbMale.setOnClickListener(this);
         rbFemale = (RadioButton) view.findViewById(R.id.rbFemale);
         rbFemale.setOnClickListener(this);
-
 
         //Language Information
         rgLanguage = (RadioGroup) view.findViewById(R.id.rgLanguage);
@@ -131,17 +153,17 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
 
         //Defaults
         rbFemale.setChecked(true);
+        gender = FEMALE;
         rbEnglish.setChecked(true);
-        isStudent = false;
+        language = ENGLISH;
         cbStudent.setChecked(isStudent);
-
+        isStudent = false;
 
         //TODO: Need to button hide on release
         //Hidden button to fill in the default details.
         Button mFillButton = (Button) view.findViewById(R.id.fill_button);
         mFillButton.setFocusable(true);
         mFillButton.setFocusableInTouchMode(true);
-        mFillButton.requestFocus();
         mFillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,9 +208,9 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
      *
      * @param view the view that being clicked on.
      */
-
     @Override
     public void onClick(View view) {
+        hideKeyboard(view);
 
         switch (view.getId()) {
 
@@ -243,7 +265,70 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
                     cancel = true;
                 } else {
                     try {
-                        //--- Valid number
+                        //Validating the Birthday
+                        String sBirthday = etBirthday.getText().toString();
+                        //--- Empty field
+                        if (TextUtils.isEmpty(sBirthday)) {
+                            etBirthday.setError(getString(R.string.error_empty_birthday));
+                            focusView = etBirthday;
+                            cancel = true;
+                        } else {
+                            try {
+                                DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                                formatter.setLenient(false);
+                                Date inputDate = formatter.parse(sBirthday);
+                                Calendar calendar = Calendar.getInstance();
+                                Date todaysDate = calendar.getTime();
+                                //Log.w("Todays Date", todaysDate.toString());
+                                //Log.w("Input Date", inputDate.toString());
+
+                                if (todaysDate.before(inputDate)) {
+                                    //--- Date in the future is chosen
+                                    etBirthday.setError(getString(R.string.error_future_date));
+                                    focusView = etBirthday;
+                                    cancel = true;
+
+                                } else {
+                                    Calendar minAge = (Calendar) calendar.clone();
+                                    Calendar maxAgeMale = (Calendar) calendar.clone();
+                                    Calendar maxAgeFemale = (Calendar) calendar.clone();
+
+                                    minAge.add(Calendar.YEAR, -MIN_AGE);
+                                    maxAgeMale.add(Calendar.YEAR, -MAX_YEAR_MALE);
+                                    maxAgeFemale.add(Calendar.YEAR, -MAX_YEAR_FEMALE);
+
+                                    //Log.w("Min Age Date", minAge.getTime().toString());
+                                    //Log.w("Max Male Age Date", maxAgeMale.getTime().toString());
+                                    //Log.w("Max Female Age Date", maxAgeFemale.getTime().toString());
+
+
+                                    if (inputDate.after(minAge.getTime())) {
+                                        //--- To young to use the app
+                                        etBirthday.setError(getString(R.string.error_birthday_young));
+                                        focusView = etBirthday;
+                                        cancel = true;
+                                    } else if (rbMale.isChecked() && inputDate.before(maxAgeMale.getTime())) {
+                                        //--- To old as a male.
+                                        etBirthday.setError(getString(R.string.error_birthday_old_male));
+                                        focusView = etBirthday;
+                                        cancel = true;
+                                    } else if (rbFemale.isChecked() && inputDate.before(maxAgeFemale.getTime())) {
+                                        //--- To old as a female.
+                                        etBirthday.setError(getString(R.string.error_birthday_old_female));
+                                        focusView = etBirthday;
+                                        cancel = true;
+                                    }
+                                }
+                            } catch (ParseException pe) {
+                                //--- Invalid Pattern
+                                etBirthday.setError(getString(R.string.error_invalid_date));
+                                focusView = etBirthday;
+                                cancel = true;
+                            }
+                        }
+
+
+                        //--- Valid number, further validation
                         children = Integer.parseInt(sChildren);
                         if (children < 0) {
                             //--- Negative number
@@ -268,15 +353,20 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
                         cancel = true;
 
                     }
+
+
                 }
                 if (cancel) {
-                    // There was an error; don't attempt login and focus the first
-                    // form field with an error.
+                    // There was an error. Focus on the element.
                     focusView.requestFocus();
+
                 } else if (callback != null) {
+                    //Error Messages, Keyboard & Icons need to disappear
+                    etChildren.setError(null);
+                    etBirthday.setError(null);
+
                     callback.onButtonClick(view);
                 }
-                //TODO: Need some validation for the Birthday
                 break;
 
             default:
@@ -285,6 +375,29 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
 
     }
 
+    /**
+     * Hides the keyboard when the focus changes.
+     *
+     * @param view the view that needs the keyboard being hidden
+     */
+    public void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    /**
+     * Shows the keyboard when the focus changes.
+     *
+     * @param view the view that needs the keyboard being hidden
+     */
+    public void showKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+    /**
+     * This is a callback interface which informs the class RegisterActivity if a Butons is clicked
+     */
     public interface Callback {
         public void onButtonClick(View button);
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/cloth_background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
@@ -151,11 +151,12 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/Next"
                 android:textColor="@color/evaDarkGreen" />
+
             <!-- TODO: Need to button hide on release -->
             <Button
                 android:id="@+id/fill_button"
                 android:layout_width="146dp"
-                android:layout_height="150dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@android:color/transparent" />
         </LinearLayout>

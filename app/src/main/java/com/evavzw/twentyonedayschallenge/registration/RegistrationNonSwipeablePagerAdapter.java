@@ -16,7 +16,6 @@ public class RegistrationNonSwipeablePagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-
             case 0:
                 return new RegistrationPartOne();
             case 1:
@@ -30,4 +29,6 @@ public class RegistrationNonSwipeablePagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 2;
     }
+
+
 }

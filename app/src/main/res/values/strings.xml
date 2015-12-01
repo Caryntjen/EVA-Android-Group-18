@@ -21,12 +21,21 @@
     <string name="error_empty_children">Fill in the number of children</string>
     <string name="error_invalid_children">This is not a valid number</string>
     <string name="error_negative_children">Fill in zero or a positive number of children</string>
-    <string name="error_male_children">As a male you\'re having more children than Genghis Khan. Please correct.</string>
-    <string name="error_female_children">As a female you\'re having more children than Mrs. Vassilyev. Please correct.</string>
+    <string name="error_male_children">As a male you\'re having more children than Mr. Genghis Khan which is 2000. Please correct.</string>
+    <string name="error_female_children">As a female you\'re having more children than Mrs. Vassilyev which is 69. Please correct.</string>
     <string name="action_register">Register</string>
     <string name="activity_SignIn">Sign In</string>
     <string name="activity_Challenges">Challenges</string>
     <string name="activity_Register">Register</string>
+
+
+    <string name="error_empty_birthday">Fill in the number of birthday</string>
+    <string name="error_invalid_date">This is not a valid date. Please use format dd/mm/yyyy.</string>
+    <string name="error_future_date">You were born today or in the future. Please use a date in the past.</string>
+    <string name="error_birthday_young">You are to young to use this app. The minimum age is 13.</string>
+    <string name="error_birthday_old_male">As a male you\'re older than Mr. Jiroemon Kimura which is 116 years. Please correct.</string>
+    <string name="error_birthday_old_female">As a female you\'re older thanthan Mrs. Jeanne Calment which is 122 years. Please correct.</string>
+
 
     <string name="registration.female">Female</string>
     <string name="registration.male">Male</string>
