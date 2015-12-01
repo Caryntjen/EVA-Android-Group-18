@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/cloth_background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
@@ -9,11 +9,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:id="@+id/llRegistrationPartTwo">
 
 
     <ScrollView
-        android:id="@+id/eva_form"
+        android:id="@+id/svPartTwo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -29,7 +30,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/registration.kindofdiet"
                 android:textColor="@color/evaDarkGreen"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:id="@+id/tvKindOfDiet"/>
 
             <RadioGroup
                 android:id="@+id/rgKindOfVegitarian"
@@ -97,14 +99,14 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/registration.complete"
                 android:textColor="@color/evaDarkGreen" />
-            <!--
-                        <Button
-                            android:id="@+id/fill_button"
-                            android:layout_width="146dp"
-                            android:layout_height="150dp"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@android:color/transparent" />
-            -->
+
+            <!-- TODO: Need to button hide on release -->
+            <Button
+                android:id="@+id/fill_button"
+                android:layout_width="146dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/transparent" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

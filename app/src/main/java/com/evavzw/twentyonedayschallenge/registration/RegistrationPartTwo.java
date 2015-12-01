@@ -1,23 +1,32 @@
 package com.evavzw.twentyonedayschallenge.registration;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
-import com.evavzw.twentyonedayschallenge.login.LoginActivity;
-import com.evavzw.twentyonedayschallenge.main.ChallengesActivity;
 import com.evavzw.twentyonedayschallenge.main.MainActivity;
 
 
+/**
+ * The second part of the registration where the user needs to provide:
+ * - The kind of diet they're following, the default is Meat Eater.
+ * - Check if they want the newsletter, default is checked.
+ */
+
+//TODO: Information should be save in database when registration is complete
 public class RegistrationPartTwo extends Fragment implements View.OnClickListener {
 
     // UI references.
@@ -29,10 +38,18 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
     private static RadioButton rbVeganism;
     private static CheckBox cbNewsletter;
     private static Button btnComplete;
+    private static ScrollView svPartTwo;
 
+    //Diet Abbreviations
+    private static final String OMNIVORISM = "Omnivorism";
+    private static final String PESCETARIANISM = "Pescetarianism";
+    private static final String VEGETARIANSIM = "Vegetarianism";
+    private static final String PARTTIME_VEGETARIANSIM = "Part-Time Vegetarianism";
+    private static final String VEGANISM = "Veganism";
+
+    //Provided information in registration form
     private String diet;
-
-    private boolean wantsNewsletter = true;
+    private boolean wantsNewsletter;
 
     public RegistrationPartTwo() {
     }
@@ -46,8 +63,11 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_registration_part_two, container, false);
 
+
+        //Kind of Diet
         rgKindOfVegitarian = (RadioGroup) view.findViewById(R.id.rgKindOfVegitarian);
         rgKindOfVegitarian.setOnClickListener(this);
+        rgKindOfVegitarian.requestFocus();
         rbOmnivorism = (RadioButton) view.findViewById(R.id.rbOmnivorism);
         rbOmnivorism.setOnClickListener(this);
         rbPescetarianism = (RadioButton) view.findViewById(R.id.rbPescetarianism);
@@ -59,18 +79,26 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
         rbVeganism = (RadioButton) view.findViewById(R.id.rbVeganism);
         rbVeganism.setOnClickListener(this);
 
+        //Newsletter
         cbNewsletter = (CheckBox) view.findViewById(R.id.cbNewsletter);
-        cbNewsletter.setChecked(true);
         cbNewsletter.setOnClickListener(this);
 
+        //Complete Button for registration.
         btnComplete = (Button) view.findViewById(R.id.btnComplete);
         btnComplete.setOnClickListener(this);
 
-/*
+        //Defaults
+        rbOmnivorism.setChecked(true);
+        diet = OMNIVORISM;
+        cbNewsletter.setChecked(true);
+        wantsNewsletter = true;
+
+
+        //TODO: Need to button hide on release
+        //Hidden button to fill in the default details.
         Button mFillButton = (Button) view.findViewById(R.id.fill_button);
         mFillButton.setFocusable(true);
         mFillButton.setFocusableInTouchMode(true);
-        mFillButton.requestFocus();
         mFillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,34 +106,38 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
                 cbNewsletter.setChecked(User.LANGUAGE.toBool());
             }
         });
-        */
+
         return view;
     }
 
-
+    /**
+     * Handling the different click events for the UI references.
+     *
+     * @param view the view that being clicked on.
+     */
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
             case R.id.rbOmnivorism:
                 //if (rbOmnivorism.isChecked())
-                diet = "Omnivorism";
+                diet = OMNIVORISM;
                 break;
             case R.id.rbPescetarianism:
                 //if (rbPescetarianism.isChecked())
-                diet = "Pescetarianism";
+                diet = PESCETARIANISM;
                 break;
             case R.id.rbVegetarianism:
                 //if (rbVegetarianism.isChecked())
-                diet = "Vegetarianism";
+                diet = VEGETARIANSIM;
                 break;
             case R.id.rbParttimeVegetarianism:
                 //if (rbParttimeVegetarianism.isChecked())
-                diet = "Part-Time Vegetarianism";
+                diet = PARTTIME_VEGETARIANSIM;
                 break;
             case R.id.rbVeganism:
                 //if (rbVeganism.isChecked())
-                diet = "Veganism";
+                diet = VEGANISM;
                 break;
 
             case R.id.cbNewsletter:
@@ -114,7 +146,6 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
                 break;
 
             case R.id.btnComplete:
-                //TODO: Need some validation
                 Intent mainActivity = new Intent(getActivity(), MainActivity.class);
                 startActivity(mainActivity);
                 break;
@@ -125,7 +156,10 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
 
     }
 
-    public static RegistrationPartTwo newInstance() {
+    /**
+     * Private instance method of the Registration
+     */
+    private static RegistrationPartTwo newInstance() {
         return new RegistrationPartTwo();
     }
 }

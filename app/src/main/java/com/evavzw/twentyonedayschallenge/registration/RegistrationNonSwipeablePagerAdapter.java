@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+/**
+ * A FragmentPagerAdapter to determine which page needs to be viewed.
+ */
 public class RegistrationNonSwipeablePagerAdapter extends FragmentPagerAdapter {
 
     public RegistrationNonSwipeablePagerAdapter(FragmentManager fragmentManager) {
@@ -13,7 +16,6 @@ public class RegistrationNonSwipeablePagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-
             case 0:
                 return new RegistrationPartOne();
             case 1:
@@ -27,4 +29,6 @@ public class RegistrationNonSwipeablePagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 2;
     }
+
+
 }
