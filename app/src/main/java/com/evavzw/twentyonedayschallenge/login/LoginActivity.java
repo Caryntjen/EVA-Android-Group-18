@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,10 +15,16 @@ import android.widget.EditText;
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 import com.evavzw.twentyonedayschallenge.main.MainActivity;
+import com.evavzw.twentyonedayschallenge.models.LoginModel;
+import com.evavzw.twentyonedayschallenge.models.LoginToken;
 import com.evavzw.twentyonedayschallenge.registration.RegisterActivity;
 import com.evavzw.twentyonedayschallenge.services.UserDataService;
 
+import retrofit.Callback;
 import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.TypedByteArray;
 
 /**
  * A login screen that offers login or register via email/password.
@@ -50,9 +57,6 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.setLogo(R.drawable.evalogo);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-
-
-
 
         // Set up the login form.
         etEmail = (EditText) findViewById(R.id.email);
@@ -143,12 +147,12 @@ public class LoginActivity extends AppCompatActivity {
                 i.putExtra("email", email);
                 i.putExtra("password", password);
             } else {
-                task = new UserLoginTask(email, password);
                 i = new Intent(this, MainActivity.class);
+                task = new UserLoginTask(email, password, i);
+
             }
 
             task.execute((Void) null);
-            startActivity(i);
         }
     }
 
@@ -170,15 +174,40 @@ public class LoginActivity extends AppCompatActivity {
 
         private final String mEmail;
         private final String mPassword;
+        private Intent i;
 
-        UserLoginTask(String email, String password) {
+        UserLoginTask(String email, String password, Intent intent) {
             mEmail = email;
             mPassword = password;
+            i = intent;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            return null;
+
+            LoginModel model = new LoginModel();
+            model.passWord = mPassword.toString();
+            model.userName = mEmail.toString();
+            model.grant_type = "password";
+
+            service.getToken("password", mEmail, mPassword,  new Callback<LoginToken>() {
+                @Override
+                public void success(LoginToken loginToken, Response response) {
+                    Log.d("Success", loginToken.token_type + ": " + loginToken.access_token);
+                    startActivity(i);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    if (error.getResponse() != null) {
+                        String errorString =  new String(((TypedByteArray)error.getResponse().getBody()).getBytes());
+                        //Error handling here
+                        Log.e("FAILURE", errorString.toString());
+                    }
+                }
+            });
+
+            return true;
         }
     }
 

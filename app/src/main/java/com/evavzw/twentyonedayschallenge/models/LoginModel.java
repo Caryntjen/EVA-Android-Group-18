@@ -6,5 +6,5 @@ package com.evavzw.twentyonedayschallenge.models;
 public class LoginModel {
     public String userName;
     public String passWord;
-    public String grant_type = "password";
+    public String grant_type;
 }
