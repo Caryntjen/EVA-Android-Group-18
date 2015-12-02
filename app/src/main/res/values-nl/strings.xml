@@ -2,133 +2,135 @@
 
     <!--- Account Layout -->
     <string name="account.email">E-mail</string>
-    <string name="account.birthday">Birthday</string>
-    <string name="account.sex">Gender</string>
-    <string name="account.newsletter">Subscribed to Newsletter</string>
+    <string name="account.birthday">Verjaardag</string>
+    <string name="account.sex">Geslacht</string>
+    <string name="account.newsletter">Schrijf je in voor de nieuwsbrief</string>
     <string name="account.student">Student</string>
-    <string name="account.children">Number of children</string>
-    <string name="account.diet">Diet</string>
-    <string name="account.language">Language</string>
-    <string name="account.invite">Invite a friend</string>
+    <string name="account.children">Aantal kinderen</string>
+    <string name="account.diet">Dieet</string>
+    <string name="account.language">Taal</string>
+    <string name="account.invite">Nodig vriend uit</string>
 
     <!--- Account Activity -->
     <string name="title_activity_account">Account</string>
     <string name="overview_invite_email_title">21 Days Eva Challenge</string>
-    <string name="overview_invite_email_body">Come and join this healthy lifestyle and download our app.\nVisit our website at http://www.evavazw.be for more information!</string>
-    <string name="overview_invite_email_chooser">Choose your email client:</string>
-    <string name="overview_invite_email_notfound">We\'ve found no email clients</string>
+    <string name="overview_invite_email_body">Vergezel ons met deze gezonde levenswijze. \nDownload onze app en bezoek ons op http://www.evavazw.be voor meer informatie!</string>
+    <string name="overview_invite_email_chooser">Kies uw e-mail app:</string>
+    <string name="overview_invite_email_notfound">We vonden geen e-mail app.</string>
 
     <!--- First Run Layouts -->
-    <string name="firstrun.letsgo">Let\'s go</string>
-    <string name="firstrun.description">EVA vzw wants to challenge you for 21 days where you\'ll experience the vegan lifestyle in all its glory. \n\n Let\'s live a happy healty life!</string>
-    <string name="firstrun.fillyourheart">All you have to do is fill your heart with healthy vegetables by:</string>
-    <string name="firstrun.challenges">- \t Completing challenges</string>
-    <string name="firstrun.points">- \t Earning points</string>
-    <string name="firstrun.achievements">- \t Finishing achievements</string>
-    <string name="firstrun.begin">Begin Challenge</string>
+    <string name="firstrun.letsgo">Laten we starten!</string>
+    <string name="firstrun.description">EVA vzw nodigt u graag uit om 21 dagen lang de uitdaging aan te gaan om een veganistische levenswijze te ontdekken in al zijn glorie. \n\n Laten we starten met een gezonder leven.</string>
+    <string name="firstrun.fillyourheart">Het enige wat je moet doen is uw hart vullen met gezonde groenten door:</string>
+    <string name="firstrun.challenges">- \t Voltooien van challenges</string>
+    <string name="firstrun.points">- \t Punten verdienen</string>
+    <string name="firstrun.achievements">- \t Volbrengen van prestaties</string>
+    <string name="firstrun.begin">Start Challenge</string>
 
     <!--- Login Layout -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="action_register">Register</string>
-    <string name="activity_SignIn">Sign In</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">E-mail</string>
+    <string name="prompt_password">Wachtwoord</string>
+    <string name="action_sign_in">Log in</string>
+    <string name="action_sign_in_short">Log in</string>
+    <string name="action_register">Registreren</string>
+    <string name="activity_SignIn">Log In</string>
+    <string name="title_activity_login">Log in</string>
 
     <!--- Login Activity -->
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short. Please use at least 6 characters.</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="error_notfound_email">Emailaddress is not found, please register first</string>
-    <string name="error_found_email">Emailaddress is found, please sign in</string>
-    <string name="error_nomatch_password">Password does not match for the emailaddress</string>
+    <string name="error_invalid_email">Het e-mailadres is ongeldig.</string>
+    <string name="error_invalid_password">Het wachtwoord is te kort. Gelieve minimaal 6 karakter te gebruiken.</string>
+    <string name="error_field_required">Dit veld is verplicht.</string>
+    <string name="error_notfound_email">E-mailadres is niet gevonden. Gelieve u eerst te registreren.</string>
+    <string name="error_found_email">>E-mailadres is gevonden. Gelieve in te loggen.</string>
+    <string name="error_nomatch_password">Het wachtwoord komt niet overeen met het e-mailadres.</string>
 
     <!--- Overview Layout -->
-    <string name="overview.stats">Stats</string>
-    <string name="overview.points">Points</string>
-    <string name="overview.completechallenge">Complete challenges</string>
-    <string name="overview.currentday">Current Day</string>
-    <string name="overview.achievements">Achievements</string>
+    <string name="overview.stats">Statistieken</string>
+    <string name="overview.points">Punten</string>
+    <string name="overview.completechallenge">Voltooide challenges</string>
+    <string name="overview.currentday">Huidige Dag</string>
+    <string name="overview.achievements">Prestaties</string>
     <string name="overview.level">Level</string>
-    <string name="overview.image.badges">Badge Image</string>
-    <string name="overview.share">Share</string>
+    <string name="overview.image.badges">Badge Afbeelding</string>
+    <string name="overview.share">Deel</string>
 
     <!--- Register Layouts -->
-    <string name="prompt_children">Number Of Children</string>
-    <string name="prompt_birthday">Birthday</string>
-    <string name="registration.language">Language:</string>
-    <string name="registration.sex">Gender:</string>
-    <string name="registration.astudent">Are you a student?:</string>
-    <string name="registration.subscribe">Subscribe to:</string>
-    <string name="registration.subscribeto">Subscribe to:</string>
-    <string name="registration.studentornot">Are you a student?</string>
-    <string name="registration.female">Female</string>
-    <string name="registration.male">Male</string>
-    <string name="registration.french">French</string>
-    <string name="registration.english">English</string>
-    <string name="registration.dutch">Dutch</string>
+    <string name="prompt_children">Aantal kinderen</string>
+    <string name="prompt_birthday">Verjaardag</string>
+    <string name="registration.language">Taal:</string>
+    <string name="registration.sex">Geslacht:</string>
+    <string name="registration.astudent">Bent u een student?::</string>
+    <string name="registration.subscribe">Inschrijven voor:</string>
+    <string name="registration.subscribeto">Inschrijven voor:</string>
+    <string name="registration.studentornot">Bent u een student?</string>
+    <string name="registration.female">Vrouw</string>
+    <string name="registration.male">Man</string>
+    <string name="registration.french">Frans</string>
+    <string name="registration.english">Engels</string>
+    <string name="registration.dutch">Nederlands</string>
     <string name="registration.student">Student</string>
-    <string name="registration.next">Next</string>
-    <string name="registration.complete">Complete</string>
-    <string name="registration.omnivorism">Omnivorism (Meat eater)</string>
-    <string name="registration.pescetarianism">Pescetarianism (No meat but fish)</string>
-    <string name="registration.vegetarianism">Vegetarianism (No meat, fish or poultry)</string>
-    <string name="registration.parttimevegetarianism">Part-Time Vegetarianism (3 days Vegetarianism or less)</string>
-    <string name="registration.veganism">Veganism (No animal products)</string>
-    <string name="registration.newsletter">EVA newsletter</string>
-    <string name="registration.kindofdiet">Kind of diet:</string>
+    <string name="registration.next">Volgende</string>
+    <string name="registration.complete">Voltooi</string>
+    <string name="registration.omnivorism">Omnivorisme (Vleeseter)</string>
+    <string name="registration.pescetarianism">Pescotarisme (Geen vlees, wel vis-)</string>
+    <string name="registration.vegetarianism">Vegetarianisme (Geen vlees, vis of gevogelte)</string>
+    <string name="registration.parttimevegetarianism">Deeltijds Vegetarianisme (3 dagen Vegetarianisme of minder)</string>
+    <string name="registration.veganism">Veganisme (Geen dierlijke producten)</string>
+    <string name="registration.newsletter">EVA nieuwsbrief</string>
+    <string name="registration.kindofdiet">Soort dieet:</string>
 
     <!--- Register Activities -->
-    <string name="activity_Register">Register</string>
-    <string name="error_empty_birthday">Fill in the number of birthday</string>
-    <string name="error_invalid_date">This is not a valid date. Please use format dd/mm/yyyy.</string>
-    <string name="error_future_date">You were born today or in the future. Please use a date in the past.</string>
-    <string name="error_birthday_young">You are to young to use this app. The minimum age is 13.</string>
-    <string name="error_birthday_old_male">As a male you\'re older than Mr. Jiroemon Kimura which is 116 years. Please correct.</string>
-    <string name="error_birthday_old_female">As a female you\'re older than Mrs. Jeanne Calment which is 122 years. Please correct.</string>
-    <string name="error_empty_children">Fill in the number of children</string>
-    <string name="error_invalid_children">This is not a valid number</string>
-    <string name="error_negative_children">Fill in zero or a positive number of children</string>
-    <string name="error_male_children">As a male you\'re having more children than Mr. Genghis Khan which is 2000. Please correct.</string>
-    <string name="error_female_children">As a female you\'re having more children than Mrs. Vassilyev which is 69. Please correct.</string>
+    <string name="activity_Register">Registreren</string>
+    <string name="error_empty_birthday">Vul jouw verjaardag aan. Gebruik formaat dd-mm-yyyy.</string>
+    <string name="error_invalid_date">Dit is geen geldige datum. Gebruik formaat dd-mm-yyyy.</string>
+    <string name="error_future_date">Je werd vandaag geboren of in de toekomst. Gelieve een historische datum te gebruiken.</string>
+    <string name="error_birthday_young">Je bent te jong om de app te gebruiken. The minimum leeftijd is 13 jaar.</string>
+    <string name="error_birthday_old_male">Als man bent u ouder dan Mr. Jiroemon Kimura die 116 jaar is. Gelieve dit te corrigeren.</string>
+    <string name="error_birthday_old_female">Als vrouw bent u ouder dan Mrs. Jeanne Calment die 122 jaar is. Gelieve dit te corrigeren.</string>
+    <string name="error_empty_children">Vul het aantal kinderen in.</string>
+    <string name="error_invalid_children">Dit is geen geldig nummer.</string>
+    <string name="error_negative_children">Vul 0 of een positief nummer in.</string>
+    <string name="error_male_children">Als man hebt u meer kinderen dan Mr. Genghis Khan die er 2000 heeft. Gelieve dit te corrigeren.</string>
+    <string name="error_female_children">Als vrouw hebt u meer kinderen dan Mrs. Vassilyev die er 69 heeft. Gelieve dit te corrigeren.</string>
 
     <!--- Challenge Layouts -->
     <string name="title_activity_challenges">Challenges</string>
     <string name="activity_Challenges">Challenges</string>
-    <string name="challenge.verify">Verify challenge</string>
+    <string name="challenge.verify">Verifieer challenge</string>
 
-    <string name="challenges.currentday">Day </string>
-    <string name="card.icon">Icon</string>
-    <string name="card.star">Star</string>
-    <string name="image.star">Star</string>
+    <string name="challenges.currentday">Dag </string>
+    <string name="card.icon">Icoon</string>
+    <string name="card.star">Ster</string>
+    <string name="image.star">Ster</string>
     <string name="points.value">25p</string>
 
     <!--- Recipe Challenge Layout -->
     <string name="challenge.recipe.title">Plantaardige Béchamelsaus</string>
-    <string name="challenge.recipe.image">Recipe Image</string>
-    <string name="activity.recipe.title">Recipe Challenge</string>
+    <string name="challenge.recipe.image">Recept Afbeelding</string>
+    <string name="activity.recipe.title">Recept Challenge</string>
     <string name="text.recipetext">bereidingstijd: 15 min\naantal personen: 8\nIngredienten:\n 75 g sojaboter \n 75 g tarwebloem \n 250 ml groentebouillon \n 500 ml ongezoete sojamelk \n 3 el gistvlokken(optioneel) \n nootmuskaat \n peper \n zout\n\n
                 Bereidingswijze: \nSmelt de sojaboter op een zacht vuurtje. Meng er vervolgens de tarwebloem door. Laat op een laag vuurtje gedurende 2 minuten koken, blijf voortdurend roeren (deze stap zorgt ervoor dat de saus niet naar bloem smaakt). Voeg heel geleidelijk sojamelk en groentebouillon toe, roer stevig om geen klonters te krijgen.Breng op smaak met peper, zout en nootmuskaat.Voeg, indien gewenst, de gistvlokken toe.
                 \n\nTips: \n-Dit is een basissaus. Aan deze saus kan vb. 1 el mosterd toegevoegd worden, citroensap, miso, ...</string>
 
     <!--- Product Challenge Layout -->
-    <string name="challenge.product.image">Product Image</string>
+    <string name="challenge.product.image">Product Afbeelding</string>
     <string name="activity.product.title">Product Challenge</string>
     <string name="challenge.product.title">Biozuivel</string>
     <string name="text.producttext">Gebruik vandaag eens biozuivel. \nHieronder volgen twee voordelen van biozuivel: \nDiervriendelijk: \n\rNet zoals bij de eerder besproken activiteiten in de voedselindustrie waarbij dieren betrokken zijn (zie ook eieren en vlees), moet de biologische zuivelsector meer rekening houden met enkele diervriendelijke maatregelen. Zo moet het aantal koeien per hectare grond beperkt gehouden worden, mogen er geen preventieve geneesmiddelen worden gebruikt en moet hun voeder strikt biologisch geteeld zijn.
     \n \nGezond: \nTerwijl we bij eieren of vlees geen sluitende gezondheidsvoordelen konden vaststellen, zijn er voor melk wél al verschillende studies uitgevoerd die erop wijzen dat het biologische product daadwerkelijk gezonder is dan de reguliere variant.</string>
 
     <!--- Social Challenge Layout -->
-    <string name="challenge.socialmedia.title">Social Media</string>
-    <string name="challenge.socialmedia.image">Social Media Image</string>
-    <string name="activity.socialmedia.title">Social Media Challenge</string>
+    <string name="challenge.socialmedia.title">Sociale Media</string>
+    <string name="challenge.socialmedia.image">Sociale Media Afbeelding</string>
+    <string name="activity.socialmedia.title">Sociale Media Challenge</string>
 
     <!--- Overview Activity -->
     <!--- Overview Layout -->
     <!--- App -->
     <string name="app_name">21 Days Challenge</string>
     <string name="title_activity_main">21 Day Challenge</string>
+    <string name="text.yes">Ja</string>
+    <string name="text.no">Nee</string>
     <string name="text.defaulttext">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
 
 
