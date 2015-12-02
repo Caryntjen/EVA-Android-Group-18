@@ -1,7 +1,6 @@
 package com.evavzw.twentyonedayschallenge.registration;
 
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -9,12 +8,7 @@ import android.view.View;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.models.Registration;
-import com.evavzw.twentyonedayschallenge.models.RestError;
 import com.evavzw.twentyonedayschallenge.services.UserDataService;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.io.IOException;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -26,6 +20,7 @@ public class RegisterActivity extends FragmentActivity implements RegistrationPa
 
     private RegistrationNonSwipeablePagerAdapter paRegistration;
     private ViewPager vpRegister;
+    private String url = "http://10.0.2.2:54967";
     public Registration registration = new Registration();
     UserDataService service;
 
@@ -41,9 +36,9 @@ public class RegisterActivity extends FragmentActivity implements RegistrationPa
         setContentView(R.layout.activity_register);
 
 
-        RestAdapter retrofit = new RestAdapter.Builder().setEndpoint("http://10.0.2.2:54967").build();
+        RestAdapter retrofit = new RestAdapter.Builder().setEndpoint(url).build();
 
-            service = retrofit.create(UserDataService.class);
+        service = retrofit.create(UserDataService.class);
 
 
         registration.Email = getIntent().getExtras().getString("email");

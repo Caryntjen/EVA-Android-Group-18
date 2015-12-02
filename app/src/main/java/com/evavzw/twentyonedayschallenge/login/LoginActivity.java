@@ -15,6 +15,9 @@ import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 import com.evavzw.twentyonedayschallenge.main.MainActivity;
 import com.evavzw.twentyonedayschallenge.registration.RegisterActivity;
+import com.evavzw.twentyonedayschallenge.services.UserDataService;
+
+import retrofit.RestAdapter;
 
 /**
  * A login screen that offers login or register via email/password.
@@ -31,15 +34,25 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
 
+    //Rest adapter
+    private RestAdapter retrofit;
+    private UserDataService service;
+    private String url = "http://10.0.2.2:54967";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        retrofit = new RestAdapter.Builder().setEndpoint(url).build();
+        service = retrofit.create(UserDataService.class);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.evalogo);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+
+
+
 
         // Set up the login form.
         etEmail = (EditText) findViewById(R.id.email);

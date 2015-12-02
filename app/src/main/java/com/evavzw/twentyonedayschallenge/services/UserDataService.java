@@ -1,5 +1,7 @@
 package com.evavzw.twentyonedayschallenge.services;
 
+import com.evavzw.twentyonedayschallenge.models.LoginModel;
+import com.evavzw.twentyonedayschallenge.models.LoginToken;
 import com.evavzw.twentyonedayschallenge.models.Registration;
 
 import retrofit.Callback;
@@ -14,4 +16,7 @@ import retrofit.http.POST;
 public interface UserDataService {
     @POST("/api/account/register")
     void register(@Body Registration registration, Callback<Response> cb);
+
+    @POST("/token")
+    LoginToken getToken(@Body LoginModel lm, Callback<LoginToken> cb);
 }
