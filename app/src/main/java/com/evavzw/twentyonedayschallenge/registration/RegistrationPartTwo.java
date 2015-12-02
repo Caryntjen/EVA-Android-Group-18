@@ -1,19 +1,16 @@
 package com.evavzw.twentyonedayschallenge.registration;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;

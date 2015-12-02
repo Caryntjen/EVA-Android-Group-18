@@ -10,7 +10,9 @@ public enum User {
     STUDENT("Yes"),
     DIET("Veganism"),
     DAY("7"),
-    NEWSLETTER("Yes");
+    NEWSLETTER("Yes"),
+    POINTS("125"),
+    COMPLETEDCHALLENGES("7");
 
     private final String text;
 

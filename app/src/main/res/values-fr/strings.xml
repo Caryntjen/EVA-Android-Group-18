@@ -6,7 +6,7 @@
     <string name="account.sex">Genre</string>
     <string name="account.newsletter">Souscrit à la Newsletter</string>
     <string name="account.student">Étudiant</string>
-    <string name="account.children">Nombre d'enfants</string>
+    <string name="account.children">Nombre d\'enfants</string>
     <string name="account.diet">Régime</string>
     <string name="account.language">Langue</string>
     <string name="account.invite">Invitez un(e) ami(e)</string>
@@ -14,13 +14,13 @@
     <!--- Account Activity -->
     <string name="title_activity_account">Compte</string>
     <string name="overview_invite_email_title">21 Days Eva Challenge</string>
-    <string name="overview_invite_email_body">Venez vous joindre à ce mode de vie sain et télécharger notre application.\nVisitez notre site web à http://www.evavazw.be pour plus d'information!</string>
-    <string name="overview_invite_email_chooser">Choisissez votre app d'email:</string>
-    <string name="overview_invite_email_notfound">Nous avons trouvé aucune app d'email.</string>
+    <string name="overview_invite_email_body">Venez vous joindre à ce mode de vie sain et télécharger notre application.\nVisitez notre site web à http://www.evavazw.be pour plus d\'information!</string>
+    <string name="overview_invite_email_chooser">Choisissez votre app d\'email:</string>
+    <string name="overview_invite_email_notfound">Nous avons trouvé aucune app d\'email.</string>
 
     <!--- First Run Layouts -->
     <string name="firstrun.letsgo">Allons-y!</string>
-    <string name="firstrun.description">EVA vzw veut vous battre pendant 21 jours où vous ferez l'expérience du mode de vie végétalien dans toute sa splendeur. \n\n Vivons une vie saine heureuse!</string>
+    <string name="firstrun.description">EVA vzw veut vous battre pendant 21 jours où vous ferez l\'expérience du mode de vie végétalien dans toute sa splendeur. \n\n Vivons une vie saine heureuse!</string>
     <string name="firstrun.fillyourheart">Tout ce que vous avez à faire est de remplir votre cœur de légumes sains par:</string>
     <string name="firstrun.challenges">- \t Compléter des challenges</string>
     <string name="firstrun.points">- \t Gagner des points</string>
@@ -30,19 +30,19 @@
     <!--- Login Layout -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Mot de passe</string>
-    <string name="action_sign_in">S'inscrire</string>
-    <string name="action_sign_in_short">S'inscrire</string>
+    <string name="action_sign_in">S\'inscrire</string>
+    <string name="action_sign_in_short">S\'inscrire</string>
     <string name="action_register">Registre</string>
-    <string name="activity_SignIn">S'inscrire</string>
-    <string name="title_activity_login">S'inscrire</string>
+    <string name="activity_SignIn">S\'inscrire</string>
+    <string name="title_activity_login">S\'inscrire</string>
 
     <!--- Login Activity -->
     <string name="error_invalid_email">Cette adresse email est invalide.</string>
-    <string name="error_invalid_password">Ce mot de passe est trop court. S'il vous plaît utiliser au moins 6 caractères.</string>
+    <string name="error_invalid_password">Ce mot de passe est trop court. S\'il vous plaît utiliser au moins 6 caractères.</string>
     <string name="error_field_required">Ce champ est obligatoire.</string>
-    <string name="error_notfound_email">Adresse e-mail ne se trouve pas, s'il vous plaît inscrire au préalable.</string>
-    <string name="error_found_email">Adresse e-mail se trouve, s'il vous plaît vous connecter.</string>
-    <string name="error_nomatch_password">Mot de passe ne correspond pas à l'adresse e-mail.</string>
+    <string name="error_notfound_email">Adresse e-mail ne se trouve pas, s\'il vous plaît inscrire au préalable.</string>
+    <string name="error_found_email">Adresse e-mail se trouve, s\'il vous plaît vous connecter.</string>
+    <string name="error_nomatch_password">Mot de passe ne correspond pas à l\'adresse e-mail.</string>
 
     <!--- Overview Layout -->
     <string name="overview.stats">Statistiques</string>
@@ -51,11 +51,12 @@
     <string name="overview.currentday">Jour courant</string>
     <string name="overview.achievements">Réalisations</string>
     <string name="overview.level">Niveau</string>
-    <string name="overview.image.badges">Image de badge</string>
+    <string name="overview.image.badges">Image de Badge</string>
     <string name="overview.share">Partager</string>
+    <string name="overview.image.level">Image de Niveau</string>
 
     <!--- Register Layouts -->
-    <string name="prompt_children">Nombre d'enfants</string>
+    <string name="prompt_children">Nombre d\'enfants</string>
     <string name="prompt_birthday">Anniversaire</string>
     <string name="registration.language">Langue:</string>
     <string name="registration.sex">Genre:</string>
@@ -75,23 +76,23 @@
     <string name="registration.pescetarianism">Pescétarisme (Pas de viande mais du poisson)</string>
     <string name="registration.vegetarianism">Végétarisme (Pas de viande, poisson ou volaille)</string>
     <string name="registration.parttimevegetarianism">Partiel Végétarisme (3 jours Végétarisme ou moins)</string>
-    <string name="registration.veganism">Véganisme (Pas de produits d'origine animale)</string>
+    <string name="registration.veganism">Véganisme (Pas de produits d\'origine animale)</string>
     <string name="registration.newsletter">EVA bulletin</string>
     <string name="registration.kindofdiet">Genre de régime:</string>
 
     <!--- Register Activities -->
     <string name="activity_Register">Registre</string>
-    <string name="error_empty_birthday">Indiquez la date de votre anniversaire. S'il vous plaît utiliser le format dd/mm/yyyy.</string>
-    <string name="error_invalid_date">Cela ne veut pas une date valide. S'il vous plaît utiliser le format dd/mm/yyyy.</string>
-    <string name="error_future_date">Tu es né aujourd'hui ou dans l'avenir. S'il vous plaît utiliser une date dans le passé.</string>
-    <string name="error_birthday_young">Vous êtes trop jeune pour utiliser cette application. L'âge minimum est de 13.</string>
-    <string name="error_birthday_old_male">Comme un homme que vous êtes plus âgé que M. Jiroemon Kimura qui est de 116 ans. Corrigez s'il vous plaît.</string>
-    <string name="error_birthday_old_female">En tant que femme, vous êtes plus vieux que Mme Jeanne Calment qui est de 122 ans. Corrigez s'il vous plaît.</string>
-    <string name="error_empty_children">Remplissez le nombre d'enfants.</string>
+    <string name="error_empty_birthday">Indiquez la date de votre anniversaire. S\'il vous plaît utiliser le format dd/mm/yyyy.</string>
+    <string name="error_invalid_date">Cela ne veut pas une date valide. S\'il vous plaît utiliser le format dd/mm/yyyy.</string>
+    <string name="error_future_date">Tu es né aujourd\'hui ou dans l\'avenir. S\'il vous plaît utiliser une date dans le passé.</string>
+    <string name="error_birthday_young">Vous êtes trop jeune pour utiliser cette application. L\'âge minimum est de 13.</string>
+    <string name="error_birthday_old_male">Comme un homme que vous êtes plus âgé que M. Jiroemon Kimura qui est de 116 ans. Corrigez s\'il vous plaît.</string>
+    <string name="error_birthday_old_female">En tant que femme, vous êtes plus vieux que Mme Jeanne Calment qui est de 122 ans. Corrigez s\'il vous plaît.</string>
+    <string name="error_empty_children">Remplissez le nombre d\'enfants.</string>
     <string name="error_invalid_children">Ceci est une valeur invalide.</string>
     <string name="error_negative_children">Remplissez zéro ou un nombre positif des enfants.</string>
-    <string name="error_male_children">Comme un homme vous avoir plus d'enfants que M. Gengis Khan qui est 2000. S'il vous plaît corriger.</string>
-    <string name="error_female_children">En tant que femme vous avoir plus d'enfants que Mme Vassiliev qui est 69. S'il vous plaît corriger.</string>
+    <string name="error_male_children">Comme un homme vous avoir plus d\'enfants que M. Gengis Khan qui est 2000. S\'il vous plaît corriger.</string>
+    <string name="error_female_children">En tant que femme vous avoir plus d\'enfants que Mme Vassiliev qui est 69. S\'il vous plaît corriger.</string>
 
     <!--- Challenge Layouts -->
     <string name="title_activity_challenges">Challenges</string>
@@ -124,8 +125,12 @@
     <string name="challenge.socialmedia.image">Média Social Image</string>
     <string name="activity.socialmedia.title">Média Social Challenge</string>
 
-    <!--- Overview Activity -->
-    <!--- Overview Layout -->
+    <!--- Facebook Share -->
+    <string name="facebook.message">Venez vous joindre à vos amis 21 Day Challenge avec un nouveau mode de vie sain.</string>
+    <string name="facebook.name">EVA 21 Days Challenge</string>
+    <string name="facebook.caption">Rassemblez vos légumes dans votre coeur!</string>
+    <string name="facebook.description">EVA vzw veut vous battre pendant 21 jours où vous ferez l\'expérience du mode de vie végétalien dans toute sa splendeur. Vivons une vie saine heureuse!</string>
+
     <!--- App -->
     <string name="app_name">21 Days Challenge</string>
     <string name="title_activity_main">21 Day Challenge</string>

@@ -6,7 +6,6 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.evavzw.twentyonedayschallenge.R;
-import com.evavzw.twentyonedayschallenge.registration.RegistrationNonSwipeablePagerAdapter;
 
 public class FirstRunActivity extends FragmentActivity implements FirstRunPartOne.Callback {
 

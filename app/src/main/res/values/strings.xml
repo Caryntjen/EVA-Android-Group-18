@@ -1,7 +1,7 @@
 <resources>
 
     <!--- Account Layout -->
-    <string name="account.email">E-mail</string>
+    <string name="account.email">Email</string>
     <string name="account.birthday">Birthday</string>
     <string name="account.sex">Gender</string>
     <string name="account.newsletter">Subscribed to Newsletter</string>
@@ -16,11 +16,11 @@
     <string name="overview_invite_email_title">21 Days Eva Challenge</string>
     <string name="overview_invite_email_body">Come and join this healthy lifestyle and download our app.\nVisit our website at http://www.evavazw.be for more information!</string>
     <string name="overview_invite_email_chooser">Choose your email client:</string>
-    <string name="overview_invite_email_notfound">We\'ve found no email clients</string>
+    <string name="overview_invite_email_notfound">We\'ve found no email clients.</string>
 
     <!--- First Run Layouts -->
-    <string name="firstrun.letsgo">Let\'s go</string>
-    <string name="firstrun.description">EVA vzw wants to challenge you for 21 days where you\'ll experience the vegan lifestyle in all its glory. \n\n Let\'s live a happy healty life!</string>
+    <string name="firstrun.letsgo">Let\'s go!</string>
+    <string name="firstrun.description">EVA vzw wants to challenge you for 21 days where you\'ll experience the vegan lifestyle in all its glory. \n\n Let\'s live a happy healthy life!</string>
     <string name="firstrun.fillyourheart">All you have to do is fill your heart with healthy vegetables by:</string>
     <string name="firstrun.challenges">- \t Completing challenges</string>
     <string name="firstrun.points">- \t Earning points</string>
@@ -37,22 +37,23 @@
     <string name="title_activity_login">Sign in</string>
 
     <!--- Login Activity -->
-    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_email">This email address is invalid.</string>
     <string name="error_invalid_password">This password is too short. Please use at least 6 characters.</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="error_notfound_email">Emailaddress is not found, please register first</string>
-    <string name="error_found_email">Emailaddress is found, please sign in</string>
-    <string name="error_nomatch_password">Password does not match for the emailaddress</string>
+    <string name="error_field_required">This field is required.</string>
+    <string name="error_notfound_email">Email address is not found, please register first.</string>
+    <string name="error_found_email">Email address is found, please sign in.</string>
+    <string name="error_nomatch_password">Password does not match for the email address.</string>
 
     <!--- Overview Layout -->
     <string name="overview.stats">Stats</string>
     <string name="overview.points">Points</string>
-    <string name="overview.completechallenge">Complete challenges</string>
+    <string name="overview.completechallenge">Completed challenges</string>
     <string name="overview.currentday">Current Day</string>
     <string name="overview.achievements">Achievements</string>
     <string name="overview.level">Level</string>
     <string name="overview.image.badges">Badge Image</string>
     <string name="overview.share">Share</string>
+    <string name="overview.image.level">Level Image</string>
 
     <!--- Register Layouts -->
     <string name="prompt_children">Number Of Children</string>
@@ -81,8 +82,8 @@
 
     <!--- Register Activities -->
     <string name="activity_Register">Register</string>
-    <string name="error_empty_birthday">Fill in the number of birthday</string>
-    <string name="error_invalid_date">This is not a valid date. Please use format dd/mm/yyyy.</string>
+    <string name="error_empty_birthday">Fill in the date of your birthday. Please use format dd-mm-yyyy.</string>
+    <string name="error_invalid_date">This is not a valid date. Please use format dd-mm-yyyy.</string>
     <string name="error_future_date">You were born today or in the future. Please use a date in the past.</string>
     <string name="error_birthday_young">You are to young to use this app. The minimum age is 13.</string>
     <string name="error_birthday_old_male">As a male you\'re older than Mr. Jiroemon Kimura which is 116 years. Please correct.</string>
@@ -124,11 +125,19 @@
     <string name="challenge.socialmedia.image">Social Media Image</string>
     <string name="activity.socialmedia.title">Social Media Challenge</string>
 
-    <!--- Overview Activity -->
-    <!--- Overview Layout -->
+    <!--- Facebook Share -->
+    <string name="facebook.message">Come join your friends 21 Day Challenge with a new healthy lifestyle.</string>
+    <string name="facebook.name">EVA 21 Days Challenge</string>
+    <string name="facebook.caption">Collect your vegetables in your hearth</string>
+    <string name="facebook.description">EVA vzw wants to challenge you for 21 days where you\'ll experience the vegan lifestyle in all its glory. Let\'s live a happy healthy life!</string>
+
     <!--- App -->
     <string name="app_name">21 Days Challenge</string>
     <string name="title_activity_main">21 Day Challenge</string>
+    <string name="facebook_app_id">926048174111271</string>
+    <string name="app_id">926048174111271</string>
+    <string name="text.yes">Yes</string>
+    <string name="text.no">No</string>
     <string name="text.defaulttext">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
 
 

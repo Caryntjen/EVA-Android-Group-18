@@ -4,7 +4,7 @@
     <string name="account.email">E-mail</string>
     <string name="account.birthday">Verjaardag</string>
     <string name="account.sex">Geslacht</string>
-    <string name="account.newsletter">Schrijf je in voor de nieuwsbrief</string>
+    <string name="account.newsletter">Ingeschreven voor de nieuwsbrief</string>
     <string name="account.student">Student</string>
     <string name="account.children">Aantal kinderen</string>
     <string name="account.diet">Dieet</string>
@@ -53,6 +53,7 @@
     <string name="overview.level">Level</string>
     <string name="overview.image.badges">Badge Afbeelding</string>
     <string name="overview.share">Deel</string>
+    <string name="overview.image.level">Level Afbeelding</string>
 
     <!--- Register Layouts -->
     <string name="prompt_children">Aantal kinderen</string>
@@ -124,8 +125,12 @@
     <string name="challenge.socialmedia.image">Sociale Media Afbeelding</string>
     <string name="activity.socialmedia.title">Sociale Media Challenge</string>
 
-    <!--- Overview Activity -->
-    <!--- Overview Layout -->
+    <!--- Facebook Share -->
+    <string name="facebook.message">Beleef de 21 dagen challenge van Eva met jouw vrienden en ontdek een nieuwe levenstijl.</string>
+    <string name="facebook.name">EVA 21 Days Challenge</string>
+    <string name="facebook.caption">Verzamel uw groenten in uw hart</string>
+    <string name="facebook.description">EVA vzw nodigt u graag uit om 21 dagen lang de uitdaging aan te gaan om een veganistische levenswijze te ontdekken in al zijn glorie. Laten we starten met een gezonder leven.</string>
+
     <!--- App -->
     <string name="app_name">21 Days Challenge</string>
     <string name="title_activity_main">21 Day Challenge</string>

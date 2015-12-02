@@ -20,7 +20,7 @@
 
     <!--- First Run Layouts -->
     <string name="firstrun.letsgo">Let\'s go!</string>
-    <string name="firstrun.description">EVA vzw wants to challenge you for 21 days where you\'ll experience the vegan lifestyle in all its glory. \n\n Let\'s live a happy healty life!</string>
+    <string name="firstrun.description">EVA vzw wants to challenge you for 21 days where you\'ll experience the vegan lifestyle in all its glory. \n\n Let\'s live a happy healthy life!</string>
     <string name="firstrun.fillyourheart">All you have to do is fill your heart with healthy vegetables by:</string>
     <string name="firstrun.challenges">- \t Completing challenges</string>
     <string name="firstrun.points">- \t Earning points</string>
@@ -53,6 +53,7 @@
     <string name="overview.level">Level</string>
     <string name="overview.image.badges">Badge Image</string>
     <string name="overview.share">Share</string>
+    <string name="overview.image.level">Level Image</string>
 
     <!--- Register Layouts -->
     <string name="prompt_children">Number Of Children</string>
@@ -124,8 +125,12 @@
     <string name="challenge.socialmedia.image">Social Media Image</string>
     <string name="activity.socialmedia.title">Social Media Challenge</string>
 
-    <!--- Overview Activity -->
-    <!--- Overview Layout -->
+    <!--- Facebook Share -->
+    <string name="facebook.message">Come join your friends 21 Day Challenge with a new healthy lifestyle.</string>
+    <string name="facebook.name">EVA 21 Days Challenge</string>
+    <string name="facebook.caption">Collect your vegetables in your hearth</string>
+    <string name="facebook.description">EVA vzw wants to challenge you for 21 days where you\'ll experience the vegan lifestyle in all its glory. Let\'s live a happy healthy life!</string>
+
     <!--- App -->
     <string name="app_name">21 Days Challenge</string>
     <string name="title_activity_main">21 Day Challenge</string>

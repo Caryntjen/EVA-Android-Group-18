@@ -4,9 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.evavzw.twentyonedayschallenge.registration.RegistrationPartOne;
-import com.evavzw.twentyonedayschallenge.registration.RegistrationPartTwo;
-
 public class FirstRunNonSwipeablePagerAdapter extends FragmentPagerAdapter {
 
     public FirstRunNonSwipeablePagerAdapter(FragmentManager fragmentManager) {

@@ -32,7 +32,7 @@
             android:visibility="visible">
 
             <TableRow
-                android:id="@+id/trEmail"
+                android:id="@+id/trPoints"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="5dp"
@@ -63,7 +63,7 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/trBirthday"
+                android:id="@+id/trCompletedChallenges"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="5dp"
@@ -94,7 +94,7 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/trChildren"
+                android:id="@+id/trCurrentDay"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="5dp"
@@ -331,7 +331,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/challenge.product.image"
+            android:contentDescription="@string/overview.image.level"
             android:scaleType="centerCrop"
             android:src="@drawable/heart7" />
 
