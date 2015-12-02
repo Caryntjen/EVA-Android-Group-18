@@ -149,7 +149,7 @@
                 android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/Next"
+                android:text="@string/registration.next"
                 android:textColor="@color/evaDarkGreen" />
 
             <!-- TODO: Need to button hide on release -->

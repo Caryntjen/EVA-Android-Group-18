@@ -39,8 +39,7 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".firstrun.FirstRunActivity"
-            android:label="@string/activity_first_run" >
+            android:name=".firstrun.FirstRunActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
