@@ -12,7 +12,18 @@ public enum User {
     DAY("7"),
     NEWSLETTER("Yes"),
     POINTS("125"),
-    COMPLETEDCHALLENGES("7");
+    COMPLETEDCHALLENGES("7"),
+    BADGE_GERM("1"),
+    BADGE_FLOWER("4"),
+    BADGE_TREE("19"),
+    BADGE_EARTH("19"),
+    BADGE_HEARTH("6"),
+    BADGE_NUT("2"),
+    BADGE_STAR("10"),
+    BADGE_PRIZE("450"),
+    BADGE_LITTLECUP("450"),
+    BADGE_BIGCUP("7"),
+    LEVEL("5");
 
     private final String text;
 

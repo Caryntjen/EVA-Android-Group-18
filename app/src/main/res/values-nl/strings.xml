@@ -138,5 +138,20 @@
     <string name="text.no">Nee</string>
     <string name="text.defaulttext">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
 
+    <!--- Achievements -->
+    <string name="achievements.defaulttext">Kies een achievement om uw vooruitgang te zien...</string>
+    <string name="achievements.germ">Voltooide eerste challenge!</string>
+    <string name="achievements.flower">Voltooide 5 challenges.</string>
+    <string name="achievements.tree">Voltooide 15 challenges.</string>
+    <string name="achievements.earth">Uw ecologische voetafdruk is verlaagd door 20 challenges te voltooien.</string>
+    <string name="achievements.hearth">Vulde uw hele hart op!</string>
+    <string name="achievements.nut">Voltooide 3 verschillende challenges categorieën.</string>
+    <string name="achievements.star">Verzamelde 10 gesterde challenges.</string>
+    <string name="achievements.prize">Verzamelde 250 punten.</string>
+    <string name="achievements.littlecup">Verzamelde 500 punten.</string>
+    <string name="achievements.bigcup">Voltooide de 21 day challenge.</string>
+
+    <!--- Level -->
+    <string name="level.current">Current Level: </string>
 
 </resources>

@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.evavzw.twentyonedayschallenge.overview.OverviewActivity;
+
 public class MainViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private static CharSequence TABS[] = {"Challenges", "Overview", "Account"};

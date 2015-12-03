@@ -140,5 +140,21 @@
     <string name="text.no">No</string>
     <string name="text.defaulttext">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
 
+    <!--- Achievements -->
+    <string name="achievements.defaulttext">Pick an achievement to view your progress...</string>
+    <string name="achievements.germ">Completed your first challenge!</string>
+    <string name="achievements.flower">Completed 5 challenges.</string>
+    <string name="achievements.tree">Completed 15 challenges.</string>
+    <string name="achievements.earth">Your ecologic footprint has been lowered by completing 20 challenges.</string>
+    <string name="achievements.hearth">Filled in your whole hearth!</string>
+    <string name="achievements.nut">Completed 3 different challenges categories.</string>
+    <string name="achievements.star">Collected 10 starred challenges.</string>
+    <string name="achievements.prize">Collected 250 points.</string>
+    <string name="achievements.littlecup">Collected 500 points.</string>
+    <string name="achievements.bigcup">Completed the 21 day challenge.</string>
+
+    <!--- Level -->
+    <string name="level.current">Huidig Level: </string>
+
 
 </resources>

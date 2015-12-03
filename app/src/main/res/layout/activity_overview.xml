@@ -45,9 +45,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:paddingLeft="15dp"
                     android:paddingRight="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="0dp"
                     android:text="@string/overview.points"
                     android:textColor="@color/evaDarkGreen" />
 
@@ -56,9 +58,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.70"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:paddingLeft="0dp"
                     android:paddingRight="15dp"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="15dp"
+                    android:textIsSelectable="false"
                     android:textColor="@color/evaLightGreen" />
             </TableRow>
 
@@ -76,9 +81,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.70"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:paddingLeft="15dp"
                     android:paddingRight="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="0dp"
                     android:text="@string/overview.completechallenge"
                     android:textColor="@color/evaDarkGreen" />
 
@@ -87,9 +94,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.30"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:paddingLeft="0dp"
                     android:paddingRight="15dp"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="15dp"
+                    android:textIsSelectable="false"
                     android:textColor="@color/evaLightGreen" />
             </TableRow>
 
@@ -107,9 +117,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.80"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:paddingLeft="15dp"
                     android:paddingRight="0dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="0dp"
                     android:text="@string/overview.currentday"
                     android:textColor="@color/evaDarkGreen" />
 
@@ -118,9 +130,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.20"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:paddingLeft="0dp"
                     android:paddingRight="15dp"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="15dp"
+                    android:textIsSelectable="false"
                     android:textColor="@color/evaLightGreen" />
             </TableRow>
 
@@ -134,182 +149,6 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/include" />
-
-
-        <!--
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/rlBadges1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="45dp">
-
-                <ImageView
-                    android:id="@+id/ivBadge1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|bottom"
-                    android:contentDescription="@string/image.star"
-                    android:src="@drawable/badge1"
-                    android:visibility="visible"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
-
-                <ImageView
-                    android:id="@+id/ivBadge2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|bottom"
-                    android:contentDescription="@string/image.star"
-                    android:src="@drawable/badge2"
-                    android:layout_marginLeft="10dp"
-                    android:visibility="visible"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/ivBadge1"
-                    android:layout_toEndOf="@+id/ivBadge1" />
-
-                <ImageView
-                    android:id="@+id/ivBadge3"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|bottom"
-                    android:contentDescription="@string/image.star"
-                    android:src="@drawable/badge3"
-                    android:layout_marginLeft="10dp"
-                    android:visibility="visible"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/ivBadge2"
-                    android:layout_toEndOf="@+id/ivBadge2" />
-
-                <ImageView
-                    android:id="@+id/ivBadge4"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|bottom"
-                    android:contentDescription="@string/image.star"
-                    android:src="@drawable/badge4"
-                    android:layout_marginLeft="10dp"
-                    android:visibility="visible"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/ivBadge3"
-                    android:layout_toEndOf="@+id/ivBadge3" />
-
-                <ImageView
-                    android:id="@+id/ivBadge0"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|bottom"
-                    android:contentDescription="@string/image.star"
-                    android:src="@drawable/badge0"
-                    android:layout_marginLeft="10dp"
-                    android:visibility="visible"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/ivBadge4"
-                    android:layout_toEndOf="@+id/ivBadge4" />
-
-
-
-
-
-
-            </RelativeLayout>
-
-
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/rlBadges2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="45dp"
-                android:layout_below="@+id/rlBadges1">
-                <ImageView
-                    android:id="@+id/ivBadge5"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|bottom"
-                    android:contentDescription="@string/image.star"
-                    android:src="@drawable/badge5"
-                    android:visibility="visible"
-                    android:layout_marginTop="5dp"
-                    android:layout_below="@+id/ivBadge1"
-                    android:layout_toLeftOf="@+id/ivBadge2"
-                    android:layout_toStartOf="@+id/ivBadge2" />
-
-                <ImageView
-                    android:id="@+id/ivBadge6"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|bottom"
-                    android:contentDescription="@string/image.star"
-                    android:src="@drawable/badge6"
-                    android:visibility="visible"
-                    android:layout_alignTop="@+id/ivBadge5"
-                    android:layout_alignLeft="@+id/ivBadge2"
-                    android:layout_alignStart="@+id/ivBadge2" />
-
-                <ImageView
-                    android:id="@+id/ivBadge7"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|bottom"
-                    android:contentDescription="@string/image.star"
-                    android:src="@drawable/badge7"
-                    android:visibility="visible"
-                    android:layout_alignTop="@+id/ivBadge6"
-                    android:layout_toLeftOf="@+id/ivBadge4"
-                    android:layout_toStartOf="@+id/ivBadge4" />
-
-                <ImageView
-                    android:id="@+id/ivBadge8"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|bottom"
-                    android:contentDescription="@string/image.star"
-                    android:src="@drawable/badge8"
-                    android:visibility="visible"
-                    android:layout_alignTop="@+id/ivBadge7"
-                    android:layout_toLeftOf="@+id/ivBadge0"
-                    android:layout_toStartOf="@+id/ivBadge0" />
-
-                <ImageView
-                    android:id="@+id/ivBadge9"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right|bottom"
-                    android:contentDescription="@string/image.star"
-                    android:src="@drawable/badge9"
-                    android:visibility="visible"
-                    android:layout_alignTop="@+id/ivBadge8"
-                    android:layout_alignLeft="@+id/ivBadge0"
-                    android:layout_alignStart="@+id/ivBadge0" />
-
-
-        <TextView
-            android:id="@+id/tvAchievements"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvStatsTitle"
-            android:layout_alignStart="@+id/tvStatsTitle"
-            android:layout_below="@+id/tlSettings"
-            android:layout_marginTop="15dp"
-            android:text="@string/overview.achievements"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
-
-        <ImageView
-
-            android:id="@+id/ivBadges"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_below="@+id/tvAchievements"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_vertical"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/overview.image.badges"
-            android:scaleType="centerCrop"
-            android:src="@drawable/badges" />
-        -->
 
         <TextView
             android:id="@+id/tvLevel"
