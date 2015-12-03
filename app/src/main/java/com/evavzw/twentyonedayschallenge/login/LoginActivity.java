@@ -194,6 +194,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void success(LoginToken loginToken, Response response) {
                     Log.d("Success", loginToken.token_type + ": " + loginToken.access_token);
+                    i.putExtra("accesToken", loginToken.token_type + ": " + loginToken.access_token);
                     startActivity(i);
                 }
 

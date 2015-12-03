@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private SlidingTabLayout slidingTabs;
     private String currentday = User.DAY.toString();
 
+    public String accesToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(getSupportActionBar().getTitle() +currentday);
 
+        accesToken = getIntent().getExtras().getString("accesToken");
         mvAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
 
         vpMain = (ViewPager) findViewById(R.id.vpMain);
