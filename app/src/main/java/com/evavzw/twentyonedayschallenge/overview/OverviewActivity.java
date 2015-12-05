@@ -141,7 +141,7 @@ public class OverviewActivity extends Fragment {
         //Achievement Progress Information
         tvAchievementProgress = (TextView) activity.findViewById(R.id.tvAchievementProgress);
 
-        //TODO: Change pictures of Achievement when not completed to plack & white.
+        //TODO: Change pictures of Achievement when not completed to black & white.
         //Germ Badge Information
         sBadgeGerm = getString(R.string.achievements_germ);
         ivBadgeGerm = (ImageView) activity.findViewById(R.id.ivBadgeGerm);
@@ -151,11 +151,14 @@ public class OverviewActivity extends Fragment {
                 //TODO: Load user information
                 pbAchievements.setVisibility(View.VISIBLE);
                 tvAchievementTitle.setText(sBadgeGerm);
-                int max = MAX_BADGE_GERM;
-                int current = Integer.parseInt(User.BADGE_GERM.toString());
-                pbAchievements.setMax(max);
-                pbAchievements.setProgress(current);
-                tvAchievementProgress.setText(current + "/" + max);
+                int max_Germ = MAX_BADGE_GERM;
+                int current_Germ = Integer.parseInt(User.BADGE_GERM.toString());
+                if(current_Germ >= max_Germ){
+                    ivBadgeGerm.setImageResource(R.drawable.badge_finished_germ);
+                }
+                pbAchievements.setMax(max_Germ);
+                pbAchievements.setProgress(current_Germ);
+                tvAchievementProgress.setText(current_Germ + "/" + MAX_BADGE_GERM);
             }
         });
         //Flower Badge Information
