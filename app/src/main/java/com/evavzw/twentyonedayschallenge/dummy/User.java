@@ -23,6 +23,10 @@ public enum User {
     BADGE_PRIZE("450"),
     BADGE_LITTLECUP("450"),
     BADGE_BIGCUP("7"),
+    COMPLETEDSOCIALMEDIACHALLENGES("5"),
+    COMPLETEDRECIPECHALLENGES("5"),
+    COMPLETEDPRODUCTCHALLENGES("5"),
+    STARS("8"),
     LEVEL("5");
 
     private final String text;

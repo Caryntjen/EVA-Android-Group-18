@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.evavzw.twentyonedayschallenge.R;
+import com.evavzw.twentyonedayschallenge.achievements.Badge;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.entities.Feed;
@@ -36,7 +37,7 @@ public class OverviewActivity extends Fragment {
     private static ImageView ivLevel;
     private static Button btnShare;
 
-    //Achievements References
+    //Achievement Badges References
     /*
     First Line
         Badge 0 = GERM: Completed your first challenge.
@@ -53,43 +54,38 @@ public class OverviewActivity extends Fragment {
         Badge 9 = BIGCUP: You've completed the 21 day challenge.
      */
     private static ImageView ivBadgeGerm;
-    private String sBadgeGerm;
     private static final int MAX_BADGE_GERM = 1;
     private static ImageView ivBadgeFlower;
-    private String sBadgeFlower;
     private static final int MAX_BADGE_FLOWER = 5;
     private static ImageView ivBadgeTree;
-    private String sBadgeTree;
     private static final int MAX_BADGE_TREE = 10;
     private static ImageView ivBadgeEarth;
-    private String sBadgeEarth;
     private static final int MAX_BADGE_EARTH = 20;
     private static ImageView ivBadgeHearth;
-    private String sBadgeHearth;
     private static final int MAX_BADGE_HEARTH = 7;
     private static ImageView ivBadgeNut;
-    private String sBadgeNut;
     private static final int MAX_BADGE_NUT = 3;
     private static ImageView ivBadgeStar;
-    private String sBadgeStar;
     private static final int MAX_BADGE_STAR = 10;
     private static ImageView ivBadgePrize;
-    private String sBadgePrize;
     private static final int MAX_BADGE_PRIZE = 250;
     private static ImageView ivBadgeLittleCup;
-    private String sBadgeLittleCup;
     private static final int MAX_BADGE_LITTLECUP = 500;
     private static ImageView ivBadgeBigCup;
-    private String sBadgeBigCup;
     private static final int MAX_BADGE_BIGCUP = 21;
+
+    //Achievement Information References
     private static TextView tvAchievementTitle;
     private static TextView tvAchievementProgress;
     private static ProgressBar pbAchievements;
 
+    //Badges
+    private Badge germ, flower, tree, hearth, earth, bigcup, littlecup, prize, nut, star;
+
     //Facebook References
     private OnPublishListener onPublishListener;
     private SimpleFacebook sfacebook;
-
+    //EVA URL References
     private static final String EVA_URL = "http://www.evavzw.be";
     private static final String IMG_URL = "http://users.telenet.be/Caryntjen/fb_shareheart.png";
 
@@ -110,6 +106,40 @@ public class OverviewActivity extends Fragment {
     public void onResume() {
         super.onResume();
         sfacebook = SimpleFacebook.getInstance(activity);
+
+        //TODO: load user information
+        germ.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
+        flower.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
+        tree.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
+        earth.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
+        hearth.setCurrentProgress(Integer.parseInt(User.LEVEL.toString()));
+        int differentChallenges = 0;
+        if(Integer.parseInt(User.COMPLETEDPRODUCTCHALLENGES.toString())>0){
+            differentChallenges++;
+        }
+        if(Integer.parseInt(User.COMPLETEDRECIPECHALLENGES.toString())>0){
+            differentChallenges++;
+        }
+        if(Integer.parseInt(User.COMPLETEDRECIPECHALLENGES.toString())>0){
+            differentChallenges++;
+        }
+        nut.setCurrentProgress(differentChallenges);
+        star.setCurrentProgress(Integer.parseInt(User.STARS.toString()));
+        prize.setCurrentProgress(Integer.parseInt(User.POINTS.toString()));
+        littlecup.setCurrentProgress(Integer.parseInt(User.POINTS.toString()));
+        bigcup.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
+
+        //Draw Badges
+        germ.draw(ivBadgeGerm, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        flower.draw(ivBadgeFlower, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        tree.draw(ivBadgeTree, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        earth.draw(ivBadgeEarth, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        hearth.draw(ivBadgeHearth, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        nut.draw(ivBadgeNut, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        star.draw(ivBadgeStar, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        prize.draw(ivBadgePrize, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        littlecup.draw(ivBadgeLittleCup, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        bigcup.draw(ivBadgeBigCup, tvAchievementTitle, pbAchievements, tvAchievementProgress);
     }
 
     @Override
@@ -132,7 +162,8 @@ public class OverviewActivity extends Fragment {
 
         //Achievements Progressbar
         pbAchievements = (ProgressBar) activity.findViewById(R.id.pbAchievements);
-        pbAchievements.setVisibility(View.INVISIBLE);
+        pbAchievements.setVisibility(View.VISIBLE);
+        pbAchievements.setMax(0);
 
         //Achievement Title Information
         tvAchievementTitle = (TextView) activity.findViewById(R.id.tvAchievementTitle);
@@ -141,178 +172,27 @@ public class OverviewActivity extends Fragment {
         //Achievement Progress Information
         tvAchievementProgress = (TextView) activity.findViewById(R.id.tvAchievementProgress);
 
-        //TODO: Change pictures of Achievement when not completed to black & white.
-        //Germ Badge Information
-        sBadgeGerm = getString(R.string.achievements_germ);
+        //Creating badges
         ivBadgeGerm = (ImageView) activity.findViewById(R.id.ivBadgeGerm);
-        ivBadgeGerm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                pbAchievements.setVisibility(View.VISIBLE);
-                tvAchievementTitle.setText(sBadgeGerm);
-                int max_Germ = MAX_BADGE_GERM;
-                int current_Germ = Integer.parseInt(User.BADGE_GERM.toString());
-                if(current_Germ >= max_Germ){
-                    ivBadgeGerm.setImageResource(R.drawable.badge_finished_germ);
-                }
-                pbAchievements.setMax(max_Germ);
-                pbAchievements.setProgress(current_Germ);
-                tvAchievementProgress.setText(current_Germ + "/" + MAX_BADGE_GERM);
-            }
-        });
-        //Flower Badge Information
-        sBadgeFlower = getString(R.string.achievements_flower);
+        germ = new Badge(R.drawable.badge_finished_germ, R.drawable.badge_germ, MAX_BADGE_GERM, getString(R.string.achievements_germ));
         ivBadgeFlower = (ImageView) activity.findViewById(R.id.ivBadgeFlower);
-        ivBadgeFlower.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                pbAchievements.setVisibility(View.VISIBLE);
-                tvAchievementTitle.setText(sBadgeFlower);
-                int max = MAX_BADGE_FLOWER;
-                int current = Integer.parseInt(User.BADGE_FLOWER.toString());
-                pbAchievements.setMax(max);
-                pbAchievements.setProgress(current);
-                tvAchievementProgress.setText(current + "/" + max);
-            }
-        });
-
-        //Tree Badge Information
-        sBadgeTree = getString(R.string.achievements_tree);
+        flower = new Badge(R.drawable.badge_finished_flower, R.drawable.badge_flower, MAX_BADGE_FLOWER, getString(R.string.achievements_flower));
         ivBadgeTree = (ImageView) activity.findViewById(R.id.ivBadgeTree);
-        ivBadgeTree.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                pbAchievements.setVisibility(View.VISIBLE);
-                tvAchievementTitle.setText(sBadgeTree);
-                int max = MAX_BADGE_TREE;
-                int current = Integer.parseInt(User.BADGE_TREE.toString());
-                pbAchievements.setMax(max);
-                pbAchievements.setProgress(current);
-                tvAchievementProgress.setText(current + "/" + max);
-            }
-        });
-
-        //Earth Badge Information
-        sBadgeEarth = getString(R.string.achievements_earth);
+        tree = new Badge(R.drawable.badge_finished_tree, R.drawable.badge_tree, MAX_BADGE_TREE, getString(R.string.achievements_tree));
         ivBadgeEarth = (ImageView) activity.findViewById(R.id.ivBadgeEarth);
-        ivBadgeEarth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                pbAchievements.setVisibility(View.VISIBLE);
-                tvAchievementTitle.setText(sBadgeEarth);
-                int max = MAX_BADGE_EARTH;
-                int current = Integer.parseInt(User.BADGE_EARTH.toString());
-                pbAchievements.setMax(max);
-                pbAchievements.setProgress(current);
-                tvAchievementProgress.setText(current + "/" + max);
-            }
-        });
-
-        //Hearth Badge Information
-        sBadgeHearth = getString(R.string.achievements_hearth);
+        earth = new Badge(R.drawable.badge_finished_earth, R.drawable.badge_earth, MAX_BADGE_EARTH, getString(R.string.achievements_earth));
         ivBadgeHearth = (ImageView) activity.findViewById(R.id.ivBadgeHearth);
-        ivBadgeHearth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                pbAchievements.setVisibility(View.VISIBLE);
-                tvAchievementTitle.setText(sBadgeHearth);
-                int max = MAX_BADGE_HEARTH;
-                int current = Integer.parseInt(User.BADGE_HEARTH.toString());
-                pbAchievements.setMax(max);
-                pbAchievements.setProgress(current);
-                tvAchievementProgress.setText(current + "/" + max);
-            }
-        });
-
-        //Nut Badge5 Information
-        sBadgeNut = getString(R.string.achievements_nut);
+        hearth = new Badge(R.drawable.badge_finished_hearth, R.drawable.badge_hearth, MAX_BADGE_HEARTH, getString(R.string.achievements_hearth));
         ivBadgeNut = (ImageView) activity.findViewById(R.id.ivBadgeNut);
-        ivBadgeNut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                pbAchievements.setVisibility(View.VISIBLE);
-                tvAchievementTitle.setText(sBadgeNut);
-                int max = MAX_BADGE_NUT;
-                int current = Integer.parseInt(User.BADGE_NUT.toString());
-                pbAchievements.setMax(max);
-                pbAchievements.setProgress(current);
-                tvAchievementProgress.setText(current + "/" + max);
-            }
-        });
-
-        //Star Badge Information
-        sBadgeStar = getString(R.string.achievements_star);
+        nut = new Badge(R.drawable.badge_finished_nut, R.drawable.badge_nut, MAX_BADGE_NUT, getString(R.string.achievements_nut));
         ivBadgeStar = (ImageView) activity.findViewById(R.id.ivBadgeStar);
-        ivBadgeStar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                pbAchievements.setVisibility(View.VISIBLE);
-                tvAchievementTitle.setText(sBadgeStar);
-                int max = MAX_BADGE_STAR;
-                int current = Integer.parseInt(User.BADGE_STAR.toString());
-                pbAchievements.setMax(max);
-                pbAchievements.setProgress(current);
-                tvAchievementProgress.setText(current + "/" + max);
-            }
-        });
-
-        //Prize Badge Information
-        sBadgePrize = getString(R.string.achievements_prize);
+        star = new Badge(R.drawable.badge_finished_star, R.drawable.badge_star, MAX_BADGE_STAR, getString(R.string.achievements_star));
         ivBadgePrize = (ImageView) activity.findViewById(R.id.ivBadgePrize);
-        ivBadgePrize.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                pbAchievements.setVisibility(View.VISIBLE);
-                tvAchievementTitle.setText(sBadgePrize);
-                int max = MAX_BADGE_PRIZE;
-                int current = Integer.parseInt(User.BADGE_PRIZE.toString());
-                pbAchievements.setMax(max);
-                pbAchievements.setProgress(current);
-                tvAchievementProgress.setText(current + "/" + max);
-            }
-        });
-
-        //LittleCup Badge Information
-        sBadgeLittleCup = getString(R.string.achievements_littlecup);
+        prize = new Badge(R.drawable.badge_finished_prize, R.drawable.badge_prize, MAX_BADGE_PRIZE, getString(R.string.achievements_prize));
         ivBadgeLittleCup = (ImageView) activity.findViewById(R.id.ivBadgeLittleCup);
-        ivBadgeLittleCup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                pbAchievements.setVisibility(View.VISIBLE);
-                tvAchievementTitle.setText(sBadgeLittleCup);
-                int max = MAX_BADGE_LITTLECUP;
-                int current = Integer.parseInt(User.BADGE_LITTLECUP.toString());
-                pbAchievements.setMax(max);
-                pbAchievements.setProgress(current);
-                tvAchievementProgress.setText(current + "/" + max);
-            }
-        });
-
-        //BigCup Badge Information
-        sBadgeBigCup = getString(R.string.achievements_bigcup);
+        littlecup = new Badge(R.drawable.badge_finished_littlecup, R.drawable.badge_littlecup, MAX_BADGE_LITTLECUP, getString(R.string.achievements_littlecup));
         ivBadgeBigCup = (ImageView) activity.findViewById(R.id.ivBadgeBigCup);
-        ivBadgeBigCup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                pbAchievements.setVisibility(View.VISIBLE);
-                tvAchievementTitle.setText(sBadgeBigCup);
-                int max = MAX_BADGE_BIGCUP;
-                int current = Integer.parseInt(User.BADGE_BIGCUP.toString());
-                pbAchievements.setMax(max);
-                pbAchievements.setProgress(current);
-                tvAchievementProgress.setText(current + "/" + max);
-            }
-        });
+        bigcup = new Badge(R.drawable.badge_finished_bigcup, R.drawable.badge_bigcup, MAX_BADGE_BIGCUP, getString(R.string.achievements_bigcup));
 
         //Level Information
         //TODO: Change pictures for each level
