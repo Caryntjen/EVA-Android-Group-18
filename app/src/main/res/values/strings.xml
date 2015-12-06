@@ -55,6 +55,9 @@
     <string name="overview.share">Share</string>
     <string name="overview.image.level">Level Image</string>
 
+    <!--- Overview Activity -->
+    <string name="title_activity_overview">Overview</string>
+
     <!--- Register Layouts -->
     <string name="prompt_children">Number Of Children</string>
     <string name="prompt_birthday">Birthday</string>

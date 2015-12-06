@@ -55,6 +55,9 @@
     <string name="overview.share">Deel</string>
     <string name="overview.image.level">Level Afbeelding</string>
 
+    <!--- Overview Layout -->
+    <string name="title_activity_overview">Overzicht</string>
+
     <!--- Register Layouts -->
     <string name="prompt_children">Aantal kinderen</string>
     <string name="prompt_birthday">Verjaardag</string>
@@ -152,6 +155,6 @@
     <string name="achievements.bigcup">Voltooide de 21 day challenge.</string>
 
     <!--- Level -->
-    <string name="level.current">Current Level: </string>
+    <string name="level.current">Huidig Level: </string>
 
 </resources>

@@ -1,13 +1,9 @@
-package com.evavzw.twentyonedayschallenge.achievements;
+package com.evavzw.twentyonedayschallenge.tabfragments;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.evavzw.twentyonedayschallenge.R;
-
-import org.w3c.dom.Text;
 
 /*
     The Badge class will keep the information of the badge such as: resourceIDs, maximum, progress and description.

@@ -142,7 +142,7 @@
 
         </TableLayout>
 
-        <include layout="@layout/overview_achievements"
+        <include layout="@layout/fragment_overview_achievements"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:layout_below="@+id/tlSettings"
@@ -172,7 +172,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/overview.image.level"
             android:scaleType="centerCrop"
-            android:src="@drawable/heart7" />
+            android:src="@drawable/level_hearth0" />
 
         <Button
             android:id="@+id/btnShare"

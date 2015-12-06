@@ -1,4 +1,4 @@
-package com.evavzw.twentyonedayschallenge.main;
+package com.evavzw.twentyonedayschallenge.tabfragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,10 +15,10 @@ import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 
 /*
-    The AccountActivity class will display the information of the account of the user.
+    The AccountFragment class will display the information of the account of the user.
     There's also the possibility to invite a friend through e-mail.
 */
-public class AccountActivity extends Fragment {
+public class AccountFragment extends Fragment implements ITabFragment {
 
     private FragmentActivity activity;
 
@@ -42,7 +42,7 @@ public class AccountActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         activity = super.getActivity();
-        View view = (View) inflater.inflate(R.layout.activity_account, container, false);
+        View view = (View) inflater.inflate(R.layout.fragment_activity_account, container, false);
         return view;
     }
 
@@ -50,39 +50,29 @@ public class AccountActivity extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //TODO: Load information into TextViews
-
         //Email Information
         tvEmail = (TextView) activity.findViewById(R.id.tvEmail);
-        tvEmail.setText(User.EMAIL.toString());
 
         //Birthday Information
         tvBirthday = (TextView) activity.findViewById(R.id.tvBirthday);
-        tvBirthday.setText(User.BIRTHDAY.toString());
 
         //Gender Information
         tvSex = (TextView) activity.findViewById(R.id.tvSex);
-        tvSex.setText(User.SEX.toString());
 
         //Language Information
         tvLanguage = (TextView) activity.findViewById(R.id.tvLanguage);
-        tvLanguage.setText(User.LANGUAGE.toString());
 
         //Student Information
         tvStudent = (TextView) activity.findViewById(R.id.tvStudent);
-        tvStudent.setText(User.STUDENT.toString());
 
         //Number of Children Information
         tvChildren = (TextView) activity.findViewById(R.id.tvChildren);
-        tvChildren.setText(User.CHILDREN.toString());
 
         //Subscribed to newsletter Information
         tvNewsletter = (TextView) activity.findViewById(R.id.tvNewsletter);
-        tvNewsletter.setText(User.NEWSLETTER.toString());
 
         //Kind of Diet Information
         tvDiet = (TextView) activity.findViewById(R.id.tvDiet);
-        tvDiet.setText(User.DIET.toString());
 
         //Button to invite others through email if the intent can not be started a short Toast is made that no email client is found.
         btnInvite = (Button) activity.findViewById(R.id.btnInvite);
@@ -101,5 +91,28 @@ public class AccountActivity extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateFragment();
+    }
+
+    /*
+        When the fragment is swiped or clicked to, the information needs to be updated, which happens here.
+     */
+    @Override
+    public void updateFragment() {
+        //TODO: Load information into TextViews
+        tvEmail.setText(User.EMAIL.toString());
+        tvBirthday.setText(User.BIRTHDAY.toString());
+        tvSex.setText(User.SEX.toString());
+        tvLanguage.setText(User.LANGUAGE.toString());
+        tvNewsletter.setText(User.NEWSLETTER.toString());
+        tvStudent.setText(User.STUDENT.toString());
+        tvChildren.setText(User.CHILDREN.toString());
+        tvDiet.setText(User.DIET.toString());
+
     }
 }

@@ -1,4 +1,4 @@
-package com.evavzw.twentyonedayschallenge.overview;
+package com.evavzw.twentyonedayschallenge.tabfragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,19 +14,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.evavzw.twentyonedayschallenge.R;
-import com.evavzw.twentyonedayschallenge.achievements.Badge;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.entities.Feed;
 import com.sromku.simple.fb.listeners.OnPublishListener;
 
 /*
-    The OverviewActivity class will display statistics, achievements and level.
+    The OverviewFragment class will display statistics, achievements and level.
     There's also the possibility to share this through facebook.
     Achievements are clickable to show the current progress.
-    Level is also clickable to show the current level.
+    Level is also clickable to show the current level, which goes up every 75 point until the maximum of 7 level (0-6).
 */
-public class OverviewActivity extends Fragment {
+public class OverviewFragment extends Fragment implements ITabFragment {
 
     private FragmentActivity activity;
 
@@ -34,10 +33,8 @@ public class OverviewActivity extends Fragment {
     private static TextView tvPoints;
     private static TextView tvCompletedChallenges;
     private static TextView tvCurrentDay;
-    private static ImageView ivLevel;
     private static Button btnShare;
 
-    //Achievement Badges References
     /*
     First Line
         Badge 0 = GERM: Completed your first challenge.
@@ -53,6 +50,7 @@ public class OverviewActivity extends Fragment {
         Badge 8 = LITTLECUP: You've collected 500 points.
         Badge 9 = BIGCUP: You've completed the 21 day challenge.
      */
+    //Achievement Badges References
     private static ImageView ivBadgeGerm;
     private static final int MAX_BADGE_GERM = 1;
     private static ImageView ivBadgeFlower;
@@ -82,6 +80,13 @@ public class OverviewActivity extends Fragment {
     //Badges
     private Badge germ, flower, tree, hearth, earth, bigcup, littlecup, prize, nut, star;
 
+    //Level
+    private int LEVEL_IDs[];
+    private static ImageView ivLevel;
+    private final int MAX_LEVEL = MAX_BADGE_HEARTH;
+    private final int LEVELUP_POINTS = 75;
+    int currentLevel;
+
     //Facebook References
     private OnPublishListener onPublishListener;
     private SimpleFacebook sfacebook;
@@ -97,7 +102,7 @@ public class OverviewActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         activity = super.getActivity();
-        View view = (View) inflater.inflate(R.layout.activity_overview, container, false);
+        View view = (View) inflater.inflate(R.layout.fragment_overview, container, false);
 
         return view;
     }
@@ -105,56 +110,18 @@ public class OverviewActivity extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        sfacebook = SimpleFacebook.getInstance(activity);
-
-        //TODO: load user information
-        germ.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
-        flower.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
-        tree.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
-        earth.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
-        hearth.setCurrentProgress(Integer.parseInt(User.LEVEL.toString()));
-        int differentChallenges = 0;
-        if(Integer.parseInt(User.COMPLETEDPRODUCTCHALLENGES.toString())>0){
-            differentChallenges++;
-        }
-        if(Integer.parseInt(User.COMPLETEDRECIPECHALLENGES.toString())>0){
-            differentChallenges++;
-        }
-        if(Integer.parseInt(User.COMPLETEDRECIPECHALLENGES.toString())>0){
-            differentChallenges++;
-        }
-        nut.setCurrentProgress(differentChallenges);
-        star.setCurrentProgress(Integer.parseInt(User.STARS.toString()));
-        prize.setCurrentProgress(Integer.parseInt(User.POINTS.toString()));
-        littlecup.setCurrentProgress(Integer.parseInt(User.POINTS.toString()));
-        bigcup.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
-
-        //Draw Badges
-        germ.draw(ivBadgeGerm, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        flower.draw(ivBadgeFlower, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        tree.draw(ivBadgeTree, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        earth.draw(ivBadgeEarth, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        hearth.draw(ivBadgeHearth, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        nut.draw(ivBadgeNut, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        star.draw(ivBadgeStar, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        prize.draw(ivBadgePrize, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        littlecup.draw(ivBadgeLittleCup, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        bigcup.draw(ivBadgeBigCup, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        updateFragment();
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //TODO: Load information into TextViews
-
         //Points Information
         tvPoints = (TextView) activity.findViewById(R.id.tvPoints);
-        tvPoints.setText(User.POINTS.toString());
 
         //Completed Challenges Information
         tvCompletedChallenges = (TextView) activity.findViewById(R.id.tvCompletedChallenges);
-        tvCompletedChallenges.setText(User.COMPLETEDCHALLENGES.toString());
 
         //Current Day Information
         tvCurrentDay = (TextView) activity.findViewById(R.id.tvCurrentDay);
@@ -162,12 +129,9 @@ public class OverviewActivity extends Fragment {
 
         //Achievements Progressbar
         pbAchievements = (ProgressBar) activity.findViewById(R.id.pbAchievements);
-        pbAchievements.setVisibility(View.VISIBLE);
-        pbAchievements.setMax(0);
 
         //Achievement Title Information
         tvAchievementTitle = (TextView) activity.findViewById(R.id.tvAchievementTitle);
-        tvAchievementTitle.setText(getText(R.string.achievements_defaulttext));
 
         //Achievement Progress Information
         tvAchievementProgress = (TextView) activity.findViewById(R.id.tvAchievementProgress);
@@ -195,27 +159,24 @@ public class OverviewActivity extends Fragment {
         bigcup = new Badge(R.drawable.badge_finished_bigcup, R.drawable.badge_bigcup, MAX_BADGE_BIGCUP, getString(R.string.achievements_bigcup));
 
         //Level Information
-        //TODO: Change pictures for each level
         ivLevel = (ImageView) activity.findViewById(R.id.ivLevel);
-        ivLevel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                Context context = activity.getApplicationContext();
-                CharSequence currentlevel = getString(R.string.level_current) + " " + User.LEVEL;
-                int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, currentlevel, duration);
-                toast.show();
-            }
-        });
+        //Level image resources
+        LEVEL_IDs = new int[7];
+        LEVEL_IDs [0] = R.drawable.level_hearth0;
+        LEVEL_IDs [1] = R.drawable.level_hearth1;
+        LEVEL_IDs [2] = R.drawable.level_hearth2;
+        LEVEL_IDs [3] = R.drawable.level_hearth3;
+        LEVEL_IDs [4] = R.drawable.level_hearth4;
+        LEVEL_IDs [5] = R.drawable.level_hearth5;
+        LEVEL_IDs [6] = R.drawable.level_hearth6;
 
         //Simple Facebook information
         onPublishListener = new OnPublishListener() {
         };
         sfacebook = SimpleFacebook.getInstance(activity);
 
-        //Button to share your progress and evawewbsite
+        //Button to share your progress and EVA website
         btnShare = (Button) activity.findViewById(R.id.btnShare);
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -232,6 +193,81 @@ public class OverviewActivity extends Fragment {
                 sfacebook.publish(feed, true, onPublishListener);
             }
         });
+        sfacebook = SimpleFacebook.getInstance(activity);
+    }
+
+    /*
+        When the fragment is swiped or clicked to, the information needs to be updated, which happens here.
+     */
+    @Override
+    public void updateFragment() {
+        //TODO: load user information
+        //Stats
+        tvPoints.setText(User.POINTS.toString());
+        tvCompletedChallenges.setText(User.COMPLETEDCHALLENGES.toString());
+
+        //Update current level
+        currentLevel = Integer.parseInt(User.POINTS.toString())/LEVELUP_POINTS;
+        if(currentLevel >= MAX_LEVEL)
+        {
+            ivLevel.setImageResource(LEVEL_IDs[MAX_LEVEL-1]);
+        }
+        else{
+            ivLevel.setImageResource(LEVEL_IDs[currentLevel]);
+        }
+
+        ivLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: Load user information
+                Context context = activity.getApplicationContext();
+                CharSequence currentlevel = getString(R.string.level_current) + " " + currentLevel;
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, currentlevel, duration);
+                toast.show();
+            }
+        });
+
+        //Achievements
+        germ.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
+        flower.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
+        tree.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
+        earth.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
+        hearth.setCurrentProgress(currentLevel);
+        int differentChallenges = 0;
+        if(Integer.parseInt(User.COMPLETEDPRODUCTCHALLENGES.toString())>0){
+            differentChallenges++;
+        }
+        if(Integer.parseInt(User.COMPLETEDRECIPECHALLENGES.toString())>0){
+            differentChallenges++;
+        }
+        if(Integer.parseInt(User.COMPLETEDRECIPECHALLENGES.toString())>0){
+            differentChallenges++;
+        }
+        nut.setCurrentProgress(differentChallenges);
+        star.setCurrentProgress(Integer.parseInt(User.STARS.toString()));
+        prize.setCurrentProgress(Integer.parseInt(User.POINTS.toString()));
+        littlecup.setCurrentProgress(Integer.parseInt(User.POINTS.toString()));
+        bigcup.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
+
+        //Draw Badges
+        germ.draw(ivBadgeGerm, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        flower.draw(ivBadgeFlower, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        tree.draw(ivBadgeTree, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        earth.draw(ivBadgeEarth, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        hearth.draw(ivBadgeHearth, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        nut.draw(ivBadgeNut, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        star.draw(ivBadgeStar, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        prize.draw(ivBadgePrize, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        littlecup.draw(ivBadgeLittleCup, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+        bigcup.draw(ivBadgeBigCup, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+
+        //Reset Achievement Information
+        pbAchievements.setVisibility(View.VISIBLE);
+        pbAchievements.setMax(0);
+        tvAchievementTitle.setText(getString(R.string.achievements_defaulttext));
+
 
     }
 }

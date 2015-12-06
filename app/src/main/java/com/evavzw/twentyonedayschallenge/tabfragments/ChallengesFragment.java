@@ -1,4 +1,4 @@
-package com.evavzw.twentyonedayschallenge.main;
+package com.evavzw.twentyonedayschallenge.tabfragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +22,7 @@ import com.evavzw.twentyonedayschallenge.challenges.RecipeChallengeActivity;
 import com.evavzw.twentyonedayschallenge.challenges.SocialMediaChallengeActivity;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 
-public class ChallengesActivity extends Fragment {
+public class ChallengesFragment extends Fragment implements ITabFragment {
 
     private FragmentActivity activity;
     private BaseInflaterAdapter<ChallengeCardItem> adapter;
@@ -39,7 +39,7 @@ public class ChallengesActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         activity = super.getActivity();
-        View view = (View) inflater.inflate(R.layout.activity_challenges, container, false);
+        View view = (View) inflater.inflate(R.layout.fragment_challenges, container, false);
 
         return view;
     }
@@ -47,8 +47,6 @@ public class ChallengesActivity extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
 
         ProgressBar pbLoading = (ProgressBar) activity.findViewById(R.id.pbLoading);
 
@@ -104,5 +102,16 @@ public class ChallengesActivity extends Fragment {
 
 
         pbLoading.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateFragment();
+    }
+
+    @Override
+    public void updateFragment() {
+
     }
 }

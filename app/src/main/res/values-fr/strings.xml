@@ -55,6 +55,9 @@
     <string name="overview.share">Partager</string>
     <string name="overview.image.level">Image de Niveau</string>
 
+    <!--- Overview Activity -->
+    <string name="title_activity_overview">Résumé</string>
+
     <!--- Register Layouts -->
     <string name="prompt_children">Nombre d\'enfants</string>
     <string name="prompt_birthday">Anniversaire</string>
@@ -152,6 +155,6 @@
     <string name="achievements.bigcup">Complété le 21 day challenge.</string>
 
     <!--- Level -->
-    <string name="level.current">Niveau: </string>
+    <string name="level.current">Votre Niveau: </string>
 
 </resources>
