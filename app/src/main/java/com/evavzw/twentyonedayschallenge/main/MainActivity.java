@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     private final int TABS = 3;
     private String tabTitles[];
 
+    public String accesToken;
+    public String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        accesToken = getIntent().getExtras().getString("accesToken");
+        username = getIntent().getExtras().getString("username");
         mvAdapter = new MainViewPagerAdapter(tabTitles, getSupportFragmentManager());
 
         vpMain = (ViewPager) findViewById(R.id.vpMain);

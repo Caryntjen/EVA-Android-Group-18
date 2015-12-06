@@ -1,5 +1,7 @@
 package com.evavzw.twentyonedayschallenge.registration;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,7 +25,7 @@ import com.evavzw.twentyonedayschallenge.main.MainActivity;
  * - Check if they want the newsletter, default is checked.
  */
 
-//TODO: Information should be save in database when registration is complete
+//TODO: Information should be saved in database when registration is complete
 public class RegistrationPartTwo extends Fragment implements View.OnClickListener {
 
     // UI references.
@@ -37,18 +39,26 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
     private static Button btnComplete;
     private static ScrollView svPartTwo;
 
-    //Diet Abbreviations
-    private static final String OMNIVORISM = "Omnivorism";
-    private static final String PESCETARIANISM = "Pescetarianism";
-    private static final String VEGETARIANSIM = "Vegetarianism";
-    private static final String PARTTIME_VEGETARIANSIM = "Part-Time Vegetarianism";
-    private static final String VEGANISM = "Veganism";
+    //Diet
+    private static final int OMNIVORISM = 1;
+    private static final int PESCETARIANISM = 2;
+    private static final int VEGETARIANSIM = 4;
+    private static final int PARTTIME_VEGETARIANSIM = 3;
+    private static final int VEGANISM = 5;
+
+    private RegisterActivity _activity;
+
+    private int diet;
 
     //Provided information in registration form
-    private String diet;
     private boolean wantsNewsletter;
 
     public RegistrationPartTwo() {
+    }
+
+    private void updateRegistrationDataObject(){
+        _activity.registration.sendNewsLetter = wantsNewsletter;
+        _activity.registration.Difficulty = diet;
     }
 
     @Override
@@ -82,7 +92,12 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
 
         //Complete Button for registration.
         btnComplete = (Button) view.findViewById(R.id.btnComplete);
-        btnComplete.setOnClickListener(this);
+        btnComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         //Defaults
         rbOmnivorism.setChecked(true);
@@ -99,8 +114,11 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
         mFillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rbVeganism.setChecked(User.SEX.toBool());
-                cbNewsletter.setChecked(User.LANGUAGE.toBool());
+                rbVeganism.setChecked(true);
+                diet = 5;
+                cbNewsletter.setChecked(true);
+                wantsNewsletter = true;
+
             }
         });
 
@@ -143,12 +161,24 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
                 break;
 
             case R.id.btnComplete:
-                Intent mainActivity = new Intent(getActivity(), MainActivity.class);
-                startActivity(mainActivity);
+                updateRegistrationDataObject();
+                _activity.Register();
+                Intent loginActivity = new Intent(getActivity(), MainActivity.class);
+                startActivity(loginActivity);
                 break;
 
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        Activity a;
+        if (context instanceof Activity) {
+            _activity = (RegisterActivity) context;
         }
 
     }

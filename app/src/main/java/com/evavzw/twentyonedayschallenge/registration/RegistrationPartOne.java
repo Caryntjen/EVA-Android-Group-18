@@ -20,6 +20,11 @@ import android.widget.RadioGroup;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
+import com.evavzw.twentyonedayschallenge.models.Registration;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -83,8 +88,12 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
     //Minimum age to use the service is 13. Based on http://www.adweek.com/socialtimes/social-media-minimum-age/501920
     private static final int MIN_AGE = 13; //Jiroemon Kimura
 
+
+    private RegisterActivity _activity;
+
     //Default constructor
     public RegistrationPartOne() {
+
     }
 
     @Override
@@ -149,7 +158,6 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
 
         //Next Button for registration.
         btnNext = (Button) view.findViewById(R.id.btnNext);
-        btnNext.setOnClickListener(this);
 
         //Defaults
         rbFemale.setChecked(true);
@@ -159,8 +167,8 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         cbStudent.setChecked(isStudent);
         isStudent = false;
 
-        //TODO: Need to button hide on release
-        //Hidden button to fill in the default details.
+                //TODO: Need to button hide on release
+                //Hidden button to fill in the default details.
         Button mFillButton = (Button) view.findViewById(R.id.fill_button);
         mFillButton.setFocusable(true);
         mFillButton.setFocusableInTouchMode(true);
@@ -169,13 +177,37 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
             public void onClick(View view) {
                 etBirthday.setText(User.BIRTHDAY.toString());
                 etChildren.setText(User.CHILDREN.toString());
+
                 rbFemale.setChecked(User.SEX.toBool());
+                gender = "F";
                 rbEnglish.setChecked(User.LANGUAGE.toBool());
+                language = "EN";
                 cbStudent.setChecked(User.STUDENT.toBool());
             }
         });
         return view;
     }
+
+    private void updateRegistrationDataObject(){
+        _activity.registration.BirthDate = convertDate(etBirthday.getText().toString());
+        _activity.registration.NmbrOfChildren = Integer.parseInt(etChildren.getText().toString());
+        _activity.registration.Gender = gender;
+        _activity.registration.Language = language;
+        _activity.registration.IsStudent = cbStudent.isChecked();
+    }
+
+    private Date convertDate(String dateString){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date convertedDate = new Date();
+        try {
+            convertedDate = dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return convertedDate;
+    }
+
 
     /**
      * Method to show the Birthday Picker.
@@ -365,6 +397,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
                     etChildren.setError(null);
                     etBirthday.setError(null);
 
+                    updateRegistrationDataObject();
                     callback.onButtonClick(view);
                 }
                 break;
@@ -372,7 +405,6 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
             default:
                 break;
         }
-
     }
 
     /**
@@ -409,9 +441,9 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         super.onAttach(context);
 
         Activity a;
-
         if (context instanceof Activity) {
             callback = (Callback) context;
+            _activity = (RegisterActivity) context;
         }
 
     }

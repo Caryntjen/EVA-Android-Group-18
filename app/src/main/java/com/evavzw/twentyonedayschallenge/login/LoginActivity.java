@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,7 +15,16 @@ import android.widget.EditText;
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 import com.evavzw.twentyonedayschallenge.main.MainActivity;
+import com.evavzw.twentyonedayschallenge.models.LoginModel;
+import com.evavzw.twentyonedayschallenge.models.LoginToken;
 import com.evavzw.twentyonedayschallenge.registration.RegisterActivity;
+import com.evavzw.twentyonedayschallenge.services.UserDataService;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.TypedByteArray;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,11 +54,17 @@ public class LoginActivity extends AppCompatActivity {
     //Asynctask String names
     private static final String SIGN_IN = "signin";
     private static final String REGISTER = "register";
+    //Rest adapter
+    private RestAdapter retrofit;
+    private UserDataService service;
+    private String url = "http://10.0.2.2:54967";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        retrofit = new RestAdapter.Builder().setEndpoint(url).build();
+        service = retrofit.create(UserDataService.class);
 
         //Shows action bar and logos
         ActionBar actionBar = getSupportActionBar();
@@ -135,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
             focusView = etEmail;
             cancel = true;
         }
-
+/*
         //Checks if the email address is in the database and matches the password when Signing In
         if (!cancel && stask.equalsIgnoreCase(SIGN_IN)) {
             if (!isEmailInFoundDatabase(email)) {
@@ -155,6 +171,7 @@ public class LoginActivity extends AppCompatActivity {
                 focusView = etEmail;
                 cancel = true;
         }
+        */
 
         if (cancel) {
             // There was an error; don't attempt login or login and focus the first
@@ -164,16 +181,18 @@ public class LoginActivity extends AppCompatActivity {
             // Kick off a background task to perform the user login or register attempt.
             Intent i = null;
             if (stask.equalsIgnoreCase(REGISTER)) {
-                task = new UserRegisterTask(email, password);
                 i = new Intent(this, RegisterActivity.class);
+                i.putExtra("email", email);
+                i.putExtra("password", password);
+                task = new UserRegisterTask(email, password);
+                startActivity(i);
             } else {
-                task = new UserLoginTask(email, password);
                 i = new Intent(this, MainActivity.class);
+                task = new UserLoginTask(email, password, i);
             }
             task.execute((Void) null); //task.execute()
-            startActivity(i);
+            //startActivity(i);
         }
-
     }
 
     /**
@@ -216,15 +235,42 @@ public class LoginActivity extends AppCompatActivity {
 
         private final String mEmail;
         private final String mPassword;
+        private Intent i;
 
-        UserLoginTask(String email, String password) {
+        UserLoginTask(String email, String password, Intent intent) {
             mEmail = email;
             mPassword = password;
+            i = intent;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            return null;
+
+            LoginModel model = new LoginModel();
+            model.passWord = mPassword.toString();
+            model.userName = mEmail.toString();
+            model.grant_type = "password";
+
+            service.getToken("password", mEmail, mPassword,  new Callback<LoginToken>() {
+                @Override
+                public void success(LoginToken loginToken, Response response) {
+                    Log.d("Success", loginToken.token_type + ": " + loginToken.access_token);
+                    i.putExtra("accesToken", loginToken.token_type + " " + loginToken.access_token);
+                    i.putExtra("username", mEmail);
+                    startActivity(i);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    if (error.getResponse() != null) {
+                        String errorString =  new String(((TypedByteArray)error.getResponse().getBody()).getBytes());
+                        //Error handling here
+                        Log.e("FAILURE", errorString.toString());
+                    }
+                }
+            });
+
+            return true;
         }
     }
 
@@ -236,6 +282,7 @@ public class LoginActivity extends AppCompatActivity {
 
         private final String mEmail;
         private final String mPassword;
+        private Intent _i;
 
         UserRegisterTask(String email, String password) {
             mEmail = email;
