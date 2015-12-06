@@ -142,16 +142,16 @@ public class LoginActivity extends AppCompatActivity {
             // Kick off a background task to perform the user login attempt.
             Intent i = null;
             if (stask.equalsIgnoreCase("register")) {
-                task = new UserRegisterTask(email, password);
+
                 i = new Intent(this, RegisterActivity.class);
                 i.putExtra("email", email);
                 i.putExtra("password", password);
+                task = new UserRegisterTask(email, password);
+                startActivity(i);
             } else {
                 i = new Intent(this, MainActivity.class);
                 task = new UserLoginTask(email, password, i);
-
             }
-
             task.execute((Void) null);
         }
     }
@@ -194,7 +194,8 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void success(LoginToken loginToken, Response response) {
                     Log.d("Success", loginToken.token_type + ": " + loginToken.access_token);
-                    i.putExtra("accesToken", loginToken.token_type + ": " + loginToken.access_token);
+                    i.putExtra("accesToken", loginToken.token_type + " " + loginToken.access_token);
+                    i.putExtra("username", mEmail);
                     startActivity(i);
                 }
 
@@ -220,6 +221,7 @@ public class LoginActivity extends AppCompatActivity {
 
         private final String mEmail;
         private final String mPassword;
+        private Intent _i;
 
         UserRegisterTask(String email, String password) {
             mEmail = email;

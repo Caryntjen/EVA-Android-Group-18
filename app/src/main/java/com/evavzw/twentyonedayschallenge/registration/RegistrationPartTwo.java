@@ -112,11 +112,11 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
                 break;
             case R.id.rbVegetarianism:
                 //if (rbVegetarianism.isChecked())
-                diet = 3;
+                diet = 4;
                 break;
             case R.id.rbParttimeVegetarianism:
                 //if (rbParttimeVegetarianism.isChecked())
-                diet = 4;
+                diet = 3;
                 break;
             case R.id.rbVeganism:
                 //if (rbVeganism.isChecked())

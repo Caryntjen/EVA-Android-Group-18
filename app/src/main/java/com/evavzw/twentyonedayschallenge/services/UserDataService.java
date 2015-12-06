@@ -1,5 +1,6 @@
 package com.evavzw.twentyonedayschallenge.services;
 
+import com.evavzw.twentyonedayschallenge.models.AccountModel;
 import com.evavzw.twentyonedayschallenge.models.LoginModel;
 import com.evavzw.twentyonedayschallenge.models.LoginToken;
 import com.evavzw.twentyonedayschallenge.models.Registration;
@@ -10,8 +11,10 @@ import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
+import retrofit.http.Header;
 import retrofit.http.Headers;
 import retrofit.http.POST;
+import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
@@ -24,4 +27,8 @@ public interface UserDataService {
     @POST("/token")
     @FormUrlEncoded
     void getToken(@Field("grant_type") String grant, @Field("username")String userName, @Field("password") String password, Callback<LoginToken> cb);
+
+    @GET("/api/account/accountdetails")
+    @Headers("Content-Type: application/x-www-form-urlencoded")
+    void getAccountDetails(@Header("Authorization") String token, @Query("email")String username, Callback<AccountModel> cb);
 }

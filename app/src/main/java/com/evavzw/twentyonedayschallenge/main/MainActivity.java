@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private String currentday = User.DAY.toString();
 
     public String accesToken;
+    public String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getSupportActionBar().getTitle() +currentday);
 
         accesToken = getIntent().getExtras().getString("accesToken");
+        username = getIntent().getExtras().getString("username");
         mvAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
 
         vpMain = (ViewPager) findViewById(R.id.vpMain);
