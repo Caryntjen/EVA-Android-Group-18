@@ -3,6 +3,7 @@ package com.evavzw.twentyonedayschallenge.tabfragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -23,6 +24,7 @@ import com.evavzw.twentyonedayschallenge.services.UserDataService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import bolts.Task;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -144,12 +146,16 @@ public class AccountFragment extends Fragment implements ITabFragment {
             }
         });
 
+       /* GetAccountDetailsTask task = new GetAccountDetailsTask(service, accesToken, username);
+        am = task.fetchAccountDetails();
+        updateFragment();*/
+
         service.getAccountDetails(accesToken, username, new Callback<AccountModel>() {
             @Override
             public void success(AccountModel accountModel, Response response) {
                 Log.d("SUCCES", "Succesfully fetched accountdata");
                 am = accountModel;
-                //UpdateInterface(accountModel);
+                updateFragment();
             }
 
             @Override
@@ -188,18 +194,7 @@ public class AccountFragment extends Fragment implements ITabFragment {
     public String parseBooleanToText(boolean sendNewsLetter){
         return sendNewsLetter?"true":"false";
     }
-/*
-    public void UpdateInterface(AccountModel am){
-        tvEmail.setText(am.email);
-        tvBirthday.setText(am.birthDate.toString());
-        tvSex.setText(am.gender);
-        tvLanguage.setText(parseLanguage(am.language));
-        tvStudent.setText(parseBooleanToText(am.isStudent));
-        tvChildren.setText("" + am.nmbrOfChildren);
-        tvNewsletter.setText(parseBooleanToText(am.sendNewsLetter));
-        tvDiet.setText(parseDifficulty(am.difficulty));
-    }
-*/
+
     @Override
     public void onResume() {
         super.onResume();
@@ -211,14 +206,60 @@ public class AccountFragment extends Fragment implements ITabFragment {
      */
     @Override
     public void updateFragment() {
-        tvEmail.setText(am.email);
-        tvBirthday.setText(am.birthDate.toString());
-        tvSex.setText(am.gender);
-        tvLanguage.setText(parseLanguage(am.language));
-        tvStudent.setText(parseBooleanToText(am.isStudent));
-        tvChildren.setText("" + am.nmbrOfChildren);
-        tvNewsletter.setText(parseBooleanToText(am.sendNewsLetter));
-        tvDiet.setText(parseDifficulty(am.difficulty));
-
+        if(am != null) {
+            tvEmail.setText(am.email);
+            tvBirthday.setText(am.birthDate.toString());
+            tvSex.setText(am.gender);
+            tvLanguage.setText(parseLanguage(am.language));
+            tvStudent.setText(parseBooleanToText(am.isStudent));
+            tvChildren.setText("" + am.nmbrOfChildren);
+            tvNewsletter.setText(parseBooleanToText(am.sendNewsLetter));
+            tvDiet.setText(parseDifficulty(am.difficulty));
+        }
     }
+
+    /**
+     * Represents an asynchronous task to fetch the accountdetails of
+     * the user.
+     */
+  /*  public class GetAccountDetailsTask extends AsyncTask<Void, Void, Boolean> {
+
+        private UserDataService _service;
+        private String _username;
+        private String _accesToken;
+        private Intent _i;
+        private AccountModel _am;
+
+        public AccountModel fetchAccountDetails(){
+            doInBackground();
+            return _am;
+        }
+
+        GetAccountDetailsTask(UserDataService service, String accesToken, String username) {
+            _service = service;
+            _accesToken = accesToken;
+            _username = username;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            _service.getAccountDetails(_accesToken, _username, new Callback<AccountModel>() {
+                @Override
+                public void success(AccountModel accountModel, Response response) {
+                    Log.d("SUCCES", "Succesfully fetched accountdata");
+                    _am = accountModel;
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    if (error.getResponse() != null) {
+                        String errorString = new String(((TypedByteArray) error.getResponse().getBody()).getBytes());
+                        //Error handling here
+                        Log.e("FAILURE", errorString.toString());
+                    }
+                }
+            });
+            return true;
+        }
+    }*/
 }

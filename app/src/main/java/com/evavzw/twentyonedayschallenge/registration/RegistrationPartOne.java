@@ -158,6 +158,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
 
         //Next Button for registration.
         btnNext = (Button) view.findViewById(R.id.btnNext);
+        btnNext.setOnClickListener(this);
 
         //Defaults
         rbFemale.setChecked(true);
@@ -208,7 +209,6 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         return convertedDate;
     }
 
-
     /**
      * Method to show the Birthday Picker.
      */
@@ -217,9 +217,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         date.setCancelable(true);
         date.setCallBack(ondate);
         date.show(getFragmentManager(), BIRTHDAYDIALOG_TAG);
-
     }
-
 
     /**
      * Setting the OnDateSetListener for the Date Picker Dialog.
@@ -285,128 +283,130 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
             //--- NEXT REGISTRATION PART ---//
             //Clicked on Next Button
             case R.id.btnNext:
-                View focusView = null;
-                boolean cancel = false;
-
-                //Validating if Number Of Children is filled in and a positive number or zero and is not tied to exceeding the maximum.
-                String sChildren = etChildren.getText().toString();
-                //--- Empty field
-                if (TextUtils.isEmpty(sChildren)) {
-                    etChildren.setError(getString(R.string.error_empty_children));
-                    focusView = etChildren;
-                    cancel = true;
-                } else {
-                    try {
-                        //Validating the Birthday
-                        String sBirthday = etBirthday.getText().toString();
-                        //--- Empty field
-                        if (TextUtils.isEmpty(sBirthday)) {
-                            etBirthday.setError(getString(R.string.error_empty_birthday));
-                            focusView = etBirthday;
-                            cancel = true;
-                        } else {
-                            try {
-                                DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-                                formatter.setLenient(false);
-                                Date inputDate = formatter.parse(sBirthday);
-                                Calendar calendar = Calendar.getInstance();
-                                Date todaysDate = calendar.getTime();
-                                //Log.w("Todays Date", todaysDate.toString());
-                                //Log.w("Input Date", inputDate.toString());
-
-                                if (todaysDate.before(inputDate)) {
-                                    //--- Date in the future is chosen
-                                    etBirthday.setError(getString(R.string.error_future_date));
-                                    focusView = etBirthday;
-                                    cancel = true;
-
-                                } else {
-                                    Calendar minAge = (Calendar) calendar.clone();
-                                    Calendar maxAgeMale = (Calendar) calendar.clone();
-                                    Calendar maxAgeFemale = (Calendar) calendar.clone();
-
-                                    minAge.add(Calendar.YEAR, -MIN_AGE);
-                                    maxAgeMale.add(Calendar.YEAR, -MAX_YEAR_MALE);
-                                    maxAgeFemale.add(Calendar.YEAR, -MAX_YEAR_FEMALE);
-
-                                    //Log.w("Min Age Date", minAge.getTime().toString());
-                                    //Log.w("Max Male Age Date", maxAgeMale.getTime().toString());
-                                    //Log.w("Max Female Age Date", maxAgeFemale.getTime().toString());
-
-
-                                    if (inputDate.after(minAge.getTime())) {
-                                        //--- To young to use the app
-                                        etBirthday.setError(getString(R.string.error_birthday_young));
-                                        focusView = etBirthday;
-                                        cancel = true;
-                                    } else if (rbMale.isChecked() && inputDate.before(maxAgeMale.getTime())) {
-                                        //--- To old as a male.
-                                        etBirthday.setError(getString(R.string.error_birthday_old_male));
-                                        focusView = etBirthday;
-                                        cancel = true;
-                                    } else if (rbFemale.isChecked() && inputDate.before(maxAgeFemale.getTime())) {
-                                        //--- To old as a female.
-                                        etBirthday.setError(getString(R.string.error_birthday_old_female));
-                                        focusView = etBirthday;
-                                        cancel = true;
-                                    }
-                                }
-                            } catch (ParseException pe) {
-                                //--- Invalid Pattern
-                                etBirthday.setError(getString(R.string.error_invalid_date));
-                                focusView = etBirthday;
-                                cancel = true;
-                            }
-                        }
-
-
-                        //--- Valid number, further validation
-                        children = Integer.parseInt(sChildren);
-                        if (children < 0) {
-                            //--- Negative number
-                            etChildren.setError(getString(R.string.error_negative_children));
-                            focusView = etChildren;
-                            cancel = true;
-                        } else if (rbFemale.isChecked() && children > MAX_CHILDREN_FEMALE) {
-                            //--- To many children as a female
-                            etChildren.setError(getString(R.string.error_female_children));
-                            focusView = etChildren;
-                            cancel = true;
-                        } else if (rbMale.isChecked() && children > MAX_CHILDREN_MALE) {
-                            //--- To many children as a male
-                            etChildren.setError(getString(R.string.error_male_children));
-                            focusView = etChildren;
-                            cancel = true;
-                        }
-                    } catch (NumberFormatException nfe) {
-                        //--- Invalid Number
-                        etChildren.setError(getString(R.string.error_invalid_children));
-                        focusView = etChildren;
-                        cancel = true;
-
-                    }
-
-
-                }
-                if (cancel) {
-                    // There was an error. Focus on the element.
-                    focusView.requestFocus();
-
-                } else if (callback != null) {
-                    //Error Messages, Keyboard & Icons need to disappear
-                    etChildren.setError(null);
-                    etBirthday.setError(null);
-
-                    updateRegistrationDataObject();
-                    callback.onButtonClick(view);
-                }
-                break;
+                if(!checkForValidationErrors()){
+                updateRegistrationDataObject();
+                callback.onButtonClick(view);}
 
             default:
                 break;
         }
     }
 
+
+    public boolean checkForValidationErrors(){
+        View focusView = null;
+        boolean cancel = false;
+
+        //Validating if Number Of Children is filled in and a positive number or zero and is not tied to exceeding the maximum.
+        String sChildren = etChildren.getText().toString();
+        //--- Empty field
+        if (TextUtils.isEmpty(sChildren)) {
+            etChildren.setError(getString(R.string.error_empty_children));
+            focusView = etChildren;
+            cancel = true;
+        } else {
+            try {
+                //Validating the Birthday
+                String sBirthday = etBirthday.getText().toString();
+                //--- Empty field
+                if (TextUtils.isEmpty(sBirthday)) {
+                    etBirthday.setError(getString(R.string.error_empty_birthday));
+                    focusView = etBirthday;
+                    cancel = true;
+                } else {
+                    try {
+                        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                        formatter.setLenient(false);
+                        Date inputDate = formatter.parse(sBirthday);
+                        Calendar calendar = Calendar.getInstance();
+                        Date todaysDate = calendar.getTime();
+                        //Log.w("Todays Date", todaysDate.toString());
+                        //Log.w("Input Date", inputDate.toString());
+
+                        if (todaysDate.before(inputDate)) {
+                            //--- Date in the future is chosen
+                            etBirthday.setError(getString(R.string.error_future_date));
+                            focusView = etBirthday;
+                            cancel = true;
+
+                        } else {
+                            Calendar minAge = (Calendar) calendar.clone();
+                            Calendar maxAgeMale = (Calendar) calendar.clone();
+                            Calendar maxAgeFemale = (Calendar) calendar.clone();
+
+                            minAge.add(Calendar.YEAR, -MIN_AGE);
+                            maxAgeMale.add(Calendar.YEAR, -MAX_YEAR_MALE);
+                            maxAgeFemale.add(Calendar.YEAR, -MAX_YEAR_FEMALE);
+
+                            //Log.w("Min Age Date", minAge.getTime().toString());
+                            //Log.w("Max Male Age Date", maxAgeMale.getTime().toString());
+                            //Log.w("Max Female Age Date", maxAgeFemale.getTime().toString());
+
+
+                            if (inputDate.after(minAge.getTime())) {
+                                //--- To young to use the app
+                                etBirthday.setError(getString(R.string.error_birthday_young));
+                                focusView = etBirthday;
+                                cancel = true;
+                            } else if (rbMale.isChecked() && inputDate.before(maxAgeMale.getTime())) {
+                                //--- To old as a male.
+                                etBirthday.setError(getString(R.string.error_birthday_old_male));
+                                focusView = etBirthday;
+                                cancel = true;
+                            } else if (rbFemale.isChecked() && inputDate.before(maxAgeFemale.getTime())) {
+                                //--- To old as a female.
+                                etBirthday.setError(getString(R.string.error_birthday_old_female));
+                                focusView = etBirthday;
+                                cancel = true;
+                            }
+                        }
+                    } catch (ParseException pe) {
+                        //--- Invalid Pattern
+                        etBirthday.setError(getString(R.string.error_invalid_date));
+                        focusView = etBirthday;
+                        cancel = true;
+                    }
+                }
+
+
+                //--- Valid number, further validation
+                children = Integer.parseInt(sChildren);
+                if (children < 0) {
+                    //--- Negative number
+                    etChildren.setError(getString(R.string.error_negative_children));
+                    focusView = etChildren;
+                    cancel = true;
+                } else if (rbFemale.isChecked() && children > MAX_CHILDREN_FEMALE) {
+                    //--- To many children as a female
+                    etChildren.setError(getString(R.string.error_female_children));
+                    focusView = etChildren;
+                    cancel = true;
+                } else if (rbMale.isChecked() && children > MAX_CHILDREN_MALE) {
+                    //--- To many children as a male
+                    etChildren.setError(getString(R.string.error_male_children));
+                    focusView = etChildren;
+                    cancel = true;
+                }
+            } catch (NumberFormatException nfe) {
+                //--- Invalid Number
+                etChildren.setError(getString(R.string.error_invalid_children));
+                focusView = etChildren;
+                cancel = true;
+            }
+
+
+        }
+        if (cancel) {
+            // There was an error. Focus on the element.
+            focusView.requestFocus();
+
+        } else if (callback != null) {
+            //Error Messages, Keyboard & Icons need to disappear
+            etChildren.setError(null);
+            etBirthday.setError(null);
+        }
+        return cancel;
+    }
     /**
      * Hides the keyboard when the focus changes.
      *

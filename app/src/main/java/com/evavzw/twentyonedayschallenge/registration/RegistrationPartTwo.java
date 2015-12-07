@@ -16,6 +16,7 @@ import android.widget.ScrollView;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
+import com.evavzw.twentyonedayschallenge.login.LoginActivity;
 import com.evavzw.twentyonedayschallenge.main.MainActivity;
 
 
@@ -70,7 +71,6 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_registration_part_two, container, false);
 
-
         //Kind of Diet
         rgKindOfVegitarian = (RadioGroup) view.findViewById(R.id.rgKindOfVegitarian);
         rgKindOfVegitarian.setOnClickListener(this);
@@ -95,7 +95,10 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
         btnComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                updateRegistrationDataObject();
+                _activity.Register();
+                Intent loginActivity = new Intent(getActivity(), LoginActivity.class);
+                startActivity(loginActivity);
             }
         });
 
@@ -104,7 +107,6 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
         diet = OMNIVORISM;
         cbNewsletter.setChecked(true);
         wantsNewsletter = true;
-
 
         //TODO: Need to button hide on release
         //Hidden button to fill in the default details.
@@ -118,10 +120,8 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
                 diet = 5;
                 cbNewsletter.setChecked(true);
                 wantsNewsletter = true;
-
             }
         });
-
         return view;
     }
 
@@ -158,13 +158,6 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
             case R.id.cbNewsletter:
                 //cbNewsletter.setChecked(!cbNewsletter.isChecked());
                 wantsNewsletter = cbNewsletter.isChecked();
-                break;
-
-            case R.id.btnComplete:
-                updateRegistrationDataObject();
-                _activity.Register();
-                Intent loginActivity = new Intent(getActivity(), MainActivity.class);
-                startActivity(loginActivity);
                 break;
 
             default:
