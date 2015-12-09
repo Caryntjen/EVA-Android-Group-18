@@ -31,5 +31,4 @@ public class ChallengeCardItem {
     public ChallengeType getType() {
         return type;
     }
-
 }

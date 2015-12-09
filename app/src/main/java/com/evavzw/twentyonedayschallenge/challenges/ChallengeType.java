@@ -3,9 +3,13 @@ package com.evavzw.twentyonedayschallenge.challenges;
 import com.evavzw.twentyonedayschallenge.R;
 
 public enum ChallengeType {
-    SOCIALMEDIA(R.drawable.socialmedia, "Social Media", "Share the love"),
-    RECIPE(R.drawable.recipe, "Recipe", "Cook your own bio meal"),
-    PRODUCT(R.drawable.product,"Product", "Use a bio product");
+    SOCIALMEDIA(R.drawable.socialmedia, "Social Media", "Share the love!"),
+    RECIPE(R.drawable.recipe, "Recipe", "Cook your own bio meal."),
+    PRODUCT(R.drawable.product,"Product", "Use a bio product."),
+    RESTAURANTS(R.drawable.product,"Restaurant", "Eat bio in style!"),
+    LEARNING(R.drawable.product,"Learning", "How much do you know about bio?"),
+    FRIEND(R.drawable.product,"Friend", "Be bio with friends!"),
+    GETINVOLVED(R.drawable.product, "Get Involved", "Be bio with EVA!");
 
     private int resourceId;
     private String title;

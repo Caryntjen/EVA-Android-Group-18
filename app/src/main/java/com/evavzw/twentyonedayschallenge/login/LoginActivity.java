@@ -151,27 +151,6 @@ public class LoginActivity extends AppCompatActivity {
             focusView = etEmail;
             cancel = true;
         }
-/*
-        //Checks if the email address is in the database and matches the password when Signing In
-        if (!cancel && stask.equalsIgnoreCase(SIGN_IN)) {
-            if (!isEmailInFoundDatabase(email)) {
-                etEmail.setError(getString(R.string.error_notfound_email));
-                focusView = etEmail;
-                cancel = true;
-            } else if (!doesPasswordMatchDatabase(email, password)) {
-                etPassword.setError(getString(R.string.error_nomatch_password));
-                focusView = etPassword;
-                cancel = true;
-            }
-        }
-
-        //Checks if email address is not the database when Registering
-        if (!cancel && stask.equalsIgnoreCase(REGISTER) && isEmailInFoundDatabase(email)) {
-                etEmail.setError(getString(R.string.error_found_email));
-                focusView = etEmail;
-                cancel = true;
-        }
-        */
 
         if (cancel) {
             // There was an error; don't attempt login or login and focus the first
@@ -209,22 +188,6 @@ public class LoginActivity extends AppCompatActivity {
      */
     private boolean isPasswordValid(String password) {
         return password.length() >= MIN_PASSWORD_SIZE;
-    }
-
-    /**
-     * Checks if the email matches the one found in the database.
-     */
-    private boolean isEmailInFoundDatabase(String email) {
-        //TODO: Need to compare this with the database entry.
-        return true;
-    }
-
-    /**
-     * Checks if the passwords matches the one found in the database.
-     */
-    private boolean doesPasswordMatchDatabase(String email, String password) {
-        //TODO: Need to compare this with the database entry.
-        return true;
     }
 
     /**
