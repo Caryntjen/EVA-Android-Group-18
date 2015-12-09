@@ -8,9 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.evavzw.twentyonedayschallenge.R;
+import com.evavzw.twentyonedayschallenge.models.AccountModel;
+import com.evavzw.twentyonedayschallenge.models.ChallengeModel;
 import com.evavzw.twentyonedayschallenge.tabfragments.ITabFragment;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     public String accesToken;
     public String username;
+
+    public AccountModel am;
+    public List<ChallengeModel> challenges = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

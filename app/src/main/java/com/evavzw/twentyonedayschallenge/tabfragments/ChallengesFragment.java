@@ -50,15 +50,18 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
     private final int MAXDAYS = 21;
     private String _accesToken;
     private String _username;
-    private String _url = "http://10.0.2.2:54967";
+    //genymotion virtual devices
+    private String _url = "http://10.0.3.2:54967";
+    //androidstudio emulators
+    //private String _url = "http://10.0.2.2:54967";
     private RestAdapter _retrofit;
     private ChallengeDataService _service;
     private List<ChallengeModel> _challengeModels = new ArrayList<>();
+    private MainActivity _mainActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -80,30 +83,34 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
         pbDays.setProgress(Integer.parseInt(currentday));
 
         TextView tvDays = (TextView) activity.findViewById(R.id.tvDays);
-        tvDays.setText(currentday + "/21 days");
+        tvDays.setText(currentday + "/" + MAXDAYS+ " days");
 
         _retrofit = new RestAdapter.Builder().setEndpoint(_url).build();
         _service = _retrofit.create(ChallengeDataService.class);
-        _service.getChallenges(_accesToken, 4, new Callback<List<ChallengeModel>>() {
+        if(!(_mainActivity.challenges.size() > 0)) {
+            _service.getChallenges(_accesToken, 4, new Callback<List<ChallengeModel>>() {
 
-            @Override
-            public void success(List<ChallengeModel> challengeModels, Response response) {
-                for (Iterator<ChallengeModel> i= challengeModels.iterator(); i.hasNext();){
-                    ChallengeModel item = i.next();
-                    _challengeModels.add(item);
+                @Override
+                public void success(List<ChallengeModel> challengeModels, Response response) {
+                    for (Iterator<ChallengeModel> i = challengeModels.iterator(); i.hasNext(); ) {
+                        ChallengeModel item = i.next();
+                        _challengeModels.add(item);
+                        _mainActivity.challenges.add(item);
+                    }
+                    updateInterface();
                 }
-                updateInterface();
-            }
 
-            @Override
-            public void failure(RetrofitError error) {
-                if (error.getResponse() != null) {
-                    String errorString = new String(((TypedByteArray) error.getResponse().getBody()).getBytes());
-                    //Error handling here
-                    Log.e("FAILURE", errorString.toString());
+                @Override
+                public void failure(RetrofitError error) {
+                    if (error.getResponse() != null) {
+                        String errorString = new String(((TypedByteArray) error.getResponse().getBody()).getBytes());
+                        //Error handling here
+                        Log.e("FAILURE", errorString.toString());
+                    }
                 }
-            }
-        });
+            });
+        }
+
         final ListView challengeItems = (ListView) activity.findViewById(R.id.lvChallenges);
 
         challengeItems.addHeaderView(new View(activity));
@@ -111,46 +118,6 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
 
         adapter = new BaseInflaterAdapter<ChallengeCardItem>(new ChallengeCard());
 
-        /*if(_challengeModels != null) {
-            for (Iterator<ChallengeModel> i = _challengeModels.iterator(); i.hasNext(); ) {
-                ChallengeModel item = i.next();
-                ChallengeType type = ChallengeType.PRODUCT;
-                ;
-                switch (item.variant.toLowerCase()) {
-                    case "recipe":
-                        type = ChallengeType.RECIPE;
-                    case "product":
-                        type = ChallengeType.PRODUCT;
-                    case "social media":
-                        type = ChallengeType.SOCIALMEDIA;
-                    case "restaurants":
-                        type = ChallengeType.RESTAURANTS;
-                    case "learning":
-                        type = ChallengeType.LEARNING;
-                    case "friend":
-                        type = ChallengeType.FRIEND;
-                    case "get involved":
-                        type = ChallengeType.GETINVOLVED;
-                    default:
-                        type = ChallengeType.PRODUCT;
-                }
-                ChallengeCardItem card = new ChallengeCardItem(type, item.difficulty);
-                adapter.addItem(card, false);
-            }
-         }*/
-
-
-
-
-
-
-
-       /* ChallengeCardItem product = new ChallengeCardItem(ChallengeType.PRODUCT, 2);
-        adapter.addItem(product, false);
-        ChallengeCardItem recipe = new ChallengeCardItem(ChallengeType.RECIPE, 0);
-        adapter.addItem(recipe, false);
-        ChallengeCardItem socialmedia = new ChallengeCardItem(ChallengeType.SOCIALMEDIA, 1);
-        adapter.addItem(socialmedia, false);*/
         challengeItems.setAdapter(adapter);
 
 
@@ -158,7 +125,6 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
 
                 ChallengeCardItem ccItem = new ChallengeCardItem(adapter.getTItem(position - 1));
                 Intent typeChallenge = null;
@@ -179,17 +145,16 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
 
             }
         });
-
-
         pbLoading.setVisibility(View.GONE);
     }
 
     public void updateInterface(){
-        if(_challengeModels != null) {
-            for (Iterator<ChallengeModel> i = _challengeModels.iterator(); i.hasNext(); ) {
+        //TODO: condition needs to be updated so that it gets new challenges.
+        if(_mainActivity.challenges != null && !(adapter.getCount() > 0)) {
+            for (Iterator<ChallengeModel> i = _mainActivity.challenges.iterator(); i.hasNext(); ) {
                 ChallengeModel item = i.next();
                 ChallengeType type = ChallengeType.PRODUCT;
-                ;
+
                 switch (item.variant.toLowerCase()) {
                     case "recipe":
                         type = ChallengeType.RECIPE;
@@ -229,6 +194,7 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
         if (context instanceof Activity) {
             _accesToken = ((MainActivity) context).accesToken;
             _username= ((MainActivity) context).username;
+            _mainActivity = (MainActivity) context;
         }
     }
 
@@ -240,6 +206,6 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
 
     @Override
     public void updateFragment() {
-
+        updateInterface();
     }
 }

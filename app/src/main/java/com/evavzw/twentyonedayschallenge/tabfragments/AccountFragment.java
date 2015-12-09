@@ -50,13 +50,17 @@ public class AccountFragment extends Fragment implements ITabFragment {
     private static TextView tvLanguage;
     private static TextView tvNewsletter;
     private static Button btnInvite;
+    private MainActivity _mainActivity;
 
     private static final String EMAILTYPE = "message/rfc822";
 
     //Rest adapter
     private RestAdapter retrofit;
     private UserDataService service;
-    private String url = "http://10.0.2.2:54967";
+    //genymotion virtual devices
+    private String url = "http://10.0.3.2:54967";
+    //androidstudio emulators
+    //private String url = "http://10.0.2.2:54967";
 
     private String _accesToken;
     private String _username;
@@ -88,6 +92,7 @@ public class AccountFragment extends Fragment implements ITabFragment {
         if (context instanceof Activity) {
             _accesToken = ((MainActivity) context).accesToken;
             _username= ((MainActivity) context).username;
+            _mainActivity = (MainActivity) context;
         }
     }
 
@@ -154,6 +159,7 @@ public class AccountFragment extends Fragment implements ITabFragment {
             public void success(AccountModel accountModel, Response response) {
                 Log.d("SUCCES", "Succesfully fetched accountdata");
                 _am = accountModel;
+                _mainActivity.am = accountModel;
                 updateFragment();
             }
 
