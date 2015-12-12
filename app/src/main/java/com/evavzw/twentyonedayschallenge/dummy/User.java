@@ -7,7 +7,7 @@ public enum User {
     CHILDREN("2"),
     SEX("Female"),
     LANGUAGE("English"),
-    STUDENT("Yes"),
+    STUDENT("No"),
     DIET("Veganism"),
     DAY("7"),
     NEWSLETTER("Yes"),

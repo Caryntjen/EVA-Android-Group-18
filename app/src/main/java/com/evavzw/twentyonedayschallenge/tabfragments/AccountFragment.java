@@ -58,9 +58,9 @@ public class AccountFragment extends Fragment implements ITabFragment {
     private RestAdapter retrofit;
     private UserDataService service;
     //genymotion virtual devices
-    private String url = "http://10.0.3.2:54967";
+    //private String url = "http://10.0.3.2:54967";
     //androidstudio emulators
-    //private String url = "http://10.0.2.2:54967";
+    private String url = "http://10.0.2.2:54967";
 
     private String _accesToken;
     private String _username;

@@ -26,7 +26,10 @@ public class RegisterActivity extends FragmentActivity implements RegistrationPa
 
     private RegistrationNonSwipeablePagerAdapter paRegistration;
     private ViewPager vpRegister;
-    private String url = "http://10.0.3.2:54967";
+    //genymotion virtual devices
+    //private String url = "http://10.0.3.2:54967";
+    //androidstudio emulators
+    private String url = "http://10.0.2.2:54967";
     public Registration registration = new Registration();
     UserDataService service;
 
