@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.challenges.BaseInflaterAdapter;
+import com.evavzw.twentyonedayschallenge.challenges.Challenge;
 import com.evavzw.twentyonedayschallenge.challenges.ChallengeCard;
 import com.evavzw.twentyonedayschallenge.challenges.ChallengeCardItem;
 import com.evavzw.twentyonedayschallenge.challenges.ChallengeType;
@@ -128,7 +129,7 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
 
                 ChallengeCardItem ccItem = new ChallengeCardItem(adapter.getTItem(position - 1));
                 Intent typeChallenge = null;
-                switch (ccItem.getType()) {
+                switch (ccItem.getChallenge().getChallengeType()) {
                     case PRODUCT:
                         typeChallenge = new Intent(activity, ProductChallengeActivity.class);
                         break;
@@ -154,34 +155,37 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
             for (Iterator<ChallengeModel> i = _mainActivity.challenges.iterator(); i.hasNext(); ) {
                 ChallengeModel item = i.next();
                 ChallengeType type = ChallengeType.PRODUCT;
+                ChallengeCardItem card = null;
 
                 switch (item.variant.toLowerCase()) {
                     case "recipe":
                         type = ChallengeType.RECIPE;
+                        card = new ChallengeCardItem(new Challenge(R.drawable.recipe, getString(R.string.challenges_type_recipe), getString(R.string.challenges_subtitle_recipe), type),1);
                         break;
                     case "product":
                         type = ChallengeType.PRODUCT;
+                        card = new ChallengeCardItem(new Challenge(R.drawable.product, getString(R.string.challenges_type_product), getString(R.string.challenges_subtitle_product), type),2);
                         break;
                     case "social media":
                         type = ChallengeType.SOCIALMEDIA;
+                        card = new ChallengeCardItem(new Challenge(R.drawable.socialmedia, getString(R.string.challenges_type_socialmedia), getString(R.string.challenges_subtitle_socialmedia), type),0);
                         break;
                     case "restaurants":
-                        type = ChallengeType.RESTAURANTS;
+                        //type = ChallengeType.RESTAURANTS;
                         break;
                     case "learning":
-                        type = ChallengeType.LEARNING;
+                        //type = ChallengeType.LEARNING;
                         break;
                     case "friend":
-                        type = ChallengeType.FRIEND;
+                        //type = ChallengeType.FRIEND;
                         break;
                     case "get involved":
-                        type = ChallengeType.GETINVOLVED;
+                        //type = ChallengeType.GETINVOLVED;
                         break;
                     default:
                         type = ChallengeType.PRODUCT;
                         break;
                 }
-                ChallengeCardItem card = new ChallengeCardItem(type, item.difficulty);
                 adapter.addItem(card, false);
             }
         };

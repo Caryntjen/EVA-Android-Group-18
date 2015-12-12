@@ -33,6 +33,10 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
     private Intent putExtraIntent = null;
 
     private int state = 0;
+    private boolean productChallengeStarted = false;
+    private boolean recipeChallengeStarted = false;
+    private boolean socialmediaChallengeStarted = false;
+
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -40,9 +44,6 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
 
     private static final int CAMERAREQUEST = 1888;
     private Bitmap photo;
-
-    //TODO; State needs to be reset after the 21 days.
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +61,15 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
 
         exitIntent = new Intent(this, MainActivity.class);
 
-        sharedPreferences = getApplicationContext().getSharedPreferences("statepreferences", Context.MODE_PRIVATE);
+        //TODO; States needs to be reset the following day.
+        sharedPreferences = getApplicationContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
         state = sharedPreferences.getInt("state", state);
+        productChallengeStarted = sharedPreferences.getBoolean("productChallengeStarted", productChallengeStarted);
+        recipeChallengeStarted = sharedPreferences.getBoolean("recipeChallengeStarted", recipeChallengeStarted);
+        socialmediaChallengeStarted = sharedPreferences.getBoolean("socialmediaChallengeStarted", socialmediaChallengeStarted);
+        state = sharedPreferences.getInt("state", state);
+
+        if (productChallengeStarted || socialmediaChallengeStarted) state = 3;
 
         btnVerify = (Button) findViewById(R.id.btnVerify);
         btnVerify.setOnClickListener(this);
@@ -86,9 +94,10 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
                     case DialogInterface.BUTTON_POSITIVE:
                         //Yes button clicked
                         state++;
-                        sharedPreferences = getApplicationContext().getSharedPreferences("statepreferences", Context.MODE_PRIVATE);
+                        sharedPreferences = getApplicationContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
                         editor = sharedPreferences.edit();
                         editor.putInt("state", state);
+                        editor.putBoolean("recipeChallengeStarted", true);
                         editor.commit();
 
                         updateButton();
@@ -111,8 +120,8 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to begin this challenge?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+        builder.setMessage(R.string.challenges_begin_dialog).setPositiveButton(R.string.text_yes, dialogClickListener)
+                .setNegativeButton(R.string.text_no, dialogClickListener).show();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -131,21 +140,26 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
         switch (state) {
             case 0:
                 btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaDarkGreen));
-                btnVerify.setText("Begin Challenge");
+                btnVerify.setText(R.string.challenges_state_begin);
                 break;
             case 1:
                 btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaLightGreen));
-                btnVerify.setText("Verify Challenge");
+                btnVerify.setText(R.string.challenges_state_verify);
                 break;
             case 2:
                 btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaDarkOrange));
-                btnVerify.setText("Challenge Completed");
+                btnVerify.setText(R.string.challenges_state_completed);
+                btnVerify.setEnabled(false);
+                break;
+            case 3:
+                btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaGrey));
+                btnVerify.setText(R.string.challenges_state_other);
                 btnVerify.setEnabled(false);
                 break;
 
             default:
                 btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaDarkGreen));
-                btnVerify.setText("Begin Challenge");
+                btnVerify.setText(R.string.challenges_state_begin);
                 break;
 
         }
@@ -159,25 +173,30 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
                 switch (state) {
                     case 0:
                         btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaDarkGreen));
-                        btnVerify.setText("Begin Challenge");
+                        btnVerify.setText(R.string.challenges_state_begin);
                         createDialog();
                         break;
                     case 1:
                         btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaLightGreen));
-                        btnVerify.setText("Verify Challenge");
+                        btnVerify.setText(R.string.challenges_state_verify);
 
-                                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(cameraIntent, CAMERAREQUEST);
+                        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(cameraIntent, CAMERAREQUEST);
                         break;
                     case 2:
                         btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaDarkOrange));
-                        btnVerify.setText("Challenge Completed");
+                        btnVerify.setText(R.string.challenges_state_completed);
+                        btnVerify.setEnabled(false);
+                        break;
+                    case 3:
+                        btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaGrey));
+                        btnVerify.setText(R.string.challenges_state_other);
                         btnVerify.setEnabled(false);
                         break;
 
                     default:
                         btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaDarkGreen));
-                        btnVerify.setText("Begin Challenge");
+                        btnVerify.setText(R.string.challenges_state_begin);
                         createDialog();
                         break;
 
