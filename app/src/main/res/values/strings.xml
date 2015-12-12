@@ -159,5 +159,18 @@
     <!--- Level -->
     <string name="level.current">Huidig Level: </string>
 
+    <!--- Challenges-->
+    <string name="challenges.state.begin">Begin Challenge</string>
+    <string name="challenges.state.verify">Verify Challenge</string>
+    <string name="challenges.state.completed">Challenge Completed</string>
+    <string name="challenges.state.other">Other Challenge Started</string>
+    <string name="challenges.begin.dialog">Are you sure you want to begin this challenge?</string>
+    <string name="challenges.type.socialmedia">Social Media</string>
+    <string name="challenges.type.recipe">Recipe</string>
+    <string name="challenges.type.product">Product</string>
+    <string name="challenges.subtitle.socialmedia">Share the love!</string>
+    <string name="challenges.subtitle.recipe">Cook your own healthy meal.</string>
+    <string name="challenges.subtitle.product">Make use of this biologic product.</string>
+
 
 </resources>

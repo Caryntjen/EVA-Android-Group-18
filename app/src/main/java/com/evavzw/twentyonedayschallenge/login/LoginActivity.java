@@ -1,6 +1,8 @@
 package com.evavzw.twentyonedayschallenge.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -57,7 +59,14 @@ public class LoginActivity extends AppCompatActivity {
     //Rest adapter
     private RestAdapter retrofit;
     private UserDataService service;
-    private String url = "http://10.0.2.2:54967";
+    //Genymotion virtual devices
+    //private String url = "http://10.0.3.2:54967";
+    //androidstudio emulators
+     private String url = "http://10.0.2.2:54967";
+
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,27 +160,6 @@ public class LoginActivity extends AppCompatActivity {
             focusView = etEmail;
             cancel = true;
         }
-/*
-        //Checks if the email address is in the database and matches the password when Signing In
-        if (!cancel && stask.equalsIgnoreCase(SIGN_IN)) {
-            if (!isEmailInFoundDatabase(email)) {
-                etEmail.setError(getString(R.string.error_notfound_email));
-                focusView = etEmail;
-                cancel = true;
-            } else if (!doesPasswordMatchDatabase(email, password)) {
-                etPassword.setError(getString(R.string.error_nomatch_password));
-                focusView = etPassword;
-                cancel = true;
-            }
-        }
-
-        //Checks if email address is not the database when Registering
-        if (!cancel && stask.equalsIgnoreCase(REGISTER) && isEmailInFoundDatabase(email)) {
-                etEmail.setError(getString(R.string.error_found_email));
-                focusView = etEmail;
-                cancel = true;
-        }
-        */
 
         if (cancel) {
             // There was an error; don't attempt login or login and focus the first
@@ -212,22 +200,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks if the email matches the one found in the database.
-     */
-    private boolean isEmailInFoundDatabase(String email) {
-        //TODO: Need to compare this with the database entry.
-        return true;
-    }
-
-    /**
-     * Checks if the passwords matches the one found in the database.
-     */
-    private boolean doesPasswordMatchDatabase(String email, String password) {
-        //TODO: Need to compare this with the database entry.
-        return true;
-    }
-
-    /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
@@ -255,9 +227,16 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void success(LoginToken loginToken, Response response) {
                     Log.d("Success", loginToken.token_type + ": " + loginToken.access_token);
+                    String sToken = loginToken.token_type + ": " + loginToken.access_token;
                     i.putExtra("accesToken", loginToken.token_type + " " + loginToken.access_token);
                     i.putExtra("username", mEmail);
+                    sharedPreferences = getApplicationContext().getSharedPreferences("Prefs", Context.MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+                    editor.putString("token", sToken);
+                    editor.putString("email", mEmail);
+                    editor.commit();
                     startActivity(i);
+                    finish();
                 }
 
                 @Override

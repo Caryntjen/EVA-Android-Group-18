@@ -24,7 +24,6 @@ import com.evavzw.twentyonedayschallenge.services.UserDataService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import bolts.Task;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -51,18 +50,22 @@ public class AccountFragment extends Fragment implements ITabFragment {
     private static TextView tvLanguage;
     private static TextView tvNewsletter;
     private static Button btnInvite;
+    private MainActivity _mainActivity;
 
     private static final String EMAILTYPE = "message/rfc822";
 
     //Rest adapter
     private RestAdapter retrofit;
     private UserDataService service;
+    //genymotion virtual devices
+    //private String url = "http://10.0.3.2:54967";
+    //androidstudio emulators
     private String url = "http://10.0.2.2:54967";
 
-    private String accesToken;
-    private String username;
+    private String _accesToken;
+    private String _username;
 
-    private AccountModel am;
+    private AccountModel _am;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,8 +90,9 @@ public class AccountFragment extends Fragment implements ITabFragment {
         super.onAttach(context);
 
         if (context instanceof Activity) {
-            accesToken = ((MainActivity) context).accesToken;
-            username= ((MainActivity) context).username;
+            _accesToken = ((MainActivity) context).accesToken;
+            _username= ((MainActivity) context).username;
+            _mainActivity = (MainActivity) context;
         }
     }
 
@@ -142,7 +146,7 @@ public class AccountFragment extends Fragment implements ITabFragment {
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Come join the challenge");
                 intent.putExtra(Intent.EXTRA_TEXT, "Go check this new app out!");
                 startActivity(Intent.createChooser(intent, ""));
-    */
+                */
             }
         });
 
@@ -150,11 +154,12 @@ public class AccountFragment extends Fragment implements ITabFragment {
         am = task.fetchAccountDetails();
         updateFragment();*/
 
-        service.getAccountDetails(accesToken, username, new Callback<AccountModel>() {
+        service.getAccountDetails(_accesToken, _username, new Callback<AccountModel>() {
             @Override
             public void success(AccountModel accountModel, Response response) {
                 Log.d("SUCCES", "Succesfully fetched accountdata");
-                am = accountModel;
+                _am = accountModel;
+                _mainActivity.am = accountModel;
                 updateFragment();
             }
 
@@ -206,15 +211,15 @@ public class AccountFragment extends Fragment implements ITabFragment {
      */
     @Override
     public void updateFragment() {
-        if(am != null) {
-            tvEmail.setText(am.email);
-            tvBirthday.setText(am.birthDate.toString());
-            tvSex.setText(am.gender);
-            tvLanguage.setText(parseLanguage(am.language));
-            tvStudent.setText(parseBooleanToText(am.isStudent));
-            tvChildren.setText("" + am.nmbrOfChildren);
-            tvNewsletter.setText(parseBooleanToText(am.sendNewsLetter));
-            tvDiet.setText(parseDifficulty(am.difficulty));
+        if(_am != null) {
+            tvEmail.setText(_am.email);
+            tvBirthday.setText(_am.birthDate.toString());
+            tvSex.setText(_am.gender);
+            tvLanguage.setText(parseLanguage(_am.language));
+            tvStudent.setText(parseBooleanToText(_am.isStudent));
+            tvChildren.setText("" + _am.nmbrOfChildren);
+            tvNewsletter.setText(parseBooleanToText(_am.sendNewsLetter));
+            tvDiet.setText(parseDifficulty(_am.difficulty));
         }
     }
 

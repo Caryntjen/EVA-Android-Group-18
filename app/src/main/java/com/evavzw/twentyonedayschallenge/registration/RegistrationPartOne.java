@@ -112,8 +112,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     hideKeyboard(v);
-                }
-                else{
+                } else {
                     showKeyboard(v);
                 }
             }
@@ -165,7 +164,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         gender = FEMALE;
         rbEnglish.setChecked(true);
         language = ENGLISH;
-        cbStudent.setChecked(isStudent);
+        cbStudent.setChecked(false);
         isStudent = false;
 
                 //TODO: Need to button hide on release
@@ -176,6 +175,7 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
         mFillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                birthday = User.BIRTHDAY.toString();
                 etBirthday.setText(User.BIRTHDAY.toString());
                 etChildren.setText(User.CHILDREN.toString());
 
@@ -190,15 +190,15 @@ public class RegistrationPartOne extends Fragment implements View.OnClickListene
     }
 
     private void updateRegistrationDataObject(){
-        _activity.registration.BirthDate = convertDate(etBirthday.getText().toString());
-        _activity.registration.NmbrOfChildren = Integer.parseInt(etChildren.getText().toString());
+        _activity.registration.BirthDate = convertDate(birthday);
+        _activity.registration.NmbrOfChildren = children;
         _activity.registration.Gender = gender;
         _activity.registration.Language = language;
-        _activity.registration.IsStudent = cbStudent.isChecked();
+        _activity.registration.IsStudent = isStudent;
     }
 
     private Date convertDate(String dateString){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date convertedDate = new Date();
         try {
             convertedDate = dateFormat.parse(dateString);

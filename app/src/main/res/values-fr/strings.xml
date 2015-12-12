@@ -157,4 +157,17 @@
     <!--- Level -->
     <string name="level.current">Votre Niveau: </string>
 
+    <!--- Challenges-->
+    <string name="challenges.state.begin">Commencez Challenge</string>
+    <string name="challenges.state.verify">Vérifiez Challenge</string>
+    <string name="challenges.state.completed">Challenge Complété</string>
+    <string name="challenges.state.other">Autre Challenge En Route</string>
+    <string name="challenges.begin.dialog">Etes-vous sûr que vous voulez commencer à relever ce challenge?</string>
+    <string name="challenges.type.socialmedia">Média Social</string>
+    <string name="challenges.type.recipe">Recette</string>
+    <string name="challenges.type.product">Produit</string>
+    <string name="challenges.subtitle.socialmedia">Partager l\'amour!</string>
+    <string name="challenges.subtitle.recipe">Faire cuire votre propre repas sain.</string>
+    <string name="challenges.subtitle.product">Faire usage de ce produit biologique.</string>
+
 </resources>
