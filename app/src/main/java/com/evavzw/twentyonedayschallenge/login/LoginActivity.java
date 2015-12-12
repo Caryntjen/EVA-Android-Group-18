@@ -236,6 +236,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("email", mEmail);
                     editor.commit();
                     startActivity(i);
+                    finish();
                 }
 
                 @Override

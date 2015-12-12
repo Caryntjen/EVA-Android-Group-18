@@ -99,6 +99,7 @@ public class RegistrationPartTwo extends Fragment implements View.OnClickListene
                 _activity.Register();
                 Intent loginActivity = new Intent(getActivity(), LoginActivity.class);
                 startActivity(loginActivity);
+                getActivity().finish();
             }
         });
 

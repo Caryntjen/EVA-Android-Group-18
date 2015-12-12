@@ -1,6 +1,8 @@
 package com.evavzw.twentyonedayschallenge.firstrun;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +15,10 @@ import com.evavzw.twentyonedayschallenge.login.LoginActivity;
 
 public class FirstRunPartTwo extends Fragment implements View.OnClickListener  {
     private static Button btnBeginChallenge;
+
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     public FirstRunPartTwo() {
     }
 
@@ -37,6 +43,11 @@ public class FirstRunPartTwo extends Fragment implements View.OnClickListener  {
             case R.id.btnBeginChallenge:
                 Intent loginActivity = new Intent(getActivity(), LoginActivity.class);
                 startActivity(loginActivity);
+                sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.putBoolean("firtrun", true);
+                editor.commit();
+                getActivity().finish();
                 break;
 
             default:
