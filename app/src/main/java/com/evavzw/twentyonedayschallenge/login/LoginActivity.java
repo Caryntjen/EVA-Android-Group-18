@@ -1,6 +1,8 @@
 package com.evavzw.twentyonedayschallenge.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -61,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
     //private String url = "http://10.0.3.2:54967";
     //androidstudio emulators
      private String url = "http://10.0.2.2:54967";
+
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -221,8 +227,14 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void success(LoginToken loginToken, Response response) {
                     Log.d("Success", loginToken.token_type + ": " + loginToken.access_token);
+                    String sToken = loginToken.token_type + ": " + loginToken.access_token;
                     i.putExtra("accesToken", loginToken.token_type + " " + loginToken.access_token);
                     i.putExtra("username", mEmail);
+                    sharedPreferences = getApplicationContext().getSharedPreferences("Prefs", Context.MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+                    editor.putString("token", sToken);
+                    editor.putString("email", mEmail);
+                    editor.commit();
                     startActivity(i);
                 }
 

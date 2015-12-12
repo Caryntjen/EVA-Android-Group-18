@@ -15,6 +15,8 @@ public enum ChallengeType {
     private String title;
     private String tagline;
 
+    private boolean challengeAccepted;
+
     private ChallengeType(int resourceId, String title, String tagline) {
         this.resourceId = resourceId;
         this.title = title;
@@ -36,5 +38,13 @@ public enum ChallengeType {
         return tagline;
     }
 
+
+    public boolean isChallengeAccepted() {
+        return this.challengeAccepted;
+    }
+
+    public void setChallengeAccepted(boolean challengeAccepted) {
+        this.challengeAccepted = challengeAccepted;
+    }
 
 }
