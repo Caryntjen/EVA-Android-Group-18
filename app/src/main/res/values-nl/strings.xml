@@ -106,7 +106,7 @@
     <string name="card.icon">Icoon</string>
     <string name="card.star">Ster</string>
     <string name="image.star">Ster</string>
-    <string name="points.value">25p</string>
+    <string name="points.value"></string>
 
     <!--- Recipe Challenge Layout -->
     <string name="challenge.recipe.title">Plantaardige Béchamelsaus</string>

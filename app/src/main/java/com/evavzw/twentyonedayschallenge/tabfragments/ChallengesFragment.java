@@ -60,6 +60,9 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
     private List<ChallengeModel> _challengeModels = new ArrayList<>();
     private MainActivity _mainActivity;
 
+    private boolean challengeStarted;
+    private boolean challengeCompleted;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,13 +134,13 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
                 Intent typeChallenge = null;
                 switch (ccItem.getChallenge().getChallengeType()) {
                     case PRODUCT:
-                        typeChallenge = new Intent(activity, ProductChallengeActivity.class);
+                        typeChallenge = new Intent(activity, ProductChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
                         break;
                     case SOCIALMEDIA:
-                        typeChallenge = new Intent(activity, SocialMediaChallengeActivity.class);
+                        typeChallenge = new Intent(activity, SocialMediaChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
                         break;
                     case RECIPE:
-                        typeChallenge = new Intent(activity, RecipeChallengeActivity.class);
+                        typeChallenge = new Intent(activity, RecipeChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
                         break;
                 }
                 if (!typeChallenge.equals(null)) {
@@ -147,6 +150,7 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
             }
         });
         pbLoading.setVisibility(View.GONE);
+
     }
 
     public void updateInterface(){
@@ -160,15 +164,15 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
                 switch (item.variant.toLowerCase()) {
                     case "recipe":
                         type = ChallengeType.RECIPE;
-                        card = new ChallengeCardItem(new Challenge(R.drawable.recipe, getString(R.string.challenges_type_recipe), getString(R.string.challenges_subtitle_recipe), type),1);
+                        card = new ChallengeCardItem(new Challenge(R.drawable.recipe, getString(R.string.challenges_type_recipe), getString(R.string.challenges_subtitle_recipe), type),determineDifficultyImage(item.difficulty));
                         break;
                     case "product":
                         type = ChallengeType.PRODUCT;
-                        card = new ChallengeCardItem(new Challenge(R.drawable.product, getString(R.string.challenges_type_product), getString(R.string.challenges_subtitle_product), type),2);
+                        card = new ChallengeCardItem(new Challenge(R.drawable.product, getString(R.string.challenges_type_product), getString(R.string.challenges_subtitle_product), type),determineDifficultyImage(item.difficulty));
                         break;
                     case "social media":
                         type = ChallengeType.SOCIALMEDIA;
-                        card = new ChallengeCardItem(new Challenge(R.drawable.socialmedia, getString(R.string.challenges_type_socialmedia), getString(R.string.challenges_subtitle_socialmedia), type),0);
+                        card = new ChallengeCardItem(new Challenge(R.drawable.socialmedia, getString(R.string.challenges_type_socialmedia), getString(R.string.challenges_subtitle_socialmedia), type),determineDifficultyImage(item.difficulty));
                         break;
                     case "restaurants":
                         //type = ChallengeType.RESTAURANTS;
@@ -202,11 +206,52 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
         }
     }
 
+    public int determineDifficultyImage(int difficulty) {
+        int resource;
+        switch (difficulty) {
+            case 1:
+                resource = R.drawable.star1;
+            break;
+            case 2:
+                resource = R.drawable.star2;
+            break;
+            case 3:
+                resource = R.drawable.star3;
+            break;
+            case 4:
+                resource = R.drawable.star4;
+            break;
+            case 5:
+                resource = R.drawable.star5;
+            break;
+            default:
+                resource = R.drawable.star;
+            break;
+    }
+        return resource;
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+        //TODO: load in from backend
+        challengeStarted = User.CHALLENGESTARTED.toBool();
         updateFragment();
     }
+
+    //TODO: load in from backend and determin this challenge has started en set challengeHasStarted, challengeHasCompleted.
+    public int challengeState(int state){
+        //No challenge is choses, all have
+        //Challenge has been chosen: that challenge gets State = 1
+        //challenge has completed = State = 2
+        //TODO
+        //challenge has started = State = 0
+        //different challenge has been chose; State = 3
+
+
+            return state;
+    }
+
 
     @Override
     public void updateFragment() {

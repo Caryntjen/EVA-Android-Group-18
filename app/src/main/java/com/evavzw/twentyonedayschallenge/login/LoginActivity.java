@@ -227,16 +227,16 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void success(LoginToken loginToken, Response response) {
                     Log.d("Success", loginToken.token_type + ": " + loginToken.access_token);
-                    String sToken = loginToken.token_type + ": " + loginToken.access_token;
-                    i.putExtra("accesToken", loginToken.token_type + " " + loginToken.access_token);
+                    String sToken = loginToken.token_type + " " + loginToken.access_token;
+                    i.putExtra("accesToken", sToken);
                     i.putExtra("username", mEmail);
-                    sharedPreferences = getApplicationContext().getSharedPreferences("Prefs", Context.MODE_PRIVATE);
+                    sharedPreferences = getApplicationContext().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
                     editor = sharedPreferences.edit();
                     editor.putString("token", sToken);
                     editor.putString("email", mEmail);
                     editor.commit();
                     startActivity(i);
-                    finish();
+                    //finish();
                 }
 
                 @Override

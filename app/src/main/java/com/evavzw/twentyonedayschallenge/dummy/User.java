@@ -27,7 +27,10 @@ public enum User {
     COMPLETEDRECIPECHALLENGES("5"),
     COMPLETEDPRODUCTCHALLENGES("5"),
     STARS("8"),
-    LEVEL("5");
+    LEVEL("5"),
+    CHALLENGESTARTED("Yes"),
+    RECIPISTARTED1("YES"),
+    OTHERSTARTED("No");
 
     private final String text;
 

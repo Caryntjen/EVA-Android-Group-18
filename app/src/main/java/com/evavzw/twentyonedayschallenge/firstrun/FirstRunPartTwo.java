@@ -43,7 +43,7 @@ public class FirstRunPartTwo extends Fragment implements View.OnClickListener  {
             case R.id.btnBeginChallenge:
                 Intent loginActivity = new Intent(getActivity(), LoginActivity.class);
                 startActivity(loginActivity);
-                sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
+                sharedPreferences = getActivity().getApplicationContext().getSharedPreferences("FirstRunPreferences", Context.MODE_PRIVATE);
                 editor = sharedPreferences.edit();
                 editor.putBoolean("firtrun", true);
                 editor.commit();
