@@ -33,9 +33,8 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
     private Intent putExtraIntent = null;
 
     private int state = 0;
-    private boolean productChallengeStarted = false;
-    private boolean recipeChallengeStarted = false;
-    private boolean socialmediaChallengeStarted = false;
+    private boolean challengeStarted = false;
+    private boolean challengeCompleted = false;
 
 
     SharedPreferences sharedPreferences;
@@ -56,20 +55,25 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
         ivRecipeImage = (ImageView) findViewById(R.id.ivRecipeImage);
         ivStarOne = (ImageView) findViewById(R.id.ivStarOne);
         ivStarTwo = (ImageView) findViewById(R.id.ivStarTwo);
-        tvPoints = (TextView) findViewById(R.id.tvPoints);
+        //tvPoints = (TextView) findViewById(R.id.tvPoints);
         tvRecipeChallengeExplanation = (TextView) findViewById(R.id.tvRecipeChallengeExplanation);
+
+        challengeStarted = getIntent().getBooleanExtra("challengeStarted", false);
+        challengeCompleted = getIntent().getBooleanExtra("challengeCompleted", false);
+
 
         exitIntent = new Intent(this, MainActivity.class);
 
-        //TODO; States needs to be reset the following day.
-        sharedPreferences = getApplicationContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
-        state = sharedPreferences.getInt("state", state);
-        productChallengeStarted = sharedPreferences.getBoolean("productChallengeStarted", productChallengeStarted);
-        recipeChallengeStarted = sharedPreferences.getBoolean("recipeChallengeStarted", recipeChallengeStarted);
-        socialmediaChallengeStarted = sharedPreferences.getBoolean("socialmediaChallengeStarted", socialmediaChallengeStarted);
-        state = sharedPreferences.getInt("state", state);
+        //TODO; States needs to be reset the following day, these states should not be loaded in shared preferences.
 
-        if (productChallengeStarted || socialmediaChallengeStarted) state = 3;
+        sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences", Context.MODE_PRIVATE);
+        state = sharedPreferences.getInt("state", state);
+        if(challengeCompleted){
+            state = 2;
+        }
+        else if(challengeStarted) {
+            state = 1;
+        }
 
         btnVerify = (Button) findViewById(R.id.btnVerify);
         btnVerify.setOnClickListener(this);
@@ -94,22 +98,20 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
                     case DialogInterface.BUTTON_POSITIVE:
                         //Yes button clicked
                         state++;
-                        sharedPreferences = getApplicationContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
+                        sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences", Context.MODE_PRIVATE);
                         editor = sharedPreferences.edit();
                         editor.putInt("state", state);
                         editor.putBoolean("recipeChallengeStarted", true);
                         editor.commit();
 
                         updateButton();
-
-/*
+                        sharedPreferences = getApplicationContext().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
                     String sToken = sharedPreferences.getString("token", "");
                     String sEmail = sharedPreferences.getString("email", "");
 
                     exitIntent.putExtra("accesToken", sToken);
                     exitIntent.putExtra("username", sEmail);
                     startActivity(exitIntent);
-                    */
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:

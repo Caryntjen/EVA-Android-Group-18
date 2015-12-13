@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class AccountFragment extends Fragment implements ITabFragment {
     private static TextView tvLanguage;
     private static TextView tvNewsletter;
     private static Button btnInvite;
+    private ProgressBar pbLoading;
     private MainActivity _mainActivity;
 
     private static final String EMAILTYPE = "message/rfc822";
@@ -99,6 +101,9 @@ public class AccountFragment extends Fragment implements ITabFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        pbLoading = (ProgressBar) activity.findViewById(R.id.pbLoading);
+        pbLoading.setVisibility(View.VISIBLE);
 
         //Email Information
         tvEmail = (TextView) activity.findViewById(R.id.tvEmail);
@@ -173,6 +178,7 @@ public class AccountFragment extends Fragment implements ITabFragment {
                 }
             }
         });
+        pbLoading.setVisibility(View.GONE);
     }
 
     public String parseLanguage(String shortLanguage){
@@ -206,6 +212,27 @@ public class AccountFragment extends Fragment implements ITabFragment {
         super.onResume();
         updateFragment();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //removeProgressBar();
+    }
+/*
+    private void removeProgressBar() {
+
+        new Thread() {
+            public void run() {
+                        activity.runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {pbLoading.setVisibility(View.GONE);
+                            }
+                        });
+            }
+        }.start();
+    }
+    */
 
     /*
         When the fragment is swiped or clicked to, the information needs to be updated, which happens here.

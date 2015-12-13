@@ -20,7 +20,7 @@ public class FirstRunActivity extends FragmentActivity implements FirstRunPartOn
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = getApplicationContext().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
+        sharedPreferences = getApplicationContext().getSharedPreferences("FirstRunPreferences", Context.MODE_PRIVATE);
         if(sharedPreferences.getBoolean("firtrun", false))
         {
             Intent loginActivity = new Intent(this, LoginActivity.class);

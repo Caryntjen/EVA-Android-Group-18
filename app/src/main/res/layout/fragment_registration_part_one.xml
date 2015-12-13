@@ -146,11 +146,13 @@
             <Button
                 android:id="@+id/btnNext"
                 style="?android:textAppearanceSmall"
+                android:background="@drawable/button_background"
+                android:layout_height="40dp"
                 android:layout_width="146dp"
-                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/registration.next"
-                android:textColor="@color/evaDarkGreen" />
+                android:textColor="@color/evaDarkGreen"
+                android:textStyle="bold" />
 
             <!-- TODO: Need to button hide on release -->
             <Button

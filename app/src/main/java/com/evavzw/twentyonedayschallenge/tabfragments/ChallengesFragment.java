@@ -1,5 +1,6 @@
 package com.evavzw.twentyonedayschallenge.tabfragments;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -60,6 +62,14 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
     private List<ChallengeModel> _challengeModels = new ArrayList<>();
     private MainActivity _mainActivity;
 
+    private boolean challengeStarted;
+    private boolean challengeCompleted;
+
+
+    private ProgressBar pbLoading;
+    private ProgressBar pbDays;
+    private TextView tvDays;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,14 +87,45 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ProgressBar pbLoading = (ProgressBar) activity.findViewById(R.id.pbLoading);
+        pbLoading = (ProgressBar) activity.findViewById(R.id.pbLoading);
+        pbLoading.setVisibility(View.VISIBLE);
 
-        ProgressBar pbDays = (ProgressBar) activity.findViewById(R.id.pbDays);
-        pbDays.setMax(MAXDAYS);
-        pbDays.setProgress(Integer.parseInt(currentday));
+        pbDays = (ProgressBar) activity.findViewById(R.id.pbDays);
 
-        TextView tvDays = (TextView) activity.findViewById(R.id.tvDays);
-        tvDays.setText(currentday + "/" + MAXDAYS+ " days");
+         tvDays = (TextView) activity.findViewById(R.id.tvDays);
+
+        final ListView challengeItems = (ListView) activity.findViewById(R.id.lvChallenges);
+
+        challengeItems.addHeaderView(new View(activity));
+        challengeItems.addFooterView(new View(activity));
+
+        adapter = new BaseInflaterAdapter<ChallengeCardItem>(new ChallengeCard());
+
+        challengeItems.setAdapter(adapter);
+
+        challengeItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                ChallengeCardItem ccItem = new ChallengeCardItem(adapter.getTItem(position - 1));
+                Intent typeChallenge = null;
+                switch (ccItem.getChallenge().getChallengeType()) {
+                    case PRODUCT:
+                        typeChallenge = new Intent(activity, ProductChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
+                        break;
+                    case SOCIALMEDIA:
+                        typeChallenge = new Intent(activity, SocialMediaChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
+                        break;
+                    case RECIPE:
+                        typeChallenge = new Intent(activity, RecipeChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
+                        break;
+                }
+                if (!typeChallenge.equals(null)) {
+                    startActivity(typeChallenge);
+                }
+            }
+        });
 
         _retrofit = new RestAdapter.Builder().setEndpoint(_url).build();
         _service = _retrofit.create(ChallengeDataService.class);
@@ -112,39 +153,11 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
             });
         }
 
-        final ListView challengeItems = (ListView) activity.findViewById(R.id.lvChallenges);
 
-        challengeItems.addHeaderView(new View(activity));
-        challengeItems.addFooterView(new View(activity));
-
-        adapter = new BaseInflaterAdapter<ChallengeCardItem>(new ChallengeCard());
-
-        challengeItems.setAdapter(adapter);
-
-        challengeItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                ChallengeCardItem ccItem = new ChallengeCardItem(adapter.getTItem(position - 1));
-                Intent typeChallenge = null;
-                switch (ccItem.getChallenge().getChallengeType()) {
-                    case PRODUCT:
-                        typeChallenge = new Intent(activity, ProductChallengeActivity.class);
-                        break;
-                    case SOCIALMEDIA:
-                        typeChallenge = new Intent(activity, SocialMediaChallengeActivity.class);
-                        break;
-                    case RECIPE:
-                        typeChallenge = new Intent(activity, RecipeChallengeActivity.class);
-                        break;
-                }
-                if (!typeChallenge.equals(null)) {
-                    startActivity(typeChallenge);
-                }
-            }
-        });
+        updateFragment();
         pbLoading.setVisibility(View.GONE);
+        //activity.setProgressBarIndeterminateVisibility(false);
+
     }
 
     public void updateInterface(){
@@ -158,15 +171,15 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
                 switch (item.variant.toLowerCase()) {
                     case "recipe":
                         type = ChallengeType.RECIPE;
-                        card = new ChallengeCardItem(new Challenge(R.drawable.recipe, getString(R.string.challenges_type_recipe), getString(R.string.challenges_subtitle_recipe), type),1);
+                        card = new ChallengeCardItem(new Challenge(R.drawable.recipe, getString(R.string.challenges_type_recipe), getString(R.string.challenges_subtitle_recipe), type),determineDifficultyImage(item.difficulty));
                         break;
                     case "product":
                         type = ChallengeType.PRODUCT;
-                        card = new ChallengeCardItem(new Challenge(R.drawable.product, getString(R.string.challenges_type_product), getString(R.string.challenges_subtitle_product), type),2);
+                        card = new ChallengeCardItem(new Challenge(R.drawable.product, getString(R.string.challenges_type_product), getString(R.string.challenges_subtitle_product), type),determineDifficultyImage(item.difficulty));
                         break;
                     case "social media":
                         type = ChallengeType.SOCIALMEDIA;
-                        card = new ChallengeCardItem(new Challenge(R.drawable.socialmedia, getString(R.string.challenges_type_socialmedia), getString(R.string.challenges_subtitle_socialmedia), type),0);
+                        card = new ChallengeCardItem(new Challenge(R.drawable.socialmedia, getString(R.string.challenges_type_socialmedia), getString(R.string.challenges_subtitle_socialmedia), type),determineDifficultyImage(item.difficulty));
                         break;
                     case "restaurants":
                         //type = ChallengeType.RESTAURANTS;
@@ -200,14 +213,63 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateFragment();
+    public int determineDifficultyImage(int difficulty) {
+        int resource;
+        switch (difficulty) {
+            case 1:
+                resource = R.drawable.star1;
+            break;
+            case 2:
+                resource = R.drawable.star2;
+            break;
+            case 3:
+                resource = R.drawable.star3;
+            break;
+            case 4:
+                resource = R.drawable.star4;
+            break;
+            case 5:
+                resource = R.drawable.star5;
+            break;
+            default:
+                resource = R.drawable.star;
+            break;
+    }
+        return resource;
     }
 
     @Override
-    public void updateFragment(){
+    public void onResume() {
+        super.onResume();
+        //TODO: load in from backend
+        challengeStarted = User.CHALLENGESTARTED.toBool();
+        updateFragment();
+    }
+
+    //TODO: load in from backend and determin this challenge has started en set challengeHasStarted, challengeHasCompleted.
+    public int challengeState(int state){
+        //No challenge is choses, all have
+        //_mainActivity.chosenChallenge.challengeChosen
+        //_mainActivity.chosenChallenge.currentChallenge.title;
+        //_mainActivity.sm.
+        //Challenge has been chosen: that challenge gets State = 1
+        //challenge has completed = State = 2
+        //TODO
+        //challenge has started = State = 0
+        //different challenge has been chose; State = 3
+
+
+            return state;
+    }
+
+
+    @Override
+    public void updateFragment() {
+        //pbLoading.setVisibility(View.VISIBLE);
+        pbDays.setMax(MAXDAYS);
+        pbDays.setProgress(Integer.parseInt(currentday));
+        tvDays.setText(currentday + "/" + MAXDAYS + " days");
         updateInterface();
+        //pbLoading.setVisibility(View.GONE);
     }
 }
