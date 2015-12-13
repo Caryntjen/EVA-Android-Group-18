@@ -52,9 +52,9 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
     private String _accesToken;
     private String _username;
     //genymotion virtual devices
-    //private String _url = "http://10.0.3.2:54967";
+    private String _url = "http://10.0.3.2:54967";
     //androidstudio emulators
-    private String _url = "http://10.0.2.2:54967";
+    //private String _url = "http://10.0.2.2:54967";
     private RestAdapter _retrofit;
     private ChallengeDataService _service;
     private List<ChallengeModel> _challengeModels = new ArrayList<>();
