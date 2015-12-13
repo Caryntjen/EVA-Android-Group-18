@@ -217,7 +217,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-
+            //TODO:
             LoginModel model = new LoginModel();
             model.passWord = mPassword.toString();
             model.userName = mEmail.toString();

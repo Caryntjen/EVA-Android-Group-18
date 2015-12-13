@@ -121,7 +121,6 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
 
         challengeItems.setAdapter(adapter);
 
-
         challengeItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
