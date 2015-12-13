@@ -47,8 +47,9 @@
             <Button
                 android:id="@+id/btnNext"
                 style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="250dp"
+                android:background="@drawable/button_background"
+                android:layout_height="40dp"
                 android:layout_below="@+id/tvFirstRun"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="15dp"

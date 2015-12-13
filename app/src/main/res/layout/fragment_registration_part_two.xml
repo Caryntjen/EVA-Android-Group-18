@@ -95,7 +95,8 @@
                 android:id="@+id/btnComplete"
                 style="?android:textAppearanceSmall"
                 android:layout_width="146dp"
-                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/registration.complete"
                 android:textColor="@color/evaDarkGreen" />

@@ -49,15 +49,19 @@ public class ChallengeCard implements IAdapterViewInflater<ChallengeCardItem> {
             ivChallengeThumbnail.setImageResource(item.getImage());
             tvTitle.setText(item.getTitle());
             tvTagline.setText(item.getTagline());
+            ivStarTwo.setVisibility(View.VISIBLE);
+            ivStarTwo.setImageResource(item.getStars());
 
+/*
             if (item.getStars() >= 1) {
                 ivStarOne.setVisibility(View.VISIBLE);
                 if (item.getStars() >= 2) {
                     ivStarTwo.setVisibility(View.VISIBLE);
 
                 }
-
             }
+                */
+
 
         }
     }
