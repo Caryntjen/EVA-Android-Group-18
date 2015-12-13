@@ -5,16 +5,31 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.util.SortedList;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.models.AccountModel;
 import com.evavzw.twentyonedayschallenge.models.ChallengeModel;
+import com.evavzw.twentyonedayschallenge.models.ChosenChallengeModel;
+import com.evavzw.twentyonedayschallenge.models.ScoreModel;
+import com.evavzw.twentyonedayschallenge.services.ChallengeDataService;
+import com.evavzw.twentyonedayschallenge.services.UserDataService;
 import com.evavzw.twentyonedayschallenge.tabfragments.ITabFragment;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
+import retrofit.mime.TypedByteArray;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,12 +43,67 @@ public class MainActivity extends AppCompatActivity {
     public String accesToken;
     public String username;
 
+
     public AccountModel am;
     public List<ChallengeModel> challenges = new ArrayList<>();
+    public ScoreModel sm;
+    public ChosenChallengeModel chosenChallenge;
+
+    //Rest adapter
+    private RestAdapter retrofit;
+    private UserDataService _userService;
+    private ChallengeDataService _chalService;
+
+    //genymotion virtual devices
+    private String url = "http://10.0.3.2:54967";
+    //androidstudio emulators
+    //private String url = "http://10.0.2.2:54967";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        accesToken = getIntent().getExtras().getString("accesToken");
+        username = getIntent().getExtras().getString("username");
+
+        //Rest adapter
+        Gson gSon=  new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+        RestAdapter retrofit = new RestAdapter.Builder().setConverter(new GsonConverter(gSon)).setEndpoint(url).build();
+        _userService = retrofit.create(UserDataService.class);
+        _chalService = retrofit.create(ChallengeDataService.class);
+
+        //get data
+
+        _userService.getAccountAccomplishments(accesToken,username,new Callback<ScoreModel>(){
+                    @Override
+                    public void success(ScoreModel scoreModel, Response response) {
+                        if(scoreModel != null) {
+                            sm = scoreModel;
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        handleRetrofitError(error);
+                    }
+                }
+        );
+
+        //get chosen challenges
+        _chalService.checkForChosenChallenge(accesToken, username, new Callback<ChosenChallengeModel>() {
+                    @Override
+                    public void success(ChosenChallengeModel chosenChallengeModel, Response response) {
+                        if (chosenChallengeModel != null) {
+                            chosenChallenge = chosenChallengeModel;
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        handleRetrofitError(error);
+                    }
+                }
+        );
 
         //Filling up tabtiles
         tabTitles = new String[TABS];
@@ -48,8 +118,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setLogo(R.drawable.evalogo);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-            accesToken = getIntent().getExtras().getString("accesToken");
-            username = getIntent().getExtras().getString("username");
+
         mvAdapter = new MainViewPagerAdapter(tabTitles, getSupportFragmentManager());
 
         vpMain = (ViewPager) findViewById(R.id.vpMain);
@@ -83,6 +152,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         slidingTabs.setViewPager(vpMain);
+
+
+    }
+
+    public void handleRetrofitError(RetrofitError error){
+        if (error.getResponse() != null) {
+            String errorString = new String(((TypedByteArray) error.getResponse().getBody()).getBytes());
+            //Error handling here
+            Log.e("FAILURE", errorString.toString());
+        }
     }
 
     @Override

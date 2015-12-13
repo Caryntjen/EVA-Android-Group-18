@@ -142,7 +142,6 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
                 if (!typeChallenge.equals(null)) {
                     startActivity(typeChallenge);
                 }
-
             }
         });
         pbLoading.setVisibility(View.GONE);
@@ -208,7 +207,7 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
     }
 
     @Override
-    public void updateFragment() {
+    public void updateFragment(){
         updateInterface();
     }
 }
