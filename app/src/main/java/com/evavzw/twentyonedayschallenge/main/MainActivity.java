@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.Window;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.models.AccountModel;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        //setSupportProgressBarIndeterminateVisibility(true);
 
         //Filling up tabtiles
         tabTitles = new String[TABS];
@@ -60,10 +63,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(final int position) {
+                //setSupportProgressBarIndeterminateVisibility(true);
                 ITabFragment fragment = (ITabFragment) mvAdapter.instantiateItem(vpMain, position);
                 if (fragment != null) {
                     fragment.updateFragment();
                 }
+                //setSupportProgressBarIndeterminateVisibility(false);
             }
 
             @Override
@@ -83,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         slidingTabs.setViewPager(vpMain);
+        //setSupportProgressBarIndeterminateVisibility(false);
     }
 
     @Override

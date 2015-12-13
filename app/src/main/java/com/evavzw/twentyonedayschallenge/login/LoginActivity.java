@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -60,13 +61,16 @@ public class LoginActivity extends AppCompatActivity {
     private RestAdapter retrofit;
     private UserDataService service;
     //Genymotion virtual devices
-    //private String url = "http://10.0.3.2:54967";
+    private String url = "http://10.0.3.2:54967";
     //androidstudio emulators
-     private String url = "http://10.0.2.2:54967";
+    // private String url = "http://10.0.2.2:54967";
 
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
+
+    private static final String GRID_STRING_SPINNER = "Spinner";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

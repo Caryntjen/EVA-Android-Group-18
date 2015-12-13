@@ -1,5 +1,6 @@
 package com.evavzw.twentyonedayschallenge.tabfragments;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -52,9 +54,9 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
     private String _accesToken;
     private String _username;
     //genymotion virtual devices
-    //private String _url = "http://10.0.3.2:54967";
+    private String _url = "http://10.0.3.2:54967";
     //androidstudio emulators
-    private String _url = "http://10.0.2.2:54967";
+    //private String _url = "http://10.0.2.2:54967";
     private RestAdapter _retrofit;
     private ChallengeDataService _service;
     private List<ChallengeModel> _challengeModels = new ArrayList<>();
@@ -62,6 +64,11 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
 
     private boolean challengeStarted;
     private boolean challengeCompleted;
+
+
+    private ProgressBar pbLoading;
+    private ProgressBar pbDays;
+    private TextView tvDays;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,14 +87,46 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ProgressBar pbLoading = (ProgressBar) activity.findViewById(R.id.pbLoading);
+        pbLoading = (ProgressBar) activity.findViewById(R.id.pbLoading);
+        pbLoading.setVisibility(View.VISIBLE);
 
-        ProgressBar pbDays = (ProgressBar) activity.findViewById(R.id.pbDays);
-        pbDays.setMax(MAXDAYS);
-        pbDays.setProgress(Integer.parseInt(currentday));
+        pbDays = (ProgressBar) activity.findViewById(R.id.pbDays);
 
-        TextView tvDays = (TextView) activity.findViewById(R.id.tvDays);
-        tvDays.setText(currentday + "/" + MAXDAYS+ " days");
+         tvDays = (TextView) activity.findViewById(R.id.tvDays);
+
+        final ListView challengeItems = (ListView) activity.findViewById(R.id.lvChallenges);
+
+        challengeItems.addHeaderView(new View(activity));
+        challengeItems.addFooterView(new View(activity));
+
+        adapter = new BaseInflaterAdapter<ChallengeCardItem>(new ChallengeCard());
+
+        challengeItems.setAdapter(adapter);
+
+        challengeItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                ChallengeCardItem ccItem = new ChallengeCardItem(adapter.getTItem(position - 1));
+                Intent typeChallenge = null;
+                switch (ccItem.getChallenge().getChallengeType()) {
+                    case PRODUCT:
+                        typeChallenge = new Intent(activity, ProductChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
+                        break;
+                    case SOCIALMEDIA:
+                        typeChallenge = new Intent(activity, SocialMediaChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
+                        break;
+                    case RECIPE:
+                        typeChallenge = new Intent(activity, RecipeChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
+                        break;
+                }
+                if (!typeChallenge.equals(null)) {
+                    startActivity(typeChallenge);
+                }
+
+            }
+        });
 
         _retrofit = new RestAdapter.Builder().setEndpoint(_url).build();
         _service = _retrofit.create(ChallengeDataService.class);
@@ -115,41 +154,10 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
             });
         }
 
-        final ListView challengeItems = (ListView) activity.findViewById(R.id.lvChallenges);
 
-        challengeItems.addHeaderView(new View(activity));
-        challengeItems.addFooterView(new View(activity));
-
-        adapter = new BaseInflaterAdapter<ChallengeCardItem>(new ChallengeCard());
-
-        challengeItems.setAdapter(adapter);
-
-
-        challengeItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                ChallengeCardItem ccItem = new ChallengeCardItem(adapter.getTItem(position - 1));
-                Intent typeChallenge = null;
-                switch (ccItem.getChallenge().getChallengeType()) {
-                    case PRODUCT:
-                        typeChallenge = new Intent(activity, ProductChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
-                        break;
-                    case SOCIALMEDIA:
-                        typeChallenge = new Intent(activity, SocialMediaChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
-                        break;
-                    case RECIPE:
-                        typeChallenge = new Intent(activity, RecipeChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
-                        break;
-                }
-                if (!typeChallenge.equals(null)) {
-                    startActivity(typeChallenge);
-                }
-
-            }
-        });
+        updateFragment();
         pbLoading.setVisibility(View.GONE);
+        //activity.setProgressBarIndeterminateVisibility(false);
 
     }
 
@@ -255,6 +263,12 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
 
     @Override
     public void updateFragment() {
+        //pbLoading.setVisibility(View.VISIBLE);
+        pbDays.setMax(MAXDAYS);
+        pbDays.setProgress(Integer.parseInt(currentday));
+        tvDays.setText(currentday + "/" + MAXDAYS + " days");
+
         updateInterface();
+        //pbLoading.setVisibility(View.GONE);
     }
 }
