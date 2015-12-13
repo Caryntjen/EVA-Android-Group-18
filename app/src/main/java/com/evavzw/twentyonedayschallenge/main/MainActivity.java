@@ -88,7 +88,23 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+        _userService.getAccountDetails(accesToken, username, new Callback<AccountModel>() {
+            @Override
+            public void success(AccountModel accountModel, Response response) {
+                Log.d("SUCCES", "Succesfully fetched accountdata");
+                am = accountModel;
 
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                if (error.getResponse() != null) {
+                    String errorString = new String(((TypedByteArray) error.getResponse().getBody()).getBytes());
+                    //Error handling here
+                    Log.e("FAILURE", errorString.toString());
+                }
+            }
+        });
         //get chosen challenges
         _chalService.checkForChosenChallenge(accesToken, username, new Callback<ChosenChallengeModel>() {
                     @Override

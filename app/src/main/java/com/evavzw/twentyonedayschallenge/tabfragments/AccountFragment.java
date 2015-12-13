@@ -153,7 +153,8 @@ public class AccountFragment extends Fragment implements ITabFragment {
        /* GetAccountDetailsTask task = new GetAccountDetailsTask(service, accesToken, username);
         am = task.fetchAccountDetails();
         updateFragment();*/
-
+        _am = _mainActivity.am;
+        updateFragment();
         service.getAccountDetails(_accesToken, _username, new Callback<AccountModel>() {
             @Override
             public void success(AccountModel accountModel, Response response) {
