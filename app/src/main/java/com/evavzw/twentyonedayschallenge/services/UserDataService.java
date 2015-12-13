@@ -1,9 +1,11 @@
 package com.evavzw.twentyonedayschallenge.services;
 
 import com.evavzw.twentyonedayschallenge.models.AccountModel;
+import com.evavzw.twentyonedayschallenge.models.ChosenChallengeModel;
 import com.evavzw.twentyonedayschallenge.models.LoginModel;
 import com.evavzw.twentyonedayschallenge.models.LoginToken;
 import com.evavzw.twentyonedayschallenge.models.Registration;
+import com.evavzw.twentyonedayschallenge.models.ScoreModel;
 
 import retrofit.Callback;
 import retrofit.client.Response;
@@ -31,4 +33,9 @@ public interface UserDataService {
     @GET("/api/account/accountdetails")
     @Headers("Content-Type: application/x-www-form-urlencoded")
     void getAccountDetails(@Header("Authorization") String token, @Query("email")String username, Callback<AccountModel> cb);
-}
+
+    @GET("/api/account/accountaccomplishments")
+    //@Headers("Content-Type: application/x-www-form-urlencoded")
+    void getAccountAccomplishments(@Header("Authorization") String token, @Query("email")String username, Callback<ScoreModel> cb);
+
+    }

@@ -60,9 +60,9 @@ public class LoginActivity extends AppCompatActivity {
     private RestAdapter retrofit;
     private UserDataService service;
     //Genymotion virtual devices
-    //private String url = "http://10.0.3.2:54967";
+    private String url = "http://10.0.3.2:54967";
     //androidstudio emulators
-     private String url = "http://10.0.2.2:54967";
+    //private String url = "http://10.0.2.2:54967";
 
 
     SharedPreferences sharedPreferences;
