@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -24,8 +25,21 @@ import android.widget.TextView;
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.main.MainActivity;
 import com.evavzw.twentyonedayschallenge.models.ChallengeModel;
+import com.evavzw.twentyonedayschallenge.models.ChooseChallengeModel;
+import com.evavzw.twentyonedayschallenge.models.CompleteChallengeModel;
+import com.evavzw.twentyonedayschallenge.services.ChallengeDataService;
+import com.evavzw.twentyonedayschallenge.services.UserDataService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.InputStream;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
+import retrofit.mime.TypedByteArray;
 
 public class ProductChallengeActivity extends AppCompatActivity implements View.OnClickListener {
     // UI references.
@@ -47,10 +61,20 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
 
     String stateprefsTitle;
 
+    private String _username;
+    private String _accesToken;
 
     private static final int CAMERAREQUEST = 1888;
     private Bitmap photo;
 
+    //Rest adapter
+    private RestAdapter retrofit;
+    private ChallengeDataService _chalService;
+
+    //genymotion virtual devices
+    private String url = "http://10.0.3.2:54967";
+    //androidstudio emulators
+    //private String url = "http://10.0.2.2:54967";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +99,20 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
         tvProductTitle = (TextView) findViewById(R.id.tvProductTitle);
         tvProductTitle.setText(_challengeModel.title);
 
+
         // show The Image
         new DownloadImageTask((ImageView) findViewById(R.id.ivProductImage))
                 .execute(_challengeModel.image);
 
         exitIntent = new Intent(this, MainActivity.class);
+
+        _accesToken = getIntent().getExtras().getString("accesToken");
+        _username = getIntent().getExtras().getString("username");
+
+        //Rest adapter
+        Gson gSon=  new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+        RestAdapter retrofit = new RestAdapter.Builder().setConverter(new GsonConverter(gSon)).setEndpoint(url).build();
+        _chalService = retrofit.create(ChallengeDataService.class);
 
         stateprefsTitle = getIntent().getStringExtra("stateprefs");
 
@@ -111,14 +144,30 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
                         //Yes button clicked
                         //TODO: Backend set challengeChosen to true
 
-                        state++;
-                        sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
-                        editor = sharedPreferences.edit();
-                        editor.putInt(stateprefsTitle, state);
-                        editor.commit();
+                        ChooseChallengeModel chooseChallengeModel = new ChooseChallengeModel();
+                        chooseChallengeModel.challengeId = _challengeModel.id;
+                        chooseChallengeModel.email = _username;
 
-                        updateButton();
-                        sharedPreferences = getApplicationContext().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
+                        _chalService.chooseChallenge(chooseChallengeModel, new Callback<Response>() {
+                            @Override
+                            public void success(Response response, Response response2) {
+                                state++;
+                                sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
+                                editor = sharedPreferences.edit();
+                                editor.putInt(stateprefsTitle, state);
+                                editor.commit();
+
+                                updateButton();
+                                sharedPreferences = getApplicationContext().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                handleRetrofitError(error);
+                            }
+                        });
+
+
                         /*
                     String sToken = sharedPreferences.getString("token", "");
                     String sEmail = sharedPreferences.getString("email", "");
@@ -145,12 +194,28 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
         if (requestCode == CAMERAREQUEST && resultCode == RESULT_OK) {
 
             photo = (Bitmap) data.getExtras().get("data");
-            state++;
-            sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
-            editor = sharedPreferences.edit();
-            editor.putInt(stateprefsTitle, state);
-            editor.commit();
-            updateButton();
+
+            CompleteChallengeModel completeChallengeModel = new CompleteChallengeModel();
+            completeChallengeModel.challengeId = _challengeModel.id;
+            completeChallengeModel.email = _username;
+            completeChallengeModel.passed = true;
+            _chalService.completeChallenge(completeChallengeModel, new Callback<Response>() {
+                @Override
+                public void success(Response response, Response response2) {
+                    state++;
+                    sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
+                    editor = sharedPreferences.edit();
+                    editor.putInt(stateprefsTitle, state);
+                    editor.commit();
+                    updateButton();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    handleRetrofitError(error);
+                }
+            });
+
         }
     }
 
@@ -241,6 +306,13 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
+        }
+    }
+    public void handleRetrofitError(RetrofitError error){
+        if (error.getResponse() != null) {
+            String errorString = new String(((TypedByteArray) error.getResponse().getBody()).getBytes());
+            //Error handling here
+            Log.e("FAILURE", errorString.toString());
         }
     }
 }

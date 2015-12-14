@@ -128,6 +128,8 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
                         break;
                 }
                 if (!typeChallenge.equals(null)) {
+                    typeChallenge.putExtra("accesToken", _accesToken);
+                    typeChallenge.putExtra("username", _username);
                     startActivity(typeChallenge);
                 }
             }
@@ -254,33 +256,33 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
     }
 
     //TODO: load in from backend and determin this challenge has started en set challengeHasStarted, challengeHasCompleted.
-    public void writeChallengeState(){
+    public void writeChallengeState() {
         sharedPreferences = activity.getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
-        //Set default state to 0 when no activity is chosen.
-        if((_mainActivity != null) && !_mainActivity.chosenChallenge.challengeChosen){
-            for (Iterator<ChallengeModel> i = _mainActivity.challenges.iterator(); i.hasNext(); ) {
-                ChallengeModel item = i.next();
-                editor.putInt(item.title + "_state", 0);
-            }
-        }
-        else{ //Set other activitystates to 0 when chosen
-            for (Iterator<ChallengeModel> i = _mainActivity.challenges.iterator(); i.hasNext(); ) {
-                ChallengeModel item = i.next();
-                if (_mainActivity.chosenChallenge.challengeChosen) {
-                    if (!_mainActivity.chosenChallenge.currentChallenge.title.equals(item.title)) {
-                        editor.putInt(item.title + "_state", 3);
-                    }
-                    else if (sharedPreferences.getInt(item.title + "_state", -1) == 0) {
-                        editor.putInt(item.title + "_state", 1);
-                    }
+        if (_mainActivity != null) {
+            //Set default state to 0 when no activity is chosen.
+            if (!_mainActivity.chosenChallenge.challengeChosen) {
+                for (Iterator<ChallengeModel> i = _mainActivity.challenges.iterator(); i.hasNext(); ) {
+                    ChallengeModel item = i.next();
+                    editor.putInt(item.title + "_state", 0);
                 }
+            } else { //Set other activitystates to 0 when chosen
+                for (Iterator<ChallengeModel> i = _mainActivity.challenges.iterator(); i.hasNext(); ) {
+                    ChallengeModel item = i.next();
+                    if (_mainActivity.chosenChallenge.challengeChosen) {
+                        if (!_mainActivity.chosenChallenge.currentChallenge.title.equals(item.title)) {
+                            editor.putInt(item.title + "_state", 3);
+                        } else if (sharedPreferences.getInt(item.title + "_state", -1) == 0) {
+                            editor.putInt(item.title + "_state", 1);
+                        }
+                    }
 
                 }
             }
-        editor.commit();
+            editor.commit();
         }
+    }
 
     @Override
     public void updateFragment() {

@@ -32,10 +32,8 @@ public interface ChallengeDataService {
     void checkForChosenChallenge(@Header("Authorization") String token, @Query("email")String username, Callback<ChosenChallengeModel> cb);
 
     @POST("/api/challenge/chooseChallenge")
-    @Headers("Content-Type: application/x-www-form-urlencoded")
-    void chooseChallenge(@Header("Authorization") String token, @Body ChooseChallengeModel chooseChallengeModel, Callback<Response> cb);
+    void chooseChallenge(@Body ChooseChallengeModel chooseChallengeModel, Callback<Response> cb);
 
     @POST("/api/challenge/completeChallenge")
-    @Headers("Content-Type: application/x-www-form-urlencoded")
-    void completeChallenge(@Header("Authorization") String token, @Body CompleteChallengeModel completeChallengeModel, Callback<Response> cb);
+    void completeChallenge(@Body CompleteChallengeModel completeChallengeModel, Callback<Response> cb);
 }

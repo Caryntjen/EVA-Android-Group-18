@@ -18,9 +18,19 @@ import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
 import com.evavzw.twentyonedayschallenge.main.MainActivity;
 import com.evavzw.twentyonedayschallenge.models.ScoreModel;
+import com.evavzw.twentyonedayschallenge.services.ChallengeDataService;
+import com.evavzw.twentyonedayschallenge.services.UserDataService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.entities.Feed;
 import com.sromku.simple.fb.listeners.OnPublishListener;
+
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
 
 /*
     The OverviewFragment class will display statistics, achievements and level.
@@ -38,9 +48,21 @@ public class OverviewFragment extends Fragment implements ITabFragment {
     private static TextView tvCurrentDay;
     private static Button btnShare;
 
+
+
     private ScoreModel _sm;
     private MainActivity _mainActivity;
+    //Rest adapter
+    private RestAdapter retrofit;
+    private UserDataService _userService;
+    private ChallengeDataService _chalService;
 
+
+
+    //genymotion virtual devices
+    private String url = "http://10.0.3.2:54967";
+    //androidstudio emulators
+    //private String url = "http://10.0.2.2:54967";
     /*
     First Line
         Badge 0 = GERM: Completed your first challenge.
@@ -92,6 +114,7 @@ public class OverviewFragment extends Fragment implements ITabFragment {
     private final int MAX_LEVEL = MAX_BADGE_HEARTH;
     private final int LEVELUP_POINTS = 75;
     int currentLevel;
+    private boolean extrascore = false;
 
     //Facebook References
     private OnPublishListener onPublishListener;
@@ -104,6 +127,8 @@ public class OverviewFragment extends Fragment implements ITabFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -122,6 +147,12 @@ public class OverviewFragment extends Fragment implements ITabFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //Rest adapter
+        Gson gSon=  new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+        RestAdapter retrofit = new RestAdapter.Builder().setConverter(new GsonConverter(gSon)).setEndpoint(url).build();
+        _userService = retrofit.create(UserDataService.class);
+        _chalService = retrofit.create(ChallengeDataService.class);
+
 
         //Points Information
         tvPoints = (TextView) activity.findViewById(R.id.tvPoints);
@@ -215,6 +246,24 @@ public class OverviewFragment extends Fragment implements ITabFragment {
     @Override
     public void updateFragment() {
         //TODO: load user information
+        _userService.getAccountAccomplishments(_mainActivity.accesToken, _mainActivity.username, new Callback<ScoreModel>() {
+                    @Override
+                    public void success(ScoreModel scoreModel, Response response) {
+                        if (scoreModel != null) {
+                            _mainActivity.sm = scoreModel;
+                            if(extrascore){
+                                _mainActivity.sm.totalScore += 500;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        _mainActivity.handleRetrofitError(error);
+                    }
+                }
+        );
+
         _sm = _mainActivity.sm;
 
         if(_sm != null) {
@@ -240,6 +289,11 @@ public class OverviewFragment extends Fragment implements ITabFragment {
 
                     Toast toast = Toast.makeText(context, currentlevel, duration);
                     toast.show();
+                    if(_sm != null){
+                        extrascore = extrascore? false: true;
+                    }
+
+
                 }
             });
 
