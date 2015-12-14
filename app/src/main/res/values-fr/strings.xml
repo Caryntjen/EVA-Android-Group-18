@@ -166,8 +166,8 @@
     <string name="challenges.type.socialmedia">Média Social</string>
     <string name="challenges.type.recipe">Recette</string>
     <string name="challenges.type.product">Produit</string>
-    <string name="challenges.subtitle.socialmedia">Partager l\'amour!</string>
-    <string name="challenges.subtitle.recipe">Faire cuire votre propre repas sain.</string>
-    <string name="challenges.subtitle.product">Faire usage de ce produit biologique.</string>
+    <string name="challenges.subtitle.socialmedia">Partager l\'amour</string>
+    <string name="challenges.subtitle.recipe">Cuisiner un plat</string>
+    <string name="challenges.subtitle.product">Utilisez ce produit</string>
 
 </resources>

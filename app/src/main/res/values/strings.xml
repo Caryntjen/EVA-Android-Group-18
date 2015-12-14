@@ -20,7 +20,7 @@
 
     <!--- First Run Layouts -->
     <string name="firstrun.letsgo">Let\'s go!</string>
-    <string name="firstrun.description">EVA vzw wants to challenge you for 21 days where you\'ll experience the vegan lifestyle in all its glory. \n\n Let\'s live a happy healthy life!</string>
+    <string name="firstrun.description">EVA vzw wants to challenge you for 21 days where you\'ll experience the vegan lifestyle in all its glory. \n\n Let us live a happy healthy life!</string>
     <string name="firstrun.fillyourheart">All you have to do is fill your heart with healthy vegetables by:</string>
     <string name="firstrun.challenges">- \t Completing challenges</string>
     <string name="firstrun.points">- \t Earning points</string>
@@ -168,9 +168,9 @@
     <string name="challenges.type.socialmedia">Social Media</string>
     <string name="challenges.type.recipe">Recipe</string>
     <string name="challenges.type.product">Product</string>
-    <string name="challenges.subtitle.socialmedia">Share the love!</string>
-    <string name="challenges.subtitle.recipe">Cook your own healthy meal.</string>
-    <string name="challenges.subtitle.product">Make use of this biologic product.</string>
+    <string name="challenges.subtitle.socialmedia">Share the love.</string>
+    <string name="challenges.subtitle.recipe">Cook a meal.</string>
+    <string name="challenges.subtitle.product">Use this product.</string>
 
 
 </resources>

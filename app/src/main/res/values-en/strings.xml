@@ -132,7 +132,7 @@
     <string name="facebook.message">Come join your friends 21 Day Challenge with a new healthy lifestyle.</string>
     <string name="facebook.name">EVA 21 Days Challenge</string>
     <string name="facebook.caption">Collect your vegetables in your hearth</string>
-    <string name="facebook.description">EVA vzw wants to challenge you for 21 days where you\'ll experience the vegan lifestyle in all its glory. Let\'s live a happy healthy life!</string>
+    <string name="facebook.description">EVA vzw wants to challenge you for 21 days where you\'ll experience the vegan lifestyle in all its glory. Let us live a happy healthy life!</string>
 
     <!--- App -->
     <string name="app_name">21 Days Challenge</string>
@@ -166,8 +166,8 @@
     <string name="challenges.type.socialmedia">Social Media</string>
     <string name="challenges.type.recipe">Recipe</string>
     <string name="challenges.type.product">Product</string>
-    <string name="challenges.subtitle.socialmedia">Share the love!</string>
-    <string name="challenges.subtitle.recipe">Cook your own healthy meal.</string>
-    <string name="challenges.subtitle.product">Make use of this biologic product.</string>
+    <string name="challenges.subtitle.socialmedia">Share the love</string>
+    <string name="challenges.subtitle.recipe">Cook a meal</string>
+    <string name="challenges.subtitle.product">Use this product</string>
 
 </resources>
