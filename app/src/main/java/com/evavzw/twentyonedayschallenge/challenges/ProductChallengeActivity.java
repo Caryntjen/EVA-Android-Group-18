@@ -6,19 +6,26 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.main.MainActivity;
+import com.evavzw.twentyonedayschallenge.models.ChallengeModel;
+
+import java.io.InputStream;
 
 public class ProductChallengeActivity extends AppCompatActivity implements View.OnClickListener {
     // UI references.
@@ -28,10 +35,12 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
     private static Button btnVerify;
     private TextView tvPoints;
     private TextView tvProductChallengeExplanation;
+    private TextView tvProductTitle;
     private Intent exitIntent = null;
+    private Intent entryIntent = null;
 
     private int state = 0;
-
+    private ChallengeModel _challengeModel;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -57,12 +66,22 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
         ivStarOne.setImageResource(getIntent().getIntExtra("starImage",0));
         ivStarTwo = (ImageView) findViewById(R.id.ivStarTwo);
         //tvPoints = (TextView) findViewById(R.id.tvPoints);
+
+        entryIntent = getIntent();
+
         tvProductChallengeExplanation = (TextView) findViewById(R.id.tvProductChallengeExplanation);
+        _challengeModel = (ChallengeModel) entryIntent.getExtras().get("challengeModel");
+        tvProductChallengeExplanation.setText(_challengeModel.description);
+        tvProductTitle = (TextView) findViewById(R.id.tvProductTitle);
+        tvProductTitle.setText(_challengeModel.title);
+
+        // show The Image
+        new DownloadImageTask((ImageView) findViewById(R.id.ivProductImage))
+                .execute(_challengeModel.image);
 
         exitIntent = new Intent(this, MainActivity.class);
 
         stateprefsTitle = getIntent().getStringExtra("stateprefs");
-
 
         sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
         int stateprefs = sharedPreferences.getInt(stateprefsTitle, state);
@@ -84,8 +103,6 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
 
 
     public void createDialog() {
-
-
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -93,6 +110,7 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
                     case DialogInterface.BUTTON_POSITIVE:
                         //Yes button clicked
                         //TODO: Backend set challengeChosen to true
+
                         state++;
                         sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
                         editor = sharedPreferences.edit();
@@ -110,7 +128,6 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
                     startActivity(exitIntent);
                     */
                         break;
-
                     case DialogInterface.BUTTON_NEGATIVE:
                         //No button clicked
                         break;
@@ -126,6 +143,7 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == CAMERAREQUEST && resultCode == RESULT_OK) {
+
             photo = (Bitmap) data.getExtras().get("data");
             state++;
             sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
@@ -161,13 +179,11 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
                 btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaDarkGreen));
                 btnVerify.setText(R.string.challenges_state_begin);
                 break;
-
         }
-
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v){
         switch (v.getId()) {
             case R.id.btnVerify:
                 switch (state) {
@@ -199,9 +215,32 @@ public class ProductChallengeActivity extends AppCompatActivity implements View.
                         btnVerify.setText(R.string.challenges_state_begin);
                         createDialog();
                         break;
-
                 }
                 break;
+        }
+    }
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
         }
     }
 }

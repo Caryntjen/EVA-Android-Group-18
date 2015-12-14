@@ -37,8 +37,7 @@
                     android:layout_gravity="center"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/challenge.product.image"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/zuivel" />
+                    android:scaleType="centerCrop" />
             </LinearLayout>
 
 
@@ -103,7 +102,6 @@
                 android:layout_marginTop="15dp"
                 android:padding="10dp"
                 android:background="@drawable/cloth_background"
-                android:text="@string/text.producttext"
                 android:textSize="15sp" />
 
             <Button

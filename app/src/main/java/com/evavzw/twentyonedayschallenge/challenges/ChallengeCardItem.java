@@ -1,8 +1,11 @@
 package com.evavzw.twentyonedayschallenge.challenges;
 
+import com.evavzw.twentyonedayschallenge.models.ChallengeModel;
+
 public class ChallengeCardItem {
     private Challenge challenge;
     private int stars;
+    public ChallengeModel challengeModel;
 
     public ChallengeCardItem(Challenge challenge, int stars) {
         this.challenge = challenge;

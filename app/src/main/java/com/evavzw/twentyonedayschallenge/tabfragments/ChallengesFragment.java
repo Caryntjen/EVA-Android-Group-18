@@ -109,17 +109,22 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
                                     int position, long id) {
 
                 ChallengeCardItem ccItem = new ChallengeCardItem(adapter.getTItem(position - 1));
+                ccItem.challengeModel = adapter.getTItem(position - 1).challengeModel;
+
                 Intent typeChallenge = null;
                 writeChallengeState();
                 switch (ccItem.getChallenge().getChallengeType()) {
                     case PRODUCT:
                         typeChallenge = new Intent(activity, ProductChallengeActivity.class).putExtra("statepref", ccItem.getChallenge().getTitle() + "_state").putExtra("starImage", ccItem.getStars());
+                        typeChallenge.putExtra("challengeModel", ccItem.challengeModel);
                         break;
                     case SOCIALMEDIA:
-                        typeChallenge = new Intent(activity, SocialMediaChallengeActivity.class).putExtra("statepref", ccItem.getChallenge().getTitle() + "_state").putExtra("starImage", ccItem.getStars());
+                        typeChallenge = new Intent(activity, ProductChallengeActivity.class).putExtra("statepref", ccItem.getChallenge().getTitle() + "_state").putExtra("starImage", ccItem.getStars());
+                        typeChallenge.putExtra("challengeModel", ccItem.challengeModel);
                         break;
                     case RECIPE:
-                        typeChallenge = new Intent(activity, RecipeChallengeActivity.class).putExtra("statepref", ccItem.getChallenge().getTitle() + "_state").putExtra("starImage", ccItem.getStars());
+                        typeChallenge = new Intent(activity, ProductChallengeActivity.class).putExtra("statepref", ccItem.getChallenge().getTitle() + "_state").putExtra("starImage", ccItem.getStars());
+                        typeChallenge.putExtra("challengeModel", ccItem.challengeModel);
                         break;
                 }
                 if (!typeChallenge.equals(null)) {
@@ -173,14 +178,17 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
                     case "recipe":
                         type = ChallengeType.RECIPE;
                         card = new ChallengeCardItem(new Challenge(R.drawable.recipe, getString(R.string.challenges_type_recipe), getString(R.string.challenges_subtitle_recipe), type),determineDifficultyImage(item.difficulty));
+                        card.challengeModel = item;
                         break;
                     case "product":
                         type = ChallengeType.PRODUCT;
                         card = new ChallengeCardItem(new Challenge(R.drawable.product, getString(R.string.challenges_type_product), getString(R.string.challenges_subtitle_product), type),determineDifficultyImage(item.difficulty));
+                        card.challengeModel = item;
                         break;
                     case "social media":
                         type = ChallengeType.SOCIALMEDIA;
                         card = new ChallengeCardItem(new Challenge(R.drawable.socialmedia, getString(R.string.challenges_type_socialmedia), getString(R.string.challenges_subtitle_socialmedia), type),determineDifficultyImage(item.difficulty));
+                        card.challengeModel = item;
                         break;
                     case "restaurants":
                         //type = ChallengeType.RESTAURANTS;
@@ -251,7 +259,7 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
         editor = sharedPreferences.edit();
 
         //Set default state to 0 when no activity is chosen.
-        if(!_mainActivity.chosenChallenge.challengeChosen){
+        if((_mainActivity != null) && !_mainActivity.chosenChallenge.challengeChosen){
             for (Iterator<ChallengeModel> i = _mainActivity.challenges.iterator(); i.hasNext(); ) {
                 ChallengeModel item = i.next();
                 editor.putInt(item.title + "_state", 0);
@@ -260,23 +268,33 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
         else{ //Set other activitystates to 0 when chosen
             for (Iterator<ChallengeModel> i = _mainActivity.challenges.iterator(); i.hasNext(); ) {
                 ChallengeModel item = i.next();
-                if(!_mainActivity.chosenChallenge.currentChallenge.title.equals(item.title))
-                editor.putInt(item.title + "_state", 3);
-                else if(sharedPreferences.getInt(item.title + "_state", -1) == 0)
-                    editor.putInt(item.title + "_state", 1);
+                if (_mainActivity.chosenChallenge.challengeChosen) {
+                    if (!_mainActivity.chosenChallenge.currentChallenge.title.equals(item.title)) {
+                        editor.putInt(item.title + "_state", 3);
+                    }
+                    else if (sharedPreferences.getInt(item.title + "_state", -1) == 0) {
+                        editor.putInt(item.title + "_state", 1);
+                    }
+                }
+
+                }
             }
-
-        }
         editor.commit();
-    }
-
+        }
 
     @Override
     public void updateFragment() {
         //pbLoading.setVisibility(View.VISIBLE);
         pbDays.setMax(MAXDAYS);
-        pbDays.setProgress(Integer.parseInt(currentday));
-        tvDays.setText(currentday + "/" + MAXDAYS + " days");
+
+        if(_mainActivity.sm != null) {
+            tvDays.setText((_mainActivity.sm.totalChallengesCompleted + 1) + "/" + MAXDAYS + " days");
+            pbDays.setProgress((_mainActivity.sm.totalChallengesCompleted + 1));
+        }
+        else{
+            tvDays.setText( "0" + "/" + MAXDAYS + " days");
+            pbDays.setProgress(0);
+        }
         updateInterface();
         //pbLoading.setVisibility(View.GONE);
     }

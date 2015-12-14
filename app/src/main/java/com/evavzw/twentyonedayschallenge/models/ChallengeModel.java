@@ -7,6 +7,7 @@ import android.os.Parcelable;
  * Created by Nico on 7/12/2015.
  */
 public class ChallengeModel implements Parcelable {
+    public int id;
     public String title;
     public String description;
     public String image;
@@ -20,6 +21,7 @@ public class ChallengeModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(title);
         dest.writeString(description);
         dest.writeString(image);
@@ -40,6 +42,7 @@ public class ChallengeModel implements Parcelable {
 
     // example constructor that takes a Parcel and gives you an object populated with it's values
     private ChallengeModel(Parcel in) {
+        id = in.readInt();
         title = in.readString();
         description = in.readString();
         image = in.readString();

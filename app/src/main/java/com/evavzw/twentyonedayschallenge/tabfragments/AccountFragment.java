@@ -239,7 +239,7 @@ public class AccountFragment extends Fragment implements ITabFragment {
      */
     @Override
     public void updateFragment() {
-        if(_am != null) {
+        if(_am.email != null) {
             tvEmail.setText(_am.email);
             tvBirthday.setText(_am.birthDate.toString());
             tvSex.setText(_am.gender);

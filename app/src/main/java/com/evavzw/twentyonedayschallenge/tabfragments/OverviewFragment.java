@@ -1,5 +1,6 @@
 package com.evavzw.twentyonedayschallenge.tabfragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.dummy.User;
+import com.evavzw.twentyonedayschallenge.main.MainActivity;
+import com.evavzw.twentyonedayschallenge.models.ScoreModel;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.entities.Feed;
 import com.sromku.simple.fb.listeners.OnPublishListener;
@@ -34,6 +37,9 @@ public class OverviewFragment extends Fragment implements ITabFragment {
     private static TextView tvCompletedChallenges;
     private static TextView tvCurrentDay;
     private static Button btnShare;
+
+    private ScoreModel _sm;
+    private MainActivity _mainActivity;
 
     /*
     First Line
@@ -125,7 +131,7 @@ public class OverviewFragment extends Fragment implements ITabFragment {
 
         //Current Day Information
         tvCurrentDay = (TextView) activity.findViewById(R.id.tvCurrentDay);
-        tvCurrentDay.setText(User.DAY.toString());
+
 
         //Achievements Progressbar
         pbAchievements = (ProgressBar) activity.findViewById(R.id.pbAchievements);
@@ -195,78 +201,77 @@ public class OverviewFragment extends Fragment implements ITabFragment {
         });
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof Activity) {
+            _mainActivity = (MainActivity) context;
+        }
+    }
     /*
         When the fragment is swiped or clicked to, the information needs to be updated, which happens here.
      */
     @Override
     public void updateFragment() {
         //TODO: load user information
-        //Stats
-        tvPoints.setText(User.POINTS.toString());
-        tvCompletedChallenges.setText(User.COMPLETEDCHALLENGES.toString());
+        _sm = _mainActivity.sm;
 
-        //Update current level
-        currentLevel = Integer.parseInt(User.POINTS.toString())/LEVELUP_POINTS;
-        if(currentLevel >= MAX_LEVEL)
-        {
-            ivLevel.setImageResource(LEVEL_IDs[MAX_LEVEL-1]);
-        }
-        else{
-            ivLevel.setImageResource(LEVEL_IDs[currentLevel]);
-        }
+        if(_sm != null) {
+            //Stats
+            tvPoints.setText("" + _sm.totalScore);
+            tvCompletedChallenges.setText("" + _sm.totalChallengesCompleted);
 
-        ivLevel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: Load user information
-                Context context = activity.getApplicationContext();
-                CharSequence currentlevel = getString(R.string.level_current) + " " + currentLevel;
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, currentlevel, duration);
-                toast.show();
+            //Update current level
+            currentLevel = _sm.totalScore / LEVELUP_POINTS;
+            if (currentLevel >= MAX_LEVEL) {
+                ivLevel.setImageResource(LEVEL_IDs[MAX_LEVEL - 1]);
+            } else {
+                ivLevel.setImageResource(LEVEL_IDs[currentLevel]);
             }
-        });
 
-        //Achievements
-        germ.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
-        flower.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
-        tree.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
-        earth.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
-        hearth.setCurrentProgress(currentLevel);
-        int differentChallenges = 0;
-        if(Integer.parseInt(User.COMPLETEDPRODUCTCHALLENGES.toString())>0){
-            differentChallenges++;
+            ivLevel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO: Load user information
+                    Context context = activity.getApplicationContext();
+                    CharSequence currentlevel = getString(R.string.level_current) + " " + currentLevel;
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, currentlevel, duration);
+                    toast.show();
+                }
+            });
+
+            //Achievements
+            tvCurrentDay.setText("" + (_sm.totalChallengesCompleted + 1));
+            germ.setCurrentProgress(_sm.totalChallengesCompleted);
+            flower.setCurrentProgress(_sm.totalChallengesCompleted);
+            tree.setCurrentProgress(_sm.totalChallengesCompleted);
+            earth.setCurrentProgress(_sm.totalChallengesCompleted);
+            hearth.setCurrentProgress(currentLevel);
+            int differentChallenges = _sm.variantScores.size();
+            nut.setCurrentProgress(differentChallenges);
+            star.setCurrentProgress(_sm.totalScore / 25);
+            prize.setCurrentProgress(_sm.totalScore);
+            littlecup.setCurrentProgress(_sm.totalScore);
+            bigcup.setCurrentProgress(_sm.totalChallengesCompleted);
         }
-        if(Integer.parseInt(User.COMPLETEDRECIPECHALLENGES.toString())>0){
-            differentChallenges++;
-        }
-        if(Integer.parseInt(User.COMPLETEDRECIPECHALLENGES.toString())>0){
-            differentChallenges++;
-        }
-        nut.setCurrentProgress(differentChallenges);
-        star.setCurrentProgress(Integer.parseInt(User.STARS.toString()));
-        prize.setCurrentProgress(Integer.parseInt(User.POINTS.toString()));
-        littlecup.setCurrentProgress(Integer.parseInt(User.POINTS.toString()));
-        bigcup.setCurrentProgress(Integer.parseInt(User.COMPLETEDCHALLENGES.toString()));
+            //Draw Badges
+            germ.draw(ivBadgeGerm, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+            flower.draw(ivBadgeFlower, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+            tree.draw(ivBadgeTree, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+            earth.draw(ivBadgeEarth, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+            hearth.draw(ivBadgeHearth, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+            nut.draw(ivBadgeNut, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+            star.draw(ivBadgeStar, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+            prize.draw(ivBadgePrize, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+            littlecup.draw(ivBadgeLittleCup, tvAchievementTitle, pbAchievements, tvAchievementProgress);
+            bigcup.draw(ivBadgeBigCup, tvAchievementTitle, pbAchievements, tvAchievementProgress);
 
-        //Draw Badges
-        germ.draw(ivBadgeGerm, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        flower.draw(ivBadgeFlower, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        tree.draw(ivBadgeTree, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        earth.draw(ivBadgeEarth, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        hearth.draw(ivBadgeHearth, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        nut.draw(ivBadgeNut, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        star.draw(ivBadgeStar, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        prize.draw(ivBadgePrize, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        littlecup.draw(ivBadgeLittleCup, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-        bigcup.draw(ivBadgeBigCup, tvAchievementTitle, pbAchievements, tvAchievementProgress);
-
-        //Reset Achievement Information
-        pbAchievements.setVisibility(View.VISIBLE);
-        pbAchievements.setMax(0);
-        tvAchievementTitle.setText(getString(R.string.achievements_defaulttext));
-
-
+            //Reset Achievement Information
+            pbAchievements.setVisibility(View.VISIBLE);
+            pbAchievements.setMax(0);
+            tvAchievementTitle.setText(getString(R.string.achievements_defaulttext));
     }
 }
