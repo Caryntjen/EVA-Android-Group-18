@@ -19,6 +19,9 @@ import android.widget.TextView;
 
 import com.evavzw.twentyonedayschallenge.R;
 import com.evavzw.twentyonedayschallenge.main.MainActivity;
+import com.sromku.simple.fb.SimpleFacebook;
+import com.sromku.simple.fb.entities.Feed;
+import com.sromku.simple.fb.listeners.OnPublishListener;
 
 public class SocialMediaChallengeActivity extends AppCompatActivity implements View.OnClickListener {
     // UI references.
@@ -39,8 +42,12 @@ public class SocialMediaChallengeActivity extends AppCompatActivity implements V
     String stateprefsTitle;
 
 
-    private static final int CAMERAREQUEST = 1888;
-    private Bitmap photo;
+    //Facebook References
+    private OnPublishListener onPublishListener;
+    private SimpleFacebook sfacebook;
+    //EVA URL References
+    private static final String EVA_URL = "http://www.evavzw.be";
+    private static final String IMG_URL = "http://users.telenet.be/Caryntjen/fb_shareheart.png";
 
 
     @Override
@@ -118,19 +125,11 @@ public class SocialMediaChallengeActivity extends AppCompatActivity implements V
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.challenges_begin_dialog).setPositiveButton(R.string.text_yes, dialogClickListener)
                 .setNegativeButton(R.string.text_no, dialogClickListener).show();
-    }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == CAMERAREQUEST && resultCode == RESULT_OK) {
-            photo = (Bitmap) data.getExtras().get("data");
-            state++;
-            sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
-            editor = sharedPreferences.edit();
-            editor.putInt(stateprefsTitle, state);
-            editor.commit();
-            updateButton();
-        }
+        //Simple Facebook information
+        onPublishListener = new OnPublishListener() {
+        };
+        sfacebook = SimpleFacebook.getInstance(this);
     }
 
     private void updateButton() {
@@ -175,10 +174,22 @@ public class SocialMediaChallengeActivity extends AppCompatActivity implements V
                         break;
                     case 1:
                         btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaLightGreen));
-                        btnVerify.setText(R.string.challenges_state_verify);
+                        btnVerify.setText(R.string.challenges_state_verify);Feed feed = new Feed.Builder()
+                            .setMessage(getString(R.string.facebook_message))
+                            .setName(getString(R.string.facebook_name))
+                            .setCaption(getString(R.string.facebook_caption))
+                            .setDescription(getString(R.string.facebook_description))
+                            .setPicture(IMG_URL)
+                            .setLink(EVA_URL)
+                            .build();
 
-                        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(cameraIntent, CAMERAREQUEST);
+                        sfacebook.publish(feed, true, onPublishListener);
+                        state++;
+                        sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
+                        editor = sharedPreferences.edit();
+                        editor.putInt(stateprefsTitle, state);
+                        editor.commit();
+                        updateButton();
                         break;
                     case 2:
                         btnVerify.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.evaDarkOrange));
