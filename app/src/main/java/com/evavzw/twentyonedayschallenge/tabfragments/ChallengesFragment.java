@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -62,13 +63,12 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
     private List<ChallengeModel> _challengeModels = new ArrayList<>();
     private MainActivity _mainActivity;
 
-    private boolean challengeStarted;
-    private boolean challengeCompleted;
-
-
     private ProgressBar pbLoading;
     private ProgressBar pbDays;
     private TextView tvDays;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,15 +110,16 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
 
                 ChallengeCardItem ccItem = new ChallengeCardItem(adapter.getTItem(position - 1));
                 Intent typeChallenge = null;
+                writeChallengeState();
                 switch (ccItem.getChallenge().getChallengeType()) {
                     case PRODUCT:
-                        typeChallenge = new Intent(activity, ProductChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
+                        typeChallenge = new Intent(activity, ProductChallengeActivity.class).putExtra("statepref", ccItem.getChallenge().getTitle() + "_state").putExtra("starImage", ccItem.getStars());
                         break;
                     case SOCIALMEDIA:
-                        typeChallenge = new Intent(activity, SocialMediaChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
+                        typeChallenge = new Intent(activity, SocialMediaChallengeActivity.class).putExtra("statepref", ccItem.getChallenge().getTitle() + "_state").putExtra("starImage", ccItem.getStars());
                         break;
                     case RECIPE:
-                        typeChallenge = new Intent(activity, RecipeChallengeActivity.class).putExtra("challengeStarted", challengeStarted).putExtra("challengeCompleted", challengeCompleted);
+                        typeChallenge = new Intent(activity, RecipeChallengeActivity.class).putExtra("statepref", ccItem.getChallenge().getTitle() + "_state").putExtra("starImage", ccItem.getStars());
                         break;
                 }
                 if (!typeChallenge.equals(null)) {
@@ -241,25 +242,32 @@ public class ChallengesFragment extends Fragment implements ITabFragment {
     @Override
     public void onResume() {
         super.onResume();
-        //TODO: load in from backend
-        challengeStarted = User.CHALLENGESTARTED.toBool();
         updateFragment();
     }
 
     //TODO: load in from backend and determin this challenge has started en set challengeHasStarted, challengeHasCompleted.
-    public int challengeState(int state){
-        //No challenge is choses, all have
-        //_mainActivity.chosenChallenge.challengeChosen
-        //_mainActivity.chosenChallenge.currentChallenge.title;
-        //_mainActivity.sm.
-        //Challenge has been chosen: that challenge gets State = 1
-        //challenge has completed = State = 2
-        //TODO
-        //challenge has started = State = 0
-        //different challenge has been chose; State = 3
+    public void writeChallengeState(){
+        sharedPreferences = activity.getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
+        //Set default state to 0 when no activity is chosen.
+        if(!_mainActivity.chosenChallenge.challengeChosen){
+            for (Iterator<ChallengeModel> i = _mainActivity.challenges.iterator(); i.hasNext(); ) {
+                ChallengeModel item = i.next();
+                editor.putInt(item.title + "_state", 0);
+            }
+        }
+        else{ //Set other activitystates to 0 when chosen
+            for (Iterator<ChallengeModel> i = _mainActivity.challenges.iterator(); i.hasNext(); ) {
+                ChallengeModel item = i.next();
+                if(!_mainActivity.chosenChallenge.currentChallenge.title.equals(item.title))
+                editor.putInt(item.title + "_state", 3);
+                else if(sharedPreferences.getInt(item.title + "_state", -1) == 0)
+                    editor.putInt(item.title + "_state", 1);
+            }
 
-            return state;
+        }
+        editor.commit();
     }
 
 

@@ -193,7 +193,6 @@ public class OverviewFragment extends Fragment implements ITabFragment {
                 sfacebook.publish(feed, true, onPublishListener);
             }
         });
-        sfacebook = SimpleFacebook.getInstance(activity);
     }
 
     /*
