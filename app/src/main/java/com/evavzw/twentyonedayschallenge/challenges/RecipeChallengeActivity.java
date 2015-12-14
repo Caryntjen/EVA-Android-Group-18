@@ -30,15 +30,14 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
     private TextView tvPoints;
     private TextView tvRecipeChallengeExplanation;
     private Intent exitIntent = null;
-    private Intent putExtraIntent = null;
 
     private int state = 0;
-    private boolean challengeStarted = false;
-    private boolean challengeCompleted = false;
 
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
+    String stateprefsTitle;
 
 
     private static final int CAMERAREQUEST = 1888;
@@ -54,25 +53,22 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
 
         ivRecipeImage = (ImageView) findViewById(R.id.ivRecipeImage);
         ivStarOne = (ImageView) findViewById(R.id.ivStarOne);
+        ivStarOne.setVisibility(View.VISIBLE);
+        ivStarOne.setImageResource(getIntent().getIntExtra("starImage",0));
         ivStarTwo = (ImageView) findViewById(R.id.ivStarTwo);
         //tvPoints = (TextView) findViewById(R.id.tvPoints);
         tvRecipeChallengeExplanation = (TextView) findViewById(R.id.tvRecipeChallengeExplanation);
 
-        challengeStarted = getIntent().getBooleanExtra("challengeStarted", false);
-        challengeCompleted = getIntent().getBooleanExtra("challengeCompleted", false);
-
 
         exitIntent = new Intent(this, MainActivity.class);
 
-        //TODO; States needs to be reset the following day, these states should not be loaded in shared preferences.
+        stateprefsTitle = getIntent().getStringExtra("stateprefs");
 
-        sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences", Context.MODE_PRIVATE);
-        state = sharedPreferences.getInt("state", state);
-        if(challengeCompleted){
-            state = 2;
-        }
-        else if(challengeStarted) {
-            state = 1;
+
+        sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
+        int stateprefs = sharedPreferences.getInt(stateprefsTitle, state);
+        if(state<stateprefs){
+            state = stateprefs;
         }
 
         btnVerify = (Button) findViewById(R.id.btnVerify);
@@ -97,21 +93,23 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         //Yes button clicked
+                        //TODO: Backend set challengeChosen to true
                         state++;
-                        sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences", Context.MODE_PRIVATE);
+                        sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
                         editor = sharedPreferences.edit();
-                        editor.putInt("state", state);
-                        editor.putBoolean("recipeChallengeStarted", true);
+                        editor.putInt(stateprefsTitle, state);
                         editor.commit();
 
                         updateButton();
                         sharedPreferences = getApplicationContext().getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
+                        /*
                     String sToken = sharedPreferences.getString("token", "");
                     String sEmail = sharedPreferences.getString("email", "");
 
                     exitIntent.putExtra("accesToken", sToken);
                     exitIntent.putExtra("username", sEmail);
                     startActivity(exitIntent);
+                        */
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
@@ -131,8 +129,9 @@ public class RecipeChallengeActivity extends AppCompatActivity implements View.O
         if (requestCode == CAMERAREQUEST && resultCode == RESULT_OK) {
             photo = (Bitmap) data.getExtras().get("data");
             state++;
+            sharedPreferences = getApplicationContext().getSharedPreferences("ChallengePreferences2", Context.MODE_PRIVATE);
             editor = sharedPreferences.edit();
-            editor.putInt("state", state);
+            editor.putInt(stateprefsTitle, state);
             editor.commit();
             updateButton();
         }

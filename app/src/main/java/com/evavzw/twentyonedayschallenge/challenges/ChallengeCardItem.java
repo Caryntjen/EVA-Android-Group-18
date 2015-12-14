@@ -5,8 +5,8 @@ public class ChallengeCardItem {
     private int stars;
 
     public ChallengeCardItem(Challenge challenge, int stars) {
-        this.stars = stars;
         this.challenge = challenge;
+        this.stars = stars;
     }
 
     public ChallengeCardItem(ChallengeCardItem ccItem) {
