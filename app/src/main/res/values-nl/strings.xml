@@ -166,8 +166,8 @@
     <string name="challenges.type.socialmedia">Sociale Media</string>
     <string name="challenges.type.recipe">Recept</string>
     <string name="challenges.type.product">Product</string>
-    <string name="challenges.subtitle.socialmedia">Deel de liefde!</string>
-    <string name="challenges.subtitle.recipe">Kook uw eigen gezonde maaltijd.</string>
-    <string name="challenges.subtitle.product">Maak gebruik van dit biologisch product.</string>
+    <string name="challenges.subtitle.socialmedia">Deel de liefde</string>
+    <string name="challenges.subtitle.recipe">Kook een gerecht</string>
+    <string name="challenges.subtitle.product">Gebruik dit product</string>
 
 </resources>
